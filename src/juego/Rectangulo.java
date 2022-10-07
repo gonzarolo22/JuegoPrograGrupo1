@@ -12,6 +12,7 @@ public class Rectangulo {
 	int angulo;
 	Color color;
 	
+	//probandoooooooooooo
 	
 	public Rectangulo(int x, int y) {
 		this.x=x;
