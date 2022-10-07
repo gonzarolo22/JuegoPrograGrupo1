@@ -12,7 +12,7 @@ public class Rectangulo {
 	int angulo;
 	Color color;
 	
-	//probandoooooooooooo
+	//prueba
 	
 	public Rectangulo(int x, int y) {
 		this.x=x;
@@ -30,3 +30,4 @@ public class Rectangulo {
 	
 	
 }
+
