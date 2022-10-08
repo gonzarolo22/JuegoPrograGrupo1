@@ -11,6 +11,7 @@ public class Juego extends InterfaceJuego {
 	private Entorno entorno;
 	private Rectangulo rectangulo;
 	private Mono mono;
+	private Suelo suelo;
 	
 	public Juego() {
 		this.entorno = new Entorno(this, "Titulo de TP - Grupo N - Apellido1 - Apellido2 -Apellido3 - V0.01", 800, 600);
@@ -18,6 +19,7 @@ public class Juego extends InterfaceJuego {
 		this.rectangulo= new Rectangulo(0,600);
 		this.entorno.iniciar();
 		this.mono= new Mono(0,entorno.alto()-mono.largo);
+		this.suelo= new Suelo(0,entorno.alto()-suelo.largo); 
 		
 	}
 
