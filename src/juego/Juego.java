@@ -18,8 +18,8 @@ public class Juego extends InterfaceJuego {
 		//aca va las cosas a inicialisar.....
 		this.rectangulo= new Rectangulo(0,600);
 		this.entorno.iniciar();
-		this.mono= new Mono(0,entorno.alto()- 100);
 		this.suelo= new Suelo(entorno,entorno.ancho()/2); 
+		this.mono= new Mono(0,entorno.alto()-suelo.alto);
 		
 		
 	}
@@ -29,8 +29,8 @@ public class Juego extends InterfaceJuego {
 	public void tick() {
 		// Procesamiento de un instante de tiempo.
 		
-		mono.dibujarMono(entorno);
 		suelo.dibujarRectangulo(entorno);
+		mono.dibujarMono(entorno);
 		
 		if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 			mono.saltar(entorno);
