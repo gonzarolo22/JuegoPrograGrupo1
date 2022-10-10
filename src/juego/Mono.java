@@ -28,10 +28,15 @@ public class Mono {
 	}
 	
 	public void saltar(Entorno e) {
-		//temporal
+		
 		this.y -=10;
 		//this.y debe disminuir hasta Entorno.alto()-450, luego this.y debe aumentar hasta la altura de un objeto(suelo, vibora,tigre, rama)
 		
 	}//saltar
+	
+	public void gravedad(int g) {
+		this.y += g;
+	}
 
+	
 }//class Mono
