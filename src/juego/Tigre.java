@@ -1,10 +1,10 @@
 package juego;
 
 import java.awt.Color;
-import java.util.Random;
 
 import entorno.Entorno;
-public class Arbol {
+
+public class Tigre {
 	
 	private double x;
 	private double y;
@@ -14,32 +14,29 @@ public class Arbol {
 	private Color color;
 	
 	
-	public Arbol(int x, double y) {
+	public Tigre(int x, double y) {
 		this.x=x;
 		this.y=y;
 		this.ancho=100;
-		this.alto=5;
+		this.alto=60;
 		this.angulo=0;
-		this.color=Color.GRAY;
+		this.color=Color.magenta;
 }// Arbol
 	
-	public void dibujarArbol(Entorno e) {
+	public void dibujarTigre(Entorno e) {
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-	}//crearArbol
+	}//dibujarTigre
 	
 	public void desplazar() {
 		this.x-=2;
 	}//desplazar
-
-	public double getX() {
-		return x;
+	
+	public void mostrar() {
+		System.out.println(this.x);
 	}
 
-	public double getY() {
-		return y;
-	}
-	
+
 	
 	
 
-}// class Arbol
+}// class Tigre

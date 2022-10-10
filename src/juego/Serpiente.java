@@ -1,10 +1,10 @@
 package juego;
 
 import java.awt.Color;
-import java.util.Random;
 
 import entorno.Entorno;
-public class Arbol {
+
+public class Serpiente {
 	
 	private double x;
 	private double y;
@@ -14,32 +14,30 @@ public class Arbol {
 	private Color color;
 	
 	
-	public Arbol(int x, double y) {
+	public Serpiente(double x, double y) {
 		this.x=x;
 		this.y=y;
-		this.ancho=100;
-		this.alto=5;
+		this.ancho=20;
+		this.alto=40;
 		this.angulo=0;
-		this.color=Color.GRAY;
+		this.color=Color.CYAN;
 }// Arbol
 	
-	public void dibujarArbol(Entorno e) {
+	public void dibujarSerpiente(Entorno e) {
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-	}//crearArbol
+	}//dibujarSerpiente
 	
 	public void desplazar() {
 		this.x-=2;
 	}//desplazar
-
-	public double getX() {
-		return x;
+	
+	public void mostrar() {
+		System.out.println(this.x);
 	}
 
-	public double getY() {
-		return y;
-	}
-	
+
 	
 	
 
-}// class Arbol
+}// class Tigre
+
