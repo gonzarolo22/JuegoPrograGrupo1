@@ -6,15 +6,15 @@ import java.util.Random;
 import entorno.Entorno;
 public class Arbol {
 	
-	private int x;
-	private int y;
-	private int ancho;
-	private int alto;
-	private int angulo;
+	private double x;
+	private double y;
+	private double ancho;
+	private double alto;
+	private double angulo;
 	private Color color;
 	
 	
-	public Arbol(int x, int y) {
+	public Arbol(int x, double y) {
 		this.x=x;
 		this.y=y;
 		this.ancho=100;
@@ -24,16 +24,12 @@ public class Arbol {
 }// Arbol
 	
 	public void dibujarArbol(Entorno e) {
-		
-		Random rand1 = new Random();
-		  System.out.println(rand1.nextInt(4) + 1);
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		
 	}//crearArbol
 	
 	public void desplazar() {
 		this.x-=1;
-	}
+	}//desplazar
 	
 	
 
