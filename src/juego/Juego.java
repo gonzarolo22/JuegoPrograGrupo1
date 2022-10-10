@@ -9,9 +9,9 @@ public class Juego extends InterfaceJuego {
 
 	
 	private Entorno entorno;
-	
 	private Mono mono;
 	private Suelo suelo;
+	private Arbol arbol;
 	
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800, 600);
@@ -19,7 +19,7 @@ public class Juego extends InterfaceJuego {
 		this.entorno.iniciar();
 		this.suelo= new Suelo(entorno,entorno.ancho()/2); 
 		this.mono= new Mono(0,entorno.alto()-suelo.alto);
-		
+		this.arbol = new Arbol(entorno.ancho()+100,300);
 		
 	}
 
@@ -30,13 +30,16 @@ public class Juego extends InterfaceJuego {
 		
 		suelo.dibujarRectangulo(entorno);
 		mono.dibujarMono(entorno);
+		arbol.dibujarArbol(entorno);
+		arbol.desplazar();
+//		if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {			
+//			mono.saltar(entorno);
+//		}else {
+//			mono.gravedad(2);
+//		}
 		
-		if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {			
-			mono.saltar(entorno);
-		}else {
-			mono.gravedad(2);
-		}
 		
+//		
 		
 	}
 	
