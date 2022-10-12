@@ -17,14 +17,14 @@ public class Serpiente {
 	public Serpiente(double x, double y) {
 		this.x=x;
 		this.y=y;
-		this.ancho=20;
+		this.ancho=40;
 		this.alto=40;
 		this.angulo=0;
 		this.color=Color.CYAN;
 }// Arbol
 	
 	public void dibujarSerpiente(Entorno e) {
-		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+		e.dibujarRectangulo(this.x, this.y-this.alto/2, this.ancho, this.alto, this.angulo, this.color);
 	}//dibujarSerpiente
 	
 	public void desplazar() {

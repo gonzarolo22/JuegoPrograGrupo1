@@ -27,9 +27,10 @@ public class Juego extends InterfaceJuego {
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[50];
 		this.tigre = new Tigre[50];
-		this.serpiente = new Serpiente[30];
+		this.serpiente = new Serpiente[40];
 		
 		int k=0;
+		int n =100;
 		for (int i = 0; i < arbol.length; i++) {
 			// se crea un altura aleatoria para las ramas de los arboles
 			Random rand1 = new Random();
@@ -37,12 +38,14 @@ public class Juego extends InterfaceJuego {
 			Random rand2 = new Random();
 			int rand3 = rand2.nextInt(300)+ 100 ;
 			Random rand4 = new Random();
-			int rand5 = rand4.nextInt(900)+ 500 ;
+			int rand5 = rand4.nextInt(900)+ rand3;
 				
 			//a cada elemento se le asigna una clase
-			arbol[i]= new Arbol(entorno.ancho()+k+rand3 , rand);			
-			tigre[i] = new Tigre(entorno.ancho()+k+500+rand5,entorno.alto()-suelo.alto);
-			k+=250;
+			arbol[i]= new Arbol(entorno.ancho()+n+rand3 , rand);			
+			tigre[i] = new Tigre(entorno.ancho()+k+rand,entorno.alto()-suelo.alto);
+//			tigre[i] = new Tigre(entorno.ancho()+k+rand5,entorno.alto()-suelo.alto);
+			k+=500; //tigre
+			n+=250; // arbol
 			
 		}// for
 		
@@ -54,15 +57,13 @@ public class Juego extends InterfaceJuego {
 				serpiente[i]= new Serpiente(arbol[rand].getX(),arbol[rand].getY());
 			}else {
 				serpiente[i]= new Serpiente(arbol[rand+1].getX(),arbol[rand+1].getY());
-			}
-			
-			
+			}			
 		}
 		
 	
 	}
 
-	int i = 0;
+	
 	 
 	public void tick() {
 		// Procesamiento de un instante de tiempo.
@@ -70,11 +71,22 @@ public class Juego extends InterfaceJuego {
 		suelo.dibujarRectangulo(entorno);
 		mono.dibujarMono(entorno);
 		
-//		if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {			
-//			mono.saltar(entorno);
-//		}else {
-//			mono.gravedad(3);
-//		}
+		
+		if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {	
+			
+			mono.saltar(entorno);
+			
+		}else {			
+			
+			if(mono.chocaConSuelo(entorno, suelo)) {
+				mono.gravedad(0);
+			}else {
+				mono.gravedad(3);				
+			}
+			
+			
+			
+		}
 		
 		for (int i = 0; i < arbol.length; i++) {
 			arbol[i].dibujarArbol(entorno);
@@ -88,6 +100,11 @@ public class Juego extends InterfaceJuego {
 			serpiente[i].dibujarSerpiente(entorno);
 			serpiente[i].desplazar();
 		}
+		
+		
+		
+		
+		
 		
 		
 	}
