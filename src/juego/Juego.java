@@ -30,25 +30,22 @@ public class Juego extends InterfaceJuego {
 		this.serpiente = new Serpiente[40];
 		
 		int k=0;
-		int n =100;
+		int n =0;
 		for (int i = 0; i < arbol.length; i++) {
 			// se crea un altura aleatoria para las ramas de los arboles
-			Random rand1 = new Random();
-			int rand = rand1.nextInt(200) + 150;
-			Random rand2 = new Random();
-			int rand3 = rand2.nextInt(300)+ 100 ;
-			Random rand4 = new Random();
-			int rand5 = rand4.nextInt(900)+ rand3;
-				
+			Random random = new Random();
+			int rand = random.nextInt(200,340);
+			int rand2 = random.nextInt(100,300) ;
+			
+			
 			//a cada elemento se le asigna una clase
-			arbol[i]= new Arbol(entorno.ancho()+n+rand3 , rand);			
+			arbol[i]= new Arbol(entorno.ancho()+n+rand2 , rand);	
+			
 			tigre[i] = new Tigre(entorno.ancho()+k+rand,entorno.alto()-suelo.alto);
-//			tigre[i] = new Tigre(entorno.ancho()+k+rand5,entorno.alto()-suelo.alto);
-			k+=500; //tigre
+			k+=400; //tigre
 			n+=250; // arbol
 			
 		}// for
-		
 		for (int i = 0; i < serpiente.length; i++) {
 			Random random = new Random();
 			int rand = random.nextInt(serpiente.length);
