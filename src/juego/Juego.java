@@ -34,8 +34,8 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < arbol.length; i++) {
 			// se crea un altura aleatoria para las ramas de los arboles
 			Random random = new Random();
-			int rand = random.nextInt(200,340);
-			int rand2 = random.nextInt(100,300) ;
+			int rand = random.nextInt(200);
+			int rand2 = random.nextInt(100) ;
 			
 			
 			//a cada elemento se le asigna una clase
