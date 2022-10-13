@@ -27,7 +27,7 @@ public class Juego extends InterfaceJuego {
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[50];
 		this.tigre = new Tigre[50];
-		this.serpiente = new Serpiente[40];2
+		this.serpiente = new Serpiente[40];
 		
 		int k=0;
 		int n =0;
