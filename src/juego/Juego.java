@@ -40,7 +40,6 @@ public class Juego extends InterfaceJuego {
 			
 			//a cada elemento se le asigna una clase
 			arbol[i]= new Arbol(entorno.ancho()+n+rand2 , rand);	
-			
 			tigre[i] = new Tigre(entorno.ancho()+k+rand,entorno.alto()-suelo.alto);
 			k+=400; //tigre
 			n+=250; // arbol
@@ -61,7 +60,9 @@ public class Juego extends InterfaceJuego {
 	}
 
 	
-	 
+	int timer = 0;
+	int salto =0;
+	
 	public void tick() {
 		// Procesamiento de un instante de tiempo.
 		
@@ -69,14 +70,26 @@ public class Juego extends InterfaceJuego {
 		mono.dibujarMono(entorno);
 		
 		
-		if(entorno.estaPresionada(entorno.TECLA_ARRIBA)) {	
+		if(entorno.estaPresionada(entorno.TECLA_ARRIBA) ) {	
+			timer++;
 			
-			mono.saltar(entorno);
+			//cuenta los saltos cada vez q se oprime la tecla
+			if(entorno.sePresiono(entorno.TECLA_ARRIBA)) {
+				salto++;
+			}
+			
+			if(timer<25 && salto <3) {				
+				mono.saltar(8);
+			}else {
+				//si se mantiene apretado se activa gravedad
+				mono.gravedad(3);
+			}
 			
 		}else {			
-			
+			timer=0;
 			if(mono.chocaConSuelo(entorno, suelo)) {
 				mono.gravedad(0);
+				salto = 0;
 			}else {
 				mono.gravedad(3);				
 			}

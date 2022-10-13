@@ -11,6 +11,8 @@ public class Mono {
 	private int largo;
 	private int angulo;
 	private Color color;
+
+	
 	
 	
 	//prueba
@@ -19,8 +21,8 @@ public class Mono {
 	public Mono(int x, int y) {
 		this.x=x;
 		this.y=y;
-		this.ancho=60;
-		this.largo=100;
+		this.ancho=50;
+		this.largo=60;
 		this.angulo=0;
 		this.color=Color.white;
 		
@@ -30,14 +32,11 @@ public class Mono {
 		e.dibujarRectangulo(this.x+this.ancho,this.y, this.ancho, this.largo, this.angulo, this.color);
 	}
 	
-	public void saltar(Entorno e) {
-		
-		this.y -=10;
-		//this.y debe disminuir hasta Entorno.alto()-450, luego this.y debe aumentar hasta la altura de un objeto(suelo, vibora,tigre, rama)
-		
+	public void saltar(int s) {
+		this.y -=s;
 	}//saltar
 	
-	public void gravedad(int g) {
+	public void gravedad(double g) {
 		this.y += g;
 	}
 	
@@ -47,15 +46,8 @@ public class Mono {
 		}else {
 			return false;
 		}
-		
 	}//chocaConSuelo
 	
-	public void detieneEnSuelo(Entorno e, Suelo s) {
-		if (this.y >= e.alto()-s.alto) {
-			
-		}
-		
-	}//detieneEnSuelo
 	
 	public int getX() {
 		return x;
