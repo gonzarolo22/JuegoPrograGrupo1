@@ -12,20 +12,16 @@ public class Selva {
 	Arbol []arboles;
 	
 	
-	public arboles() {
-		int k=0;
-		int n =0;
-		Entorno e;
-		for (int i = 0; i < arboles.length; i++) {
-			// se crea un altura aleatoria para las ramas de los arboles
-			Random random = new Random();
-			int rand = random.nextInt(300);
-			int rand2 = random.nextInt(100) ;
+	public Selva() {
+		
+		this.arboles= new Arbol[50];
+		
+		for(int i=0; i< arboles.length;i++) {
+		int valorEntero = (int) Math.floor(Math.random()*(350-200+1)+350);
+			arboles[i]=new Arbol(810,valorEntero);
 			
-			
-			//a cada elemento se le asigna una clase
-			arboles[i]= new Arbol(e.ancho()+n+rand2 , rand);	
-	}
+		}
+		
 
 }
 	
