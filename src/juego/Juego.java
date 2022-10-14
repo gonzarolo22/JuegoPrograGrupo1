@@ -83,11 +83,17 @@ public class Juego extends InterfaceJuego {
 			
 			if(timer<25 && salto <3) {				
 				mono.saltar(8);
-				piedra.saltar(8);
+				if(piedra.getX()<=50) { //cuando la piedra es lanzada no sera afecta por el salto del mono
+					  piedra.saltar(8);
+		}
 			}else {
 				//si se mantiene apretado se activa gravedad
-				mono.gravedad(3);
-				piedra.gravedad(3);
+				if (mono.chocaConSuelo(entorno, suelo)==false) {
+				    mono.gravedad(3);
+				    if(piedra.getX()<=50) { //cuando la piedra es lanzada no sera afectada por la gravedad del mono
+						   piedra.gravedad(3);
+				    }
+			}
 			}
 			
 		}else {			
@@ -98,13 +104,15 @@ public class Juego extends InterfaceJuego {
 				salto = 0;
 			}else {
 				mono.gravedad(3);	
-				piedra.gravedad(3);
+				if(piedra.getX()<=50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
+					piedra.gravedad(3);
+
 			}
 			
 			
 			
 		}
-		
+		} 
 		for (int i = 0; i < arbol.length; i++) {
 			arbol[i].dibujarArbol(entorno);
 			arbol[i].desplazar();
@@ -117,16 +125,14 @@ public class Juego extends InterfaceJuego {
 			serpiente[i].dibujarSerpiente(entorno);
 			serpiente[i].desplazar();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
+		if(entorno.estaPresionada(entorno.TECLA_ESPACIO) ) {	
+			piedra.lanzar(8);
+			}else { // si se presiona se seguira moviendo la piedra
+				if(piedra.getX()>50) {
+					piedra.lanzar(8);
+				}
+			}
+			}
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {

@@ -23,6 +23,9 @@ public class Piedra {
 		e.dibujarCirculo(x, y, diametro, color);
 		
 	}
+	public void lanzar(double g) {
+		this.x += g;
+	}
 	public void saltar(double s) {
 		this.y -=s;
 	}
