@@ -16,6 +16,7 @@ public class Juego extends InterfaceJuego {
 	private Arbol[] arbol;
 	private Tigre[] tigre;
 	private Serpiente[] serpiente;
+	private Piedra piedra;
 	
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800, 600);
@@ -23,6 +24,7 @@ public class Juego extends InterfaceJuego {
 		this.entorno.iniciar();
 		this.suelo= new Suelo(entorno,entorno.ancho()/2); 
 		this.mono= new Mono(0,entorno.alto()-suelo.alto);
+		this.piedra=new Piedra(50,mono.getY());
 		
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[50];
@@ -34,8 +36,8 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < arbol.length; i++) {
 			// se crea un altura aleatoria para las ramas de los arboles
 			Random random = new Random();
-			int rand = random.nextInt(200);
-			int rand2 = random.nextInt(100) ;
+			int rand = random.nextInt(200,350);
+			int rand2 = random.nextInt(100,300) ;
 			
 			
 			//a cada elemento se le asigna una clase
@@ -68,6 +70,7 @@ public class Juego extends InterfaceJuego {
 		
 		suelo.dibujarRectangulo(entorno);
 		mono.dibujarMono(entorno);
+		piedra.CrearPiedra(entorno);
 		
 		
 		if(entorno.estaPresionada(entorno.TECLA_ARRIBA) ) {	
@@ -80,18 +83,22 @@ public class Juego extends InterfaceJuego {
 			
 			if(timer<25 && salto <3) {				
 				mono.saltar(8);
+				piedra.saltar(8);
 			}else {
 				//si se mantiene apretado se activa gravedad
 				mono.gravedad(3);
+				piedra.gravedad(3);
 			}
 			
 		}else {			
 			timer=0;
 			if(mono.chocaConSuelo(entorno, suelo)) {
 				mono.gravedad(0);
+				piedra.gravedad(0);
 				salto = 0;
 			}else {
-				mono.gravedad(3);				
+				mono.gravedad(3);	
+				piedra.gravedad(3);
 			}
 			
 			
@@ -110,6 +117,8 @@ public class Juego extends InterfaceJuego {
 			serpiente[i].dibujarSerpiente(entorno);
 			serpiente[i].desplazar();
 		}
+		
+		
 		
 		
 		
