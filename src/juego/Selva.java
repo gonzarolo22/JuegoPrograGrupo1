@@ -17,13 +17,21 @@ public class Selva {
 		this.arboles= new Arbol[50];
 		
 		for(int i=0; i< arboles.length;i++) {
-		int valorEntero = (int) Math.floor(Math.random()*(350-200+1)+350);
-			arboles[i]=new Arbol(810,valorEntero);
+		double valordouble1 =  Math.floor(Math.random()*(200-200+1)+200);
+		int valordouble2 =  (int) Math.floor(Math.random()*(200-200+1)+200);
+			arboles[i]=new Arbol(valordouble2,valordouble1);
 			
 		}
 		
 
+	
 }
+	public void movimientoSelva(Entorno e) {
+		for (int i = 0; i < arboles.length; i++) {
+			arboles[i].dibujarArbol(e);
+			arboles[i].desplazar();
+			}
+		}
 	
 	
-}	
+}
