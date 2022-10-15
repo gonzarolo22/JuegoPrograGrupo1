@@ -27,12 +27,7 @@ public class Juego extends InterfaceJuego {
 		this.selva=new Selva();
 		this.piedra=new Piedra(50,mono.getY());
 		this.serpientes=new GrupoSerpientes();
-			
-		
-		
-	
-		
-		}
+	}
 		
 	
 	
