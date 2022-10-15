@@ -12,15 +12,17 @@ public class Serpiente {
 	private double alto;
 	private double angulo;
 	private Color color;
+	private double aleatorio;
 	
 	
-	public Serpiente(double x, double y) {
-		this.x=x;
-		this.y=y;
+	public Serpiente() {
+		this.x=0;
+		this.y=0;
 		this.ancho=40;
 		this.alto=40;
 		this.angulo=0;
 		this.color=Color.CYAN;
+		this.aleatorio=  1;
 }// Arbol
 	
 	public void dibujarSerpiente(Entorno e) {
@@ -36,7 +38,9 @@ public class Serpiente {
 	}
 	
 	public boolean siCoincideConArbol(Arbol a) {
-		if(a.getX() == this.x && a.getY()==this.y ) {
+		if(a.getAleatorio() == this.aleatorio) {
+			this.x=a.getX();
+			this.y=a.getY();
 			return true;
 		}
 		else {

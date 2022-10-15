@@ -12,12 +12,10 @@ public class GrupoSerpientes {
 	public GrupoSerpientes() {
 		
 		this.serpientes= new Serpiente[50];
-		double n=810;
+		
 		for(int i=0; i< serpientes.length;i++) {
-		double valordouble1 =  Math.floor(Math.random()*(300-190+1)+190);
-			serpientes[i]=new Serpiente(n,valordouble1);
-			n=n+valordouble1;
-		}
+			serpientes[i]=new Serpiente();
+			}
 		
 }
 	

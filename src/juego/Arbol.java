@@ -12,7 +12,7 @@ public class Arbol {
 	private double alto;
 	private double angulo;
 	private Color color;
-	
+	private double aleatorio;
 	
 	public Arbol(double x, double y) {
 		this.x=x;
@@ -21,6 +21,7 @@ public class Arbol {
 		this.alto=5;
 		this.angulo=0;
 		this.color=Color.GRAY;
+		this.aleatorio= 1;
 }// Arbol
 	
 	public void dibujarArbol(Entorno e) {
@@ -37,6 +38,14 @@ public class Arbol {
 
 	public double getY() {
 		return y;
+	}
+
+	public double getAleatorio() {
+		return aleatorio;
+	}
+
+	public void setAleatorio(double aleatorio) {
+		this.aleatorio = aleatorio;
 	}
 	
 	
