@@ -1,5 +1,5 @@
 package juego;
-
+// EN GRUPO DE SERPIENTES CREO A LAS SEPIENTES
 import java.awt.Color;
 
 import entorno.Entorno;
@@ -12,17 +12,17 @@ public class Serpiente {
 	private double alto;
 	private double angulo;
 	private Color color;
-	private double aleatorio;
+	private int aleatorio;
 	
 	
-	public Serpiente() {
+	public Serpiente(int aleatorio) {
 		this.x=0;
 		this.y=0;
 		this.ancho=40;
 		this.alto=40;
 		this.angulo=0;
 		this.color=Color.CYAN;
-		this.aleatorio=  1;
+		this.aleatorio=aleatorio;
 }// Arbol
 	
 	public void dibujarSerpiente(Entorno e) {
@@ -37,7 +37,9 @@ public class Serpiente {
 		System.out.println(this.x);
 	}
 	
+	
 	public boolean siCoincideConArbol(Arbol a) {
+		
 		if(a.getAleatorio() == this.aleatorio) {
 			this.x=a.getX();
 			this.y=a.getY();

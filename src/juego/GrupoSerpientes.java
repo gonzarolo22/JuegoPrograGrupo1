@@ -12,9 +12,9 @@ public class GrupoSerpientes {
 	public GrupoSerpientes() {
 		
 		this.serpientes= new Serpiente[50];
-		
+		int valorEntero = (int) Math.floor(Math.random()*(10-5+1)+5);
 		for(int i=0; i< serpientes.length;i++) {
-			serpientes[i]=new Serpiente();
+			serpientes[i]=new Serpiente(valorEntero);
 			}
 		
 }

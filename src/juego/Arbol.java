@@ -1,5 +1,5 @@
 package juego;
-
+// EN SELVA CREO LOS ARBOLES.
 import java.awt.Color;
 import java.util.Random;
 
@@ -12,17 +12,19 @@ public class Arbol {
 	private double alto;
 	private double angulo;
 	private Color color;
-	private double aleatorio;
+	private int aleatorio;
 	
-	public Arbol(double x, double y) {
-		this.x=x;
+	public Arbol(double x, double y, int aleatorio) {   //le creo aleatorio para que cuando crée un arbol le de un aleatorio 
+		this.x=x;										//entre 1 y 5, y si coincide entre el aleatorio de serpiente dibuja a la serpiente
 		this.y=y;
 		this.ancho=100;
 		this.alto=5;
 		this.angulo=0;
 		this.color=Color.GRAY;
-		this.aleatorio= 1;
+		this.aleatorio= aleatorio;
 }// Arbol
+	
+	
 	
 	public void dibujarArbol(Entorno e) {
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
@@ -44,7 +46,7 @@ public class Arbol {
 		return aleatorio;
 	}
 
-	public void setAleatorio(double aleatorio) {
+	public void setAleatorio(int aleatorio) {
 		this.aleatorio = aleatorio;
 	}
 	

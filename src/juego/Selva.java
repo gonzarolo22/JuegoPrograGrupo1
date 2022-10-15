@@ -21,12 +21,12 @@ public class Selva {
 		this.arboles= new Arbol[50];
 		
 		//CREO ARBOLES
-		double valordouble1 =  300;
+		
 		for(int i=0; i< arboles.length;i++) {
+			int valorEntero = (int) Math.floor(Math.random()*(10-5+1)+5);  //CREO EL NUMERO ALEATORIO PARA COMPARAR CON LA SERPIENTES Y CREARLA.
+			double rand=  Math.floor(Math.random()*(300-190+1)+190);		// ESTE NUMERO ALEATORIO DICTA LA ALTURA DE LA RAMA
 			
-			double rand=  Math.floor(Math.random()*(300-190+1)+190);
-			
-			arboles[i]=new Arbol(a,rand);
+			arboles[i]=new Arbol(a,rand,valorEntero);
 				a=(int) (a+rand); 								
 			
 		}
