@@ -14,39 +14,24 @@ public class Juego extends InterfaceJuego {
 	private Mono mono;
 	private Suelo suelo;
 	private Tigre[] tigre;
-	private Serpiente[] serpiente;
 	private Piedra piedra;
 	private Selva selva;
+	private GrupoSerpientes serpientes;
 	
 	public Juego() {
-		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800, 600);
 		//aca va las cosas a inicialisar.....
+		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800, 600);
 		this.entorno.iniciar();
-		this.suelo= new Suelo(entorno,entorno.ancho()/2); 
+		this.suelo= new Suelo(); 
 		this.mono= new Mono(0,entorno.alto()-suelo.alto);
-		this.piedra=new Piedra(50,mono.getY());
 		this.selva=new Selva();
-		// se crea un arreglo de x arboles
+		this.piedra=new Piedra(50,mono.getY());
+		this.serpientes=new GrupoSerpientes();
+			
 		
-		this.tigre = new Tigre[50];
-		this.serpiente = new Serpiente[40];
 		
-		int k=0;
-		int n =0;
-		for (int i = 0; i < tigre.length; i++) {
-			// se crea un altura aleatoria para las ramas de los arboles
-			Random random = new Random();
-			int rand = random.nextInt(300);
-			int rand2 = random.nextInt(100) ;
-			
-			
-			//a cada elemento se le asigna una clase
-				
-			tigre[i] = new Tigre(entorno.ancho()+k+rand,entorno.alto()-suelo.alto);
-			k+=400; //tigre
-			n+=250; // arbol
-			
-		}// for
+	
+		
 		}
 		
 	
@@ -60,9 +45,25 @@ public class Juego extends InterfaceJuego {
 		// Procesamiento de un instante de tiempo.
 		
 		suelo.dibujarRectangulo(entorno);
+		
 		mono.dibujarMono(entorno);
+		
 		piedra.CrearPiedra(entorno);
+		
 		selva.movimientoSelva(entorno);
+		
+		for(int i=0;i<selva.arboles.length;i++) {
+		serpientes.movimientoSerpientes(entorno,selva.arboles[i]);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -103,10 +104,7 @@ public class Juego extends InterfaceJuego {
 			
 		
 		
-		for (int i = 0; i < serpiente.length; i++) {
-			serpiente[i].dibujarSerpiente(entorno);
-			serpiente[i].desplazar();
-		}
+	
 }
 		
 		

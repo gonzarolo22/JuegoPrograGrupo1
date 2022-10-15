@@ -13,10 +13,10 @@ public class Suelo {
 	Color color;
 	
 	//constructor
-	public Suelo (Entorno e,int x){
-		this.x=x;
-		this.y=e.alto()-this.alto/2;
-		this.ancho= e.ancho();
+	public Suelo (){
+		this.x=400;
+		this.y=500;
+		this.ancho= 800;
 		this.alto=200;
 		this.angulo=0;
 		this.color=Color.green;

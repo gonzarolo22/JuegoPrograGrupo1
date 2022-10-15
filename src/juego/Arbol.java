@@ -14,7 +14,7 @@ public class Arbol {
 	private Color color;
 	
 	
-	public Arbol(int x, double y) {
+	public Arbol(double x, double y) {
 		this.x=x;
 		this.y=y;
 		this.ancho=100;

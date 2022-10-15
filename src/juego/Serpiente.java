@@ -34,6 +34,17 @@ public class Serpiente {
 	public void mostrar() {
 		System.out.println(this.x);
 	}
+	
+	public boolean siCoincideConArbol(Arbol a) {
+		if(a.getX() == this.x && a.getY()==this.y ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
+	}
 
 
 	
