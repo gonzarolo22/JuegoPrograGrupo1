@@ -23,7 +23,7 @@ public class Juego extends InterfaceJuego {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800, 600);
 		this.entorno.iniciar();
 		this.suelo= new Suelo(); 
-		this.mono= new Mono(0,entorno.alto()-suelo.alto);
+		this.mono= new Mono(50,entorno.alto()-suelo.alto);
 		this.selva=new Selva();
 		this.piedra=new Piedra(50,mono.getY());
 		this.serpientes=new GrupoSerpientes();
@@ -47,8 +47,15 @@ public class Juego extends InterfaceJuego {
 		
 		selva.movimientoSelva(entorno);
 		
-		for(int i=0;i<selva.arboles.length;i++) {
-		serpientes.movimientoSerpientes(entorno,selva.arboles[i]);
+		serpientes.recorrerSelva(selva, entorno);
+		
+		
+		if(entorno.estaPresionada(entorno.TECLA_ARRIBA) ) {
+			mono.saltar();
+		
+		}
+		else if(!entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
+				mono.gravedad(entorno);
 		}
 		
 		
@@ -57,47 +64,6 @@ public class Juego extends InterfaceJuego {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		if(entorno.estaPresionada(entorno.TECLA_ARRIBA) ) {	
-			timer++;
-			
-			//cuenta los saltos cada vez q se oprime la tecla
-			if(entorno.sePresiono(entorno.TECLA_ARRIBA)) {
-				salto++;
-			}
-			
-			if(timer<25 && salto <3) {				
-				mono.saltar(8);
-				piedra.saltar(8);
-			}else {
-				//si se mantiene apretado se activa gravedad
-				mono.gravedad(3);
-				piedra.gravedad(3);
-			}
-			
-		}else {			
-			timer=0;
-			if(mono.chocaConSuelo(entorno, suelo)) {
-				mono.gravedad(0);
-				piedra.gravedad(0);
-				salto = 0;
-			}else {
-				mono.gravedad(3);	
-				piedra.gravedad(3);
-			}
-			
-			
-			
-		}
-		
-		
-			
 			
 		
 		

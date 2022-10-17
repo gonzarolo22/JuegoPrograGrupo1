@@ -31,6 +31,14 @@ public class GrupoSerpientes {
 		}
 	
 	
+	public void recorrerSelva(Selva s, Entorno n) {
+		for(int i=0;i<s.arboles.length;i++) {
+			movimientoSerpientes(n,s.arboles[i]);
+			}
+		}
+	
+	
+	
 	
 	
 	
