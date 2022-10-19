@@ -47,15 +47,16 @@ public class Juego extends InterfaceJuego {
 		
 		suelo.dibujarRectangulo(entorno);
 		
-		mono.dibujarMono(entorno);
 		
 		piedra.CrearPiedra(entorno);
-		
 		selva.movimientoSelva(entorno);
-		
 		serpientes.recorrerSelva(selva, entorno);
 		
+		
 		tigres.movimientoTigres(entorno);
+		
+		mono.dibujarMono(entorno);
+		
 		
 		
 		if(entorno.estaPresionada(entorno.TECLA_ARRIBA) ) {

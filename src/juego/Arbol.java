@@ -25,14 +25,14 @@ public class Arbol {
 		this.angulo=0;
 		this.color=Color.GRAY;
 		this.aleatorio= aleatorio;
-		this.imag = Herramientas.cargarImagen("arbol.png");
+		this.imag = Herramientas.cargarImagen("arbolgif.gif");
 }// Arbol
 	
 	
 	
 	public void dibujarArbol(Entorno e) {
 		//e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imag, x, y, 0, 0.06);
+		e.dibujarImagen(imag, x, y, 0, 1.06);
 	}//crearArbol
 	
 	public void desplazar() {
