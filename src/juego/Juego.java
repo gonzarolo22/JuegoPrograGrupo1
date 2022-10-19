@@ -13,7 +13,6 @@ public class Juego extends InterfaceJuego {
 	private Entorno entorno;
 	private Mono mono;
 	private Suelo suelo;
-	private Tigre[] tigre;
 	private Piedra piedra;
 	private Selva selva;
 	private GrupoSerpientes serpientes;
