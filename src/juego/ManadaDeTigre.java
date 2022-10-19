@@ -15,7 +15,7 @@ public class ManadaDeTigre {
 		int rand=  (int) Math.floor(Math.random()*(2000-810+1)+810);
 		for(int i=0; i<tigres.length;i++) {
 			int rand2=  (int) Math.floor(Math.random()*(2000-810+1)+810);
-			tigres[i]= new Tigre(rand,400);
+			tigres[i]= new Tigre(rand,350);
 			rand=rand+rand2;
 		}
 		

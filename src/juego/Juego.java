@@ -1,10 +1,12 @@
 package juego;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.util.Iterator;
 import java.util.Random;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 import entorno.InterfaceJuego;
 
 public class Juego extends InterfaceJuego {
@@ -17,6 +19,7 @@ public class Juego extends InterfaceJuego {
 	private Selva selva;
 	private GrupoSerpientes serpientes;
 	private ManadaDeTigre tigres;
+	private Image fondo;
 	
 	public Juego() {
 		//aca va las cosas a inicialisar.....
@@ -28,17 +31,19 @@ public class Juego extends InterfaceJuego {
 		this.piedra=new Piedra(50,mono.getY());
 		this.serpientes=new GrupoSerpientes();
 		this.tigres= new ManadaDeTigre();
+		this.fondo = Herramientas.cargarImagen("fondo.jpg");
 	}
 		
 	
 	
 
 	
-	int timer = 0;
-	int salto =0;
+	
 	
 	public void tick() {
 		// Procesamiento de un instante de tiempo.
+		
+		entorno.dibujarImagen(fondo, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.5);
 		
 		suelo.dibujarRectangulo(entorno);
 		

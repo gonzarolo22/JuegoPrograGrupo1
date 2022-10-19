@@ -27,12 +27,14 @@ public class Mono {
 		this.alto=60;
 		this.angulo=0;
 		this.color=Color.blue;
+		this.imag = Herramientas.cargarImagen("mono1.gif");
 		
 		
 }
 	
 	public void dibujarMono(Entorno e) {
-		e.dibujarRectangulo(this.x,this.y,this.ancho, this.alto, this.angulo, this.color);
+		//e.dibujarRectangulo(this.x,this.y,this.ancho, this.alto, this.angulo, this.color);
+		e.dibujarImagen(imag, x, y, 0, 1.06);
 		
 	}
 	

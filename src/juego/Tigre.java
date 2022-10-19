@@ -28,8 +28,8 @@ public class Tigre {
 }// Arbol
 	
 	public void dibujarTigre(Entorno e) {
-		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imag, x, y, 0, 0.06);
+		//e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+		e.dibujarImagen(imag, x, y, 0, 0.50);
 	}//dibujarTigre
 	
 	public void desplazar() {
