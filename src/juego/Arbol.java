@@ -45,6 +45,19 @@ public class Arbol {
 	public double getAleatorio() {
 		return aleatorio;
 	}
+	
+	
+	public double getAncho() {
+		return ancho;
+	}
+
+
+
+	public double getAlto() {
+		return alto;
+	}
+
+
 
 	public void setAleatorio(int aleatorio) {
 		this.aleatorio = aleatorio;

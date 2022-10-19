@@ -46,12 +46,18 @@ public class Mono {
 		}
 	}
 	
-	public void chocaConArbol(Arbol a) {
-		if (this.y == a.getY() && this.x==a.getX()) {
-			this.y=a.getY();
-			this.x=a.getX();
-		}
-	}//chocaConSuelo
+	public boolean chocaConArbol(Arbol a) {
+		return (a.getX() - a.getAncho()/2 < x + ancho/2 && 
+				x - ancho/2 < a.getX() + a.getAncho()/2 &&
+				
+				a.getY() - a.getAlto()/2 < y + ancho/2 &&
+				y - ancho/2 < a.getY() + a.getAlto()/2);
+	}
+	
+	public void monoEnArbol(Arbol a) {
+		this.x = a.getX();
+		this.y=a.getY()-30;
+	}
 	
 	
 	public double getX() {
