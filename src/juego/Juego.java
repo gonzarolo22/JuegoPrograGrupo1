@@ -16,6 +16,7 @@ public class Juego extends InterfaceJuego {
 	private Piedra piedra;
 	private Selva selva;
 	private GrupoSerpientes serpientes;
+	private ManadaDeTigre tigres;
 	
 	public Juego() {
 		//aca va las cosas a inicialisar.....
@@ -26,6 +27,7 @@ public class Juego extends InterfaceJuego {
 		this.selva=new Selva();
 		this.piedra=new Piedra(50,mono.getY());
 		this.serpientes=new GrupoSerpientes();
+		this.tigres= new ManadaDeTigre();
 	}
 		
 	
@@ -48,6 +50,8 @@ public class Juego extends InterfaceJuego {
 		
 		serpientes.recorrerSelva(selva, entorno);
 		
+		tigres.movimientoTigres(entorno);
+		
 		
 		if(entorno.estaPresionada(entorno.TECLA_ARRIBA) ) {
 			mono.saltar();
@@ -62,6 +66,9 @@ public class Juego extends InterfaceJuego {
 			mono.monoEnArbol(selva.arboles[i]);
 		}
 		}
+		
+		
+		
 		
 		
 		

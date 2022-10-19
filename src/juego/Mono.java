@@ -37,7 +37,9 @@ public class Mono {
 	}
 	
 	public void saltar() {
+		if(this.y>200) {
 		this.y -=8;
+		}
 	}
 	
 	public void gravedad(Entorno e) {

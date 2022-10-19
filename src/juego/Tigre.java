@@ -1,4 +1,4 @@
-package juego;
+ package juego;
 
 import java.awt.Color;
 
