@@ -1,8 +1,10 @@
  package juego;
 
 import java.awt.Color;
+import java.awt.Image;
 
 import entorno.Entorno;
+import entorno.Herramientas;
 
 public class Tigre {
 	
@@ -12,6 +14,7 @@ public class Tigre {
 	private double alto;
 	private double angulo;
 	private Color color;
+	private Image imag;
 	
 	
 	public Tigre(int x, double y) {
@@ -21,10 +24,12 @@ public class Tigre {
 		this.alto=60;
 		this.angulo=0;
 		this.color=Color.magenta;
+		this.imag = Herramientas.cargarImagen("tigre.gif");
 }// Arbol
 	
 	public void dibujarTigre(Entorno e) {
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+		e.dibujarImagen(imag, x, y, 0, 0.06);
 	}//dibujarTigre
 	
 	public void desplazar() {
