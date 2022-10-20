@@ -25,7 +25,7 @@ public class Arbol {
 		this.ancho = 100;
 		this.alto = 5;
 		this.angulo = 0;
-		this.color = Color.GRAY;
+		this.color = Color.MAGENTA;
 		this.escala = escala;
 		this.imagen = Herramientas.cargarImagen("arbol.png");
 		this.imagen2 = Herramientas.cargarImagen("rama.png");
@@ -39,7 +39,7 @@ public class Arbol {
 	public void dibujarArbol(Entorno e) {
 		e.dibujarImagen(imagen, this.x, this.y, angulo, this.escala);
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
+//		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
 	}// crearArbol
 
 	public static boolean arbolesVacios(Arbol[] a) {
@@ -113,6 +113,14 @@ public class Arbol {
 	public void desplazar() {
 		this.x -= 1.2;
 	}// desplazar
+
+	public double getAncho() {
+		return ancho;
+	}
+
+	public double getAlto() {
+		return alto;
+	}
 
 	public double getX() {
 		return x;

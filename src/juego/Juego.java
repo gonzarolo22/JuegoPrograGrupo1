@@ -21,10 +21,11 @@ public class Juego extends InterfaceJuego {
 	private Selva[] selva;
 
 	public Juego() {
-		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,600);
-		
+		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
+				600);
+
 		// aca va las cosas a inicializar.....
-		
+
 		this.selva = new Selva[2];
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, entorno.alto() - suelo.alto);
@@ -35,15 +36,14 @@ public class Juego extends InterfaceJuego {
 		this.tigre = new Tigre[2];
 		this.serpiente = new Serpiente[2];
 
-
 		Selva.iniciaSelva(selva);
 
 		Arbol.crearArboles(this.arbol, entorno);
-		
+
 		Tigre.agregaTigre(this.tigre, entorno, suelo);
 
 		Serpiente.agregaSerpiente(this.serpiente, this.arbol);
-		
+
 		// una vez q se cargan los datos se inicia el juego
 		this.entorno.iniciar();
 	}// juego
@@ -51,10 +51,9 @@ public class Juego extends InterfaceJuego {
 	int timer = 0;
 	int salto = 0;
 
-	
 	public void tick() {
 //		// Procesamiento de un instante de tiempo.
-		
+
 		suelo.dibujarRectangulo(entorno);
 //	
 		// si la primera imagen sale de la pantalla vuelve al final de la segunda imagen
@@ -68,7 +67,6 @@ public class Juego extends InterfaceJuego {
 		selva[1].avanzarFondo(1);
 		selva[0].dibujarFondo(entorno);
 		selva[0].avanzarFondo(1);
-
 
 //		piedra.CrearPiedra(entorno);
 //
@@ -111,6 +109,11 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < arbol.length; i++) {
 			arbol[i].dibujarArbol(entorno);
 			arbol[i].desplazar();
+			
+			if (mono.chocaConArbol(arbol[i])) {
+	
+				mono.monoEnArbol(arbol[i]);
+			}
 
 			if (arbol[i].saleDePantalla()) {
 				// si sale de la pantalla sobreescribo el arbol con uno nuevo
@@ -129,19 +132,17 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 		mono.dibujarMono(entorno);
-		
+
 		for (int i = 0; i < serpiente.length; i++) {
 			serpiente[i].dibujarSerpiente(entorno);
 			serpiente[i].desplazar();
-			
+
 			if (serpiente[i].saleDePantalla()) {
-				serpiente[i]=null;
-				Serpiente.agregaSerpiente(this.serpiente,this.arbol);
+				serpiente[i] = null;
+				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 			}
 		}
-		
-		
-		
+
 //		if(entorno.estaPresionada(entorno.TECLA_ESPACIO) ) {	
 //			piedra.lanzar(8);
 //			}else { // si se presiona se seguira moviendo la piedra
@@ -150,7 +151,7 @@ public class Juego extends InterfaceJuego {
 //				}
 //			}
 //		
-		
+
 	}// fin tick()
 
 	@SuppressWarnings("unused")
