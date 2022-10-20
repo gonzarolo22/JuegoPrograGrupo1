@@ -32,7 +32,7 @@ public class Mono {
 }
 	
 	public void dibujarMono(Entorno e) {
-		e.dibujarRectangulo(this.x+this.ancho,this.y, this.ancho, this.largo, this.angulo, this.color);
+//		e.dibujarRectangulo(this.x+this.ancho,this.y, this.ancho, this.largo, this.angulo, this.color);
 		e.dibujarImagen(imagen, x+this.ancho,y-15, angulo, .3);
 	}
 	

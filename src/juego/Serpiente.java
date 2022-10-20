@@ -37,11 +37,17 @@ public class Serpiente {
 
 	public static Serpiente[] agregaSerpiente(Serpiente[] s, Arbol[] arbol) {
 		Random random = new Random();
-
+		
 		for (int i = 0; i < s.length; i++) {
 			// elijo un arbol aleatorio disponible
 			int rand = random.nextInt(arbol.length);
-			if (s[i] == null) {
+			
+			while(arbol[rand].getX()<800) {
+				rand = random.nextInt(arbol.length);
+			}
+			
+			if(s[i] == null ) {
+
 				//se suma 30 para q la serpiente quede al borde de la rama
 				s[i] = new Serpiente(arbol[rand].getX()+30, arbol[rand].getY());
 			}

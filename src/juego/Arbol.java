@@ -28,7 +28,7 @@ public class Arbol {
 		this.color = Color.GRAY;
 		this.escala = escala;
 		this.imagen = Herramientas.cargarImagen("arbol.png");
-		this.imagen2= Herramientas.cargarImagen("rama.png");
+		this.imagen2 = Herramientas.cargarImagen("rama.png");
 	}// Arbol
 
 	public void info() {
@@ -39,26 +39,26 @@ public class Arbol {
 	public void dibujarArbol(Entorno e) {
 		e.dibujarImagen(imagen, this.x, this.y, angulo, this.escala);
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imagen2, this.x, this.y-14, angulo, .15);
+		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
 	}// crearArbol
 
-	public static boolean arbolesVacios(Arbol[] a ) {
+	public static boolean arbolesVacios(Arbol[] a) {
 		int contador = 0;
 		for (int i = 0; i < a.length; i++) {
-			if (a[i]==null) {
+			if (a[i] == null) {
 				contador++;
 			}
 		}
-		if (contador==a.length) {
+		if (contador == a.length) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
-	}//arbolesVacios
+	}// arbolesVacios
 
 	public static Arbol[] crearArboles(Arbol[] arboles, Entorno e) {
 		Random random = new Random();
-		
+
 		if (arbolesVacios(arboles)) {
 			int n = 0;
 			for (int i = 0; i < arboles.length; i++) {
@@ -68,46 +68,41 @@ public class Arbol {
 					// se crea las distancia para los arboles fuera de la pantalla (lado derecho)
 					int rand2 = random.nextInt(10);
 					// escala para los arboles
-					double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;					
-					arboles[i] = new Arbol(e.ancho()+n + rand2, rand, escala);
+					double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;
+					arboles[i] = new Arbol(e.ancho() + n + rand2, rand, escala);
 					n += 250;
-				}//if
+				} // if
 			} // for
 			return arboles;
-		}else {
-			
+		} else {
+
 			for (int i = 0; i < arboles.length; i++) {
-				if (arboles[0]==null) {
+				if (arboles[0] == null) {
 					int rand = random.nextInt(300, 350);
 					int rand2 = random.nextInt(100);
 					double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;
-					//como arboles[0] no tiene un elemento previo entonces se accede al ultimo elemento
-					double ultimoX = arboles[arboles.length-1].x;
-	
-					arboles[0]= new Arbol(ultimoX+e.ancho(),rand, escala);
-					arboles[0].info();
-					System.out.println(arboles.length);
-				}else {
-					if (arboles[i]==null) {
+					// como arboles[0] no tiene un elemento previo entonces se accede al ultimo
+					// elemento
+					double ultimoX = arboles[arboles.length - 1].x;
+					arboles[0] = new Arbol(ultimoX + e.ancho(), rand, escala);
+				} else {
+					if (arboles[i] == null) {
 						int rand = random.nextInt(300, 350);
-						int rand2 = random.nextInt(200,400);
+						int rand2 = random.nextInt(200, 400);
 						double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;
-						
-						//se accede al arbol anterior para obtener su x
-						arboles[i] = new Arbol(arboles[i-1].x + rand2, rand, escala);
+
+						// se accede al arbol anterior para obtener su x
+						arboles[i] = new Arbol(arboles[i - 1].x + rand2, rand, escala);
 					}
 				}
 			}
-			
-			
 			return arboles;
 		}
-		
-		
+
 	}// crearArboles
+	
 
 	public boolean saleDePantalla() {
-
 		if (this.x < -100) {
 			return true;
 		} else {

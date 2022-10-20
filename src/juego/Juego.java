@@ -35,7 +35,6 @@ public class Juego extends InterfaceJuego {
 		this.tigre = new Tigre[2];
 		this.serpiente = new Serpiente[2];
 
-		Random random = new Random();
 
 		Selva.iniciaSelva(selva);
 
@@ -104,9 +103,7 @@ public class Juego extends InterfaceJuego {
 				mono.gravedad();
 				if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
 					piedra.gravedad(3);
-
 				}
-
 			}
 		}
 
