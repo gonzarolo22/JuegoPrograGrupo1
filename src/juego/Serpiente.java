@@ -42,7 +42,8 @@ public class Serpiente {
 			// elijo un arbol aleatorio disponible
 			int rand = random.nextInt(arbol.length);
 			if (s[i] == null) {
-				s[i] = new Serpiente(arbol[rand].getX(), arbol[rand].getY());
+				//se suma 30 para q la serpiente quede al borde de la rama
+				s[i] = new Serpiente(arbol[rand].getX()+30, arbol[rand].getY());
 			}
 		}
 		return s;
@@ -63,7 +64,7 @@ public class Serpiente {
 	}
 
 	public void desplazar() {
-		this.x -= 2;
+		this.x -=1.2 ;
 	}// desplazar
 
 	public void mostrar() {

@@ -117,7 +117,8 @@ public class Juego extends InterfaceJuego {
 
 			if (arbol[i].saleDePantalla()) {
 				// si sale de la pantalla sobreescribo el arbol con uno nuevo
-				arbol[i] = Arbol.agregarArbol(entorno);
+				arbol[i] = null;
+				Arbol.crearArboles(this.arbol, entorno);
 			}
 		}
 
