@@ -29,7 +29,7 @@ public class Juego extends InterfaceJuego {
 		this.selva = new Selva[2];
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, entorno.alto() - suelo.alto);
-		this.piedra = new Piedra(50, mono.getX());
+		this.piedra = new Piedra(50, mono.getY());
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -68,9 +68,11 @@ public class Juego extends InterfaceJuego {
 		selva[0].dibujarFondo(entorno);
 		selva[0].avanzarFondo(1);
 
-//		piedra.CrearPiedra(entorno);
-//
-//		
+
+		
+		
+		
+	
 		if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 			timer++;
 
@@ -81,16 +83,16 @@ public class Juego extends InterfaceJuego {
 
 			if (timer < 25 && salto < 3) {
 				mono.saltar(8);
-//				if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afecta por el salto del mono
-//					piedra.saltar(8);
-//				}
+				if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afecta por el salto del mono
+					piedra.saltar(8);
+				}
 			} else {
 				// si se mantiene apretado se activa gravedad
 				if (mono.chocaConSuelo(entorno, suelo) == false) {
 					mono.gravedad();
-//					if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
-//						piedra.gravedad(3);
-//					}
+					if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
+						piedra.gravedad();
+					}
 				}
 			}
 		} else {
@@ -100,7 +102,7 @@ public class Juego extends InterfaceJuego {
 			} else {
 				mono.gravedad();
 				if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
-					piedra.gravedad(3);
+					piedra.gravedad();
 				}
 			}
 		}
@@ -114,6 +116,12 @@ public class Juego extends InterfaceJuego {
                 if(entorno.estaPresionada(entorno.TECLA_ARRIBA)==false) {
                     mono.monoEnArbol(arbol[i]);
                     salto=0;
+                   
+                    if(piedra.getX()<=50) {
+    					piedra.setY(mono.getY());
+    					
+    				}
+                  
                 }
             }
 
@@ -122,6 +130,10 @@ public class Juego extends InterfaceJuego {
 				arbol[i] = null;
 				Arbol.crearArboles(this.arbol, entorno);
 			}
+			
+			
+			
+			
 		}
 
 		// condiciones de los tigres
@@ -133,7 +145,7 @@ public class Juego extends InterfaceJuego {
 				Tigre.agregaTigre(tigre, entorno, suelo);
 			}
 		}
-		mono.dibujarMono(entorno);
+		
 
 		for (int i = 0; i < serpiente.length; i++) {
 			serpiente[i].dibujarSerpiente(entorno);
@@ -145,14 +157,23 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 
-//		if(entorno.estaPresionada(entorno.TECLA_ESPACIO) ) {	
-//			piedra.lanzar(8);
-//			}else { // si se presiona se seguira moviendo la piedra
-//				if(piedra.getX()>50) {
-//					piedra.lanzar(8);
-//				}
-//			}
-//		
+		if(entorno.estaPresionada(entorno.TECLA_ESPACIO) ) {	
+			piedra.lanzar(8);
+			}else { // si se presiona se seguira moviendo la piedra
+				if(piedra.getX()>50) {
+					piedra.lanzar(8);
+					
+				}
+			}
+			
+		if (piedra.saleDePantalla(entorno)) {
+			this.piedra = new Piedra(50, mono.getY());
+		}
+		
+		piedra.crearPiedra(entorno);
+		mono.dibujarMono(entorno);
+			
+		
 
 	}// fin tick()
 

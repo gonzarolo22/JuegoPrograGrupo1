@@ -38,8 +38,8 @@ public class Arbol {
 
 	public void dibujarArbol(Entorno e) {
 		e.dibujarImagen(imagen, this.x, this.y, angulo, this.escala);
-		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-//		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
+//		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
 	}// crearArbol
 
 	public static boolean arbolesVacios(Arbol[] a) {
@@ -87,8 +87,8 @@ public class Arbol {
 					arboles[0] = new Arbol(ultimoX + e.ancho(), rand, escala);
 				} else {
 					if (arboles[i] == null) {
-						int rand = random.nextInt(300);
-						int rand2 = random.nextInt(200);
+						int rand = random.nextInt(300,350);
+						int rand2 = random.nextInt(200,400);
 						double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;
 
 						// se accede al arbol anterior para obtener su x
