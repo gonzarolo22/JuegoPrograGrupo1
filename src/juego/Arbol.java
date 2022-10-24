@@ -87,8 +87,8 @@ public class Arbol {
 					arboles[0] = new Arbol(ultimoX + e.ancho(), rand, escala);
 				} else {
 					if (arboles[i] == null) {
-						int rand = random.nextInt(300, 350);
-						int rand2 = random.nextInt(200, 400);
+						int rand = random.nextInt(300);
+						int rand2 = random.nextInt(200);
 						double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;
 
 						// se accede al arbol anterior para obtener su x

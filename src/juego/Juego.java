@@ -19,7 +19,7 @@ public class Juego extends InterfaceJuego {
 	private Serpiente[] serpiente;
 	private Piedra piedra;
 	private Selva[] selva;
-
+//
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
 				600);
