@@ -111,9 +111,11 @@ public class Juego extends InterfaceJuego {
 			arbol[i].desplazar();
 			
 			if (mono.chocaConArbol(arbol[i])) {
-	
-				mono.monoEnArbol(arbol[i]);
-			}
+                if(entorno.estaPresionada(entorno.TECLA_ARRIBA)==false) {
+                    mono.monoEnArbol(arbol[i]);
+                    salto=0;
+                }
+            }
 
 			if (arbol[i].saleDePantalla()) {
 				// si sale de la pantalla sobreescribo el arbol con uno nuevo
