@@ -24,7 +24,6 @@ public class Juego extends InterfaceJuego {
 	public Juego() {
 		//aca va las cosas a inicialisar.....
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800, 600);
-		this.entorno.iniciar();
 		this.suelo= new Suelo(); 
 		this.mono= new Mono(300,entorno.alto()-suelo.alto);
 		this.selva=new Selva();
@@ -32,6 +31,7 @@ public class Juego extends InterfaceJuego {
 		this.serpientes=new GrupoSerpientes();
 		this.tigres= new ManadaDeTigre();
 		this.fondo = Herramientas.cargarImagen("fondo.jpg");
+		this.entorno.iniciar();
 	}
 		
 	
