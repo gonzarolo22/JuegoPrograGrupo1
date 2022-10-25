@@ -17,7 +17,7 @@ public class Suelo {
 		this.x=x;
 		this.y=e.alto()-this.alto/2;
 		this.ancho= e.ancho();
-		this.alto=200;
+		this.alto=100;
 		this.angulo=0;
 		this.color=Color.green;
 	}

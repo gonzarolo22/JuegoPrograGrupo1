@@ -19,7 +19,7 @@ public class Piedra {
 		this.color= Color.white;
 	}
 	
-	public void CrearPiedra(Entorno e) {
+	public void crearPiedra(Entorno e) {
 		e.dibujarCirculo(x, y, diametro, color);
 		
 	}
@@ -29,8 +29,18 @@ public class Piedra {
 	public void saltar(double s) {
 		this.y -=s;
 	}
-	public void gravedad(double g) {
+	public void gravedad(int g) {
 		this.y += g;
+	}
+	
+	
+	
+	public boolean saleDePantalla(Entorno e) {
+		if (this.x > e.ancho() ) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	
