@@ -27,7 +27,20 @@ public class Mono {
 		this.imagen = Herramientas.cargarImagen("mono.gif");
 
 	}
-
+	public boolean chocaConSerpiente(Serpiente s) {
+		if ( x + ancho / 2 > s.getX() - s.getAncho()/2 && x - ancho / 2 < s.getX() + s.getAncho() / 2 &&
+                s.getY() - s.getAlto() / 2 < y + largo/2  && y - largo/2  < s.getY() + s.getAlto() /2) {
+			return true;
+		}
+	return false;
+	}
+	public boolean chocaConTigre(Tigre t) {
+		if ( x + ancho / 2 > t.getX() - t.getAncho()/2 && x - ancho / 2 < t.getX() + t.getAncho() / 2 &&
+                t.getY() - t.getAlto() / 2 < y + largo/2  && y - largo/2  < t.getY() + t.getAlto() /2) {
+			return true;
+		}
+	return false;
+	}
 	public boolean chocaConArbol(Arbol a) {
         if ( x + ancho / 2 > a.getX() - a.getAncho()/2 && x - ancho / 2 < a.getX() + a.getAncho() / 2 &&
                 a.getY() - a.getAlto() / 2 < y + largo/2  && y - largo/2  < a.getY() + a.getAlto() /2) {

@@ -77,4 +77,21 @@ public class Serpiente {
 		System.out.println(this.x);
 	}
 
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public double getAncho() {
+		return ancho;
+	}
+
+	public double getAlto() {
+		return alto;
+	}
+	
+
 }// class Tigre

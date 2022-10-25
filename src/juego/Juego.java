@@ -20,6 +20,8 @@ public class Juego extends InterfaceJuego {
 	private Piedra piedra;
 	private Selva[] selva;
 	private Puntaje puntaje;
+	private Vidas vidas;
+	private Game_over game_over;
 //
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
@@ -32,6 +34,8 @@ public class Juego extends InterfaceJuego {
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra(mono.getX(), mono.getY());
 		this.puntaje= new Puntaje();
+		this.vidas= new Vidas();
+		this.game_over = new Game_over(100);
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -45,7 +49,7 @@ public class Juego extends InterfaceJuego {
 		Tigre.agregaTigre(this.tigre, entorno, suelo);
 
 		Serpiente.agregaSerpiente(this.serpiente, this.arbol);
-
+		
 		// una vez q se cargan los datos se inicia el juego
 		this.entorno.iniciar();
 	}// juego
@@ -53,10 +57,12 @@ public class Juego extends InterfaceJuego {
 	int timer = 0;
 	int salto = 0;
 	int punto = 0;
+	int vida = 0;
 	
 
 	public void tick() {
 //		// Procesamiento de un instante de tiempo.
+		if(vida<3) {
 
 		suelo.dibujarRectangulo(entorno);
 //	
@@ -147,6 +153,13 @@ public class Juego extends InterfaceJuego {
 				tigre[i] = null;
 				Tigre.agregaTigre(tigre, entorno, suelo);
 			}
+			if(mono.chocaConTigre(tigre[i])){
+				vida++;
+				if(vida>1) {
+					vidas.disminuirVidas();
+					vida =0;
+				}
+			}
 		}
 		
 
@@ -157,6 +170,13 @@ public class Juego extends InterfaceJuego {
 			if (serpiente[i].saleDePantalla()) {
 				serpiente[i] = null;
 				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+			}
+			if(mono.chocaConSerpiente(serpiente[i])) {
+				vida++;
+				if(vida<1) {
+					vidas.disminuirVidas();
+					vida=0;
+				}
 			}
 		}
 
@@ -171,15 +191,18 @@ public class Juego extends InterfaceJuego {
 			
 		if (piedra.saleDePantalla(entorno)) {
 			this.piedra = new Piedra(mono.getX(), mono.getY());
-		}
+		}	
 		
 		piedra.crearPiedra(entorno);
 		mono.dibujarMono(entorno);
 		puntaje.cambiarPuntaje(entorno);
 		puntaje.escribirPuntaje(entorno);
+		vidas.cambiarVida(entorno);
+		vidas.escribirVida(entorno);
+		}else {
+			game_over.dibujarOver(entorno);
+		}
 	
-		
-
 	}// fin tick()
 
 	@SuppressWarnings("unused")

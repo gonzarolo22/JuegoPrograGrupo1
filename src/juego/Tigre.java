@@ -69,6 +69,22 @@ public class Tigre {
 		this.x-=3;
 	}//desplazar
 
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public double getAncho() {
+		return ancho;
+	}
+
+	public double getAlto() {
+		return alto;
+	}
+
 	
 	
 	
