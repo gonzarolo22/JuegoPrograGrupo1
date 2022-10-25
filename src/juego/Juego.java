@@ -22,8 +22,7 @@ public class Juego extends InterfaceJuego {
 	private Puntaje puntaje;
 //
 	public Juego() {
-		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
-				600);
+		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,600);
 
 		// aca va las cosas a inicializar.....
 
@@ -118,7 +117,7 @@ public class Juego extends InterfaceJuego {
 			
 			if (mono.chocaConArbol(arbol[i])) {
 				punto++;
-				if(punto<11) {
+				if(punto<2) {
 					puntaje.aumentaPuntos();
 				}
                 if(!entorno.estaPresionada(entorno.TECLA_ARRIBA)) {

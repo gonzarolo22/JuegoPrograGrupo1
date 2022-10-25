@@ -16,10 +16,10 @@ public class Puntaje {
 	public Puntaje() {
 		this.x=600;
 		this.y=50;
-		this.texto="puntaje:";
+		this.texto="Puntaje: ";
 		this.color=Color.red;
-		this.tamano=30;
-		this.font="puntaje:";
+		this.tamano=25;
+		this.font="Puntaje: ";
 		this.puntos=0;
 	}
 	
