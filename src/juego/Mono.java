@@ -31,7 +31,7 @@ public class Mono {
 	public boolean chocaConArbol(Arbol a) {
         if ( x + ancho / 2 > a.getX() - a.getAncho() && x - ancho / 2 < a.getX() + a.getAncho() / 4 &&
 
-                a.getY() - a.getAlto() / 2 < y + largo/2  && y - largo/2  < a.getY() + a.getAlto() / 4) {
+                a.getY() - a.getAlto() / 4 < y+largo/2 && y-largo/2 < a.getY() + a.getAlto() / 4) {
 
             return true;
         }
@@ -39,7 +39,7 @@ public class Mono {
     }
 
 	public void monoEnArbol(Arbol a) {
-		this.y = a.getY()-30;
+		this.y=a.getY()-30;
 	}
 
 	public void dibujarMono(Entorno e) {

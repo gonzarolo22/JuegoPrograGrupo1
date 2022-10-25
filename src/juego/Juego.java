@@ -19,10 +19,12 @@ public class Juego extends InterfaceJuego {
 	private Serpiente[] serpiente;
 	private Piedra piedra;
 	private Selva[] selva;
+	private Puntaje puntaje;
 //
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
 				600);
+		
 
 		// aca va las cosas a inicializar.....
 
@@ -30,6 +32,10 @@ public class Juego extends InterfaceJuego {
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, entorno.alto() - suelo.alto);
 		this.piedra = new Piedra(50, mono.getY());
+		this.puntaje= new Puntaje();
+		
+		
+		
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -43,6 +49,7 @@ public class Juego extends InterfaceJuego {
 		Tigre.agregaTigre(this.tigre, entorno, suelo);
 
 		Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+		
 
 		// una vez q se cargan los datos se inicia el juego
 		this.entorno.iniciar();
@@ -50,11 +57,15 @@ public class Juego extends InterfaceJuego {
 
 	int timer = 0;
 	int salto = 0;
+	int punto=0;
 
 	public void tick() {
 //		// Procesamiento de un instante de tiempo.
 
 		suelo.dibujarRectangulo(entorno);
+		
+		
+		
 //	
 		// si la primera imagen sale de la pantalla vuelve al final de la segunda imagen
 		if (selva[1].getX() == 0) {
@@ -67,12 +78,8 @@ public class Juego extends InterfaceJuego {
 		selva[1].avanzarFondo(1);
 		selva[0].dibujarFondo(entorno);
 		selva[0].avanzarFondo(1);
-
-
 		
 		
-		
-	
 		if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 			timer++;
 
@@ -88,24 +95,25 @@ public class Juego extends InterfaceJuego {
 				}
 			} else {
 				// si se mantiene apretado se activa gravedad
-				if (mono.chocaConSuelo(entorno, suelo) == false) {
-					mono.gravedad();
+				  if (mono.chocaConSuelo(entorno, suelo) == false) {
+					 mono.gravedad();			 
 					if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
 						piedra.gravedad();
-					}
-				}
-			}
+						}
+				  }}
+			
 		} else {
 			timer = 0;
-			if (mono.chocaConSuelo(entorno, suelo)) {
-				salto = 0;
+			
+			if (mono.chocaConSuelo(entorno, suelo) ) {
+				salto = 0; 
 			} else {
 				mono.gravedad();
 				if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
 					piedra.gravedad();
-				}
+				}	}
 			}
-		}
+		
 
 		// condiciones de los arboles
 		for (int i = 0; i < arbol.length; i++) {
@@ -113,27 +121,25 @@ public class Juego extends InterfaceJuego {
 			arbol[i].desplazar();
 			
 			if (mono.chocaConArbol(arbol[i])) {
-                if(entorno.estaPresionada(entorno.TECLA_ARRIBA)==false) {
-                    mono.monoEnArbol(arbol[i]);
-                    salto=0;
-                   
-                    if(piedra.getX()<=50) {
-    					piedra.setY(mono.getY());
-    					
-    				}
-                  
-                }
-            }
+				salto=0;
+				punto++;
+				if(punto<11) {
+				puntaje.aumentaPuntos();
+				}
+				if(entorno.estaPresionada(entorno.TECLA_ARRIBA)==false){
+					mono.monoEnArbol(arbol[i]);
+				}
+				if(piedra.getX()<=50) {
+					piedra.setY(mono.getY());
+               	}
+		}
 
 			if (arbol[i].saleDePantalla()) {
 				// si sale de la pantalla sobreescribo el arbol con uno nuevo
 				arbol[i] = null;
 				Arbol.crearArboles(this.arbol, entorno);
-			}
-			
-			
-			
-			
+				punto=0;
+			}	
 		}
 
 		// condiciones de los tigres
@@ -169,9 +175,12 @@ public class Juego extends InterfaceJuego {
 		if (piedra.saleDePantalla(entorno)) {
 			this.piedra = new Piedra(50, mono.getY());
 		}
-		
 		piedra.crearPiedra(entorno);
 		mono.dibujarMono(entorno);
+		puntaje.cambiarPuntaje(entorno);
+		puntaje.escribirPuntaje(entorno);
+		
+		
 			
 		
 
