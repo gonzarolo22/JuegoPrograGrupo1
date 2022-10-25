@@ -22,7 +22,7 @@ public class Arbol {
 	public Arbol(double x, double y, double escala) {
 		this.x = x;
 		this.y = y;
-		this.ancho = 100;
+		this.ancho = 130;
 		this.alto = 5;
 		this.angulo = 0;
 		this.color = Color.MAGENTA;
