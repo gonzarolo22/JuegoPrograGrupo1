@@ -38,8 +38,8 @@ public class Arbol {
 
 	public void dibujarArbol(Entorno e) {
 		e.dibujarImagen(imagen, this.x, this.y, angulo, this.escala);
-//		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
+		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+//		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
 	}// crearArbol
 
 	public static boolean arbolesVacios(Arbol[] a) {
@@ -65,6 +65,9 @@ public class Arbol {
 				if (arboles[i] == null) {
 					// se crea un altura aleatoria para las ramas de los arboles
 					int rand = random.nextInt(300, 350);
+					while(rand%5==0) {
+						rand = random.nextInt(300, 350);
+					}
 					// se crea las distancia para los arboles fuera de la pantalla (lado derecho)
 					int rand2 = random.nextInt(10);
 					// escala para los arboles
@@ -79,6 +82,9 @@ public class Arbol {
 			for (int i = 0; i < arboles.length; i++) {
 				if (arboles[0] == null) {
 					int rand = random.nextInt(300, 350);
+					while(rand%5==0) {
+						rand = random.nextInt(300, 350);
+					}
 					int rand2 = random.nextInt(100);
 					double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;
 					// como arboles[0] no tiene un elemento previo entonces se accede al ultimo
@@ -88,6 +94,9 @@ public class Arbol {
 				} else {
 					if (arboles[i] == null) {
 						int rand = random.nextInt(300,350);
+						while(rand%5==0) {
+							rand = random.nextInt(300, 350);
+						}
 						int rand2 = random.nextInt(200,400);
 						double escala = Math.round(random.nextDouble(0.08, 0.12) * 100.0) / 100.0;
 
