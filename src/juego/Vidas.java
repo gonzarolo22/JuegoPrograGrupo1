@@ -19,7 +19,7 @@ public class Vidas {
 			this.texto="vidas:";
 			this.color=Color.red;
 			this.tamano=30;
-			this.font="vidas:";
+			this.font=" ";
 			this.vidas=3;
 		}
 		
@@ -34,12 +34,6 @@ public class Vidas {
 		public void disminuirVidas() {
 			vidas-=1;
 			}
-//		public boolean gameOver() {
-//			if (vidas==0) {
-//				return true;
-//			}
-//			return false;
-//		}
 		
 
 		public double getX() {
@@ -69,6 +63,11 @@ public class Vidas {
 		public int getVidas() {
 			return vidas;
 		}
+
+		public void setVidas(int vidas) {
+			this.vidas = vidas;
+		}
+		
 		
 
 }

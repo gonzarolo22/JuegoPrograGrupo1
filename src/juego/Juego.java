@@ -22,6 +22,7 @@ public class Juego extends InterfaceJuego {
 	private Puntaje puntaje;
 	private Vidas vidas;
 	private Game_over game_over;
+	private Reintentar reintentar;
 //
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,600);
@@ -35,6 +36,7 @@ public class Juego extends InterfaceJuego {
 		this.puntaje= new Puntaje();
 		this.vidas= new Vidas();
 		this.game_over = new Game_over(100);
+		this.reintentar = new Reintentar();
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -161,7 +163,7 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 		
-
+         //condiciones de las serpientes
 		for (int i = 0; i < serpiente.length; i++) {
 			serpiente[i].dibujarSerpiente(entorno);
 			serpiente[i].desplazar();
@@ -199,7 +201,12 @@ public class Juego extends InterfaceJuego {
 		vidas.escribirVida(entorno);
 		}else {
 			game_over.dibujarOver(entorno);
-		}
+			reintentar.cambiarReintentar(entorno);
+			reintentar.escribirReintentar(entorno);
+			if(entorno.estaPresionada(entorno.TECLA_ENTER)) {
+			vidas.setVidas(3);
+			punto=0;
+		}}
 	
 	}// fin tick()
 

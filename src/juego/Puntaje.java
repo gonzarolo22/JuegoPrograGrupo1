@@ -19,7 +19,7 @@ public class Puntaje {
 		this.texto="Puntaje: ";
 		this.color=Color.red;
 		this.tamano=25;
-		this.font="Puntaje: ";
+		this.font=" ";
 		this.puntos=0;
 	}
 	
@@ -32,7 +32,7 @@ public class Puntaje {
 		
 	}
 	public void aumentaPuntos() {	
-		puntos+=1;
+		puntos+=5;
 	}
 	
 
