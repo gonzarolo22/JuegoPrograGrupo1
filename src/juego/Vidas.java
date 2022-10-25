@@ -66,7 +66,7 @@ public class Vidas {
 			return font;
 		}
 
-		public int getPuntos() {
+		public int getVidas() {
 			return vidas;
 		}
 		

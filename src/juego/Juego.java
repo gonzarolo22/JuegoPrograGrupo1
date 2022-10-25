@@ -61,7 +61,7 @@ public class Juego extends InterfaceJuego {
 
 	public void tick() {
 //		// Procesamiento de un instante de tiempo.
-		if(vida<3) {
+		if(vidas.getVidas()>0) {
 
 		suelo.dibujarRectangulo(entorno);
 //	
@@ -151,12 +151,12 @@ public class Juego extends InterfaceJuego {
 			if (tigre[i].saleDePantalla()) {
 				tigre[i] = null;
 				Tigre.agregaTigre(tigre, entorno, suelo);
+				vida=0;
 			}
 			if(mono.chocaConTigre(tigre[i])){
-				vida++;
-				if(vida>1) {
+				if(vida<1) {
+					vida++;
 					vidas.disminuirVidas();
-					vida =0;
 				}
 			}
 		}
@@ -171,10 +171,9 @@ public class Juego extends InterfaceJuego {
 				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 			}
 			if(mono.chocaConSerpiente(serpiente[i])) {
-				vida++;
 				if(vida<1) {
+					vida++;
 					vidas.disminuirVidas();
-					vida=0;
 				}
 			}
 		}
