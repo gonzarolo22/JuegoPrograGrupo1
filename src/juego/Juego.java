@@ -19,6 +19,7 @@ public class Juego extends InterfaceJuego {
 	private Serpiente[] serpiente;
 	private Piedra piedra;
 	private Selva[] selva;
+	private Puntaje puntaje;
 //
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
@@ -30,6 +31,7 @@ public class Juego extends InterfaceJuego {
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra(mono.getX(), mono.getY());
+		this.puntaje= new Puntaje();
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -50,6 +52,7 @@ public class Juego extends InterfaceJuego {
 
 	int timer = 0;
 	int salto = 0;
+	int punto = 0;
 	
 
 	public void tick() {
@@ -114,6 +117,10 @@ public class Juego extends InterfaceJuego {
 			arbol[i].desplazar();
 			
 			if (mono.chocaConArbol(arbol[i])) {
+				punto++;
+				if(punto<11) {
+					puntaje.aumentaPuntos();
+				}
                 if(!entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
                     mono.monoEnArbol(arbol[i]);
                     salto=0;
@@ -128,6 +135,7 @@ public class Juego extends InterfaceJuego {
 				// si sale de la pantalla sobreescribo el arbol con uno nuevo
 				arbol[i] = null;
 				Arbol.crearArboles(this.arbol, entorno);
+				punto=0;
 			}		
 		}
 
@@ -167,7 +175,9 @@ public class Juego extends InterfaceJuego {
 		
 		piedra.crearPiedra(entorno);
 		mono.dibujarMono(entorno);
-			
+		puntaje.cambiarPuntaje(entorno);
+		puntaje.escribirPuntaje(entorno);
+	
 		
 
 	}// fin tick()
