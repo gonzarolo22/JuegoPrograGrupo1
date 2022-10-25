@@ -29,8 +29,8 @@ public class Piedra {
 	public void saltar(double s) {
 		this.y -=s;
 	}
-	public void gravedad() {
-		this.y +=4.5;
+	public void gravedad(int g) {
+		this.y += g;
 	}
 	
 	

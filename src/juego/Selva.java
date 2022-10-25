@@ -18,7 +18,7 @@ public class Selva {
 		this.x = x;
 		this.alto = 600;
 		this.ancho = 2400;
-		this.fondo = Herramientas.cargarImagen("escenario.png"); 
+		this.fondo = Herramientas.cargarImagen("escenario.jpg"); 
 		
 	}//constructor selva
 	

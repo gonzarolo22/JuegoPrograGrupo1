@@ -29,7 +29,7 @@ public class Juego extends InterfaceJuego {
 		this.selva = new Selva[2];
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, 500);
-		this.piedra = new Piedra(50, mono.getY());
+		this.piedra = new Piedra(mono.getX(), mono.getY());
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -50,6 +50,7 @@ public class Juego extends InterfaceJuego {
 
 	int timer = 0;
 	int salto = 0;
+	
 
 	public void tick() {
 //		// Procesamiento de un instante de tiempo.
@@ -68,11 +69,11 @@ public class Juego extends InterfaceJuego {
 		selva[0].dibujarFondo(entorno);
 		selva[0].avanzarFondo(1);
 
-
 		
 		
 		
-	
+		
+		//condicionales del doble salto
 		if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 			timer++;
 
@@ -81,17 +82,17 @@ public class Juego extends InterfaceJuego {
 				salto++;
 			}
 
-			if (timer < 25 && salto < 3) {
+			if (timer < 30 && salto < 3) {
 				mono.saltar(8);
-				if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afecta por el salto del mono
+				if (piedra.getX() <= mono.getX()) { // cuando la piedra es lanzada no sera afecta por el salto del mono
 					piedra.saltar(8);
 				}
 			} else {
 				// si se mantiene apretado se activa gravedad
 				if (!mono.chocaConSuelo(entorno, suelo)) {
 					mono.gravedad();
-					if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
-						piedra.gravedad();
+					if (piedra.getX() <= mono.getX()) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
+						piedra.gravedad(5);
 					}
 				}
 			}
@@ -101,8 +102,8 @@ public class Juego extends InterfaceJuego {
 				salto = 0;
 			} else {
 				mono.gravedad();
-				if (piedra.getX() <= 50) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
-					piedra.gravedad();
+				if (piedra.getX() <= mono.getX()) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
+					piedra.gravedad(5);
 				}
 			}
 		}
@@ -117,7 +118,7 @@ public class Juego extends InterfaceJuego {
                     mono.monoEnArbol(arbol[i]);
                     salto=0;
                    
-                    if(piedra.getX()<=50) {
+                    if(piedra.getX()<=mono.getX()) {
     					piedra.setY(mono.getY());					
     				}
                 }
@@ -154,14 +155,14 @@ public class Juego extends InterfaceJuego {
 		if(entorno.estaPresionada(entorno.TECLA_ESPACIO) ) {	
 			piedra.lanzar(8);
 			}else { // si se presiona se seguira moviendo la piedra
-				if(piedra.getX()>50) {
+				if(piedra.getX()>mono.getX()) {
 					piedra.lanzar(8);
 					
 				}
 			}
 			
 		if (piedra.saleDePantalla(entorno)) {
-			this.piedra = new Piedra(50, mono.getY());
+			this.piedra = new Piedra(mono.getX(), mono.getY());
 		}
 		
 		piedra.crearPiedra(entorno);

@@ -51,7 +51,7 @@ public class Mono {
 	}// saltar
 
 	public void gravedad() {
-		this.y += 4.5;
+		this.y += 5;
 	}
 
 	public boolean chocaConSuelo(Entorno e, Suelo s) {
