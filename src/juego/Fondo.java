@@ -13,30 +13,50 @@ public class Fondo {
 	private int alto;
 
 
-public Fondo(int x) {
-	this.x=x;
+public Fondo(Image i) {
+	this.x=0;
+	this.y=300;
 	this.alto=600;
 	this.ancho=2400;
-	this.fondo=Herramientas.cargarImagen("escenario.jpg");
+	this.fondo=i;
 }
 
-public static Fondo[] iniciaFondo(Fondo[]fondo) {
-	int ancho=0;
-	for(int i=0; i<fondo.length;i++) {
-		fondo[i]=new Fondo(ancho);
-		ancho+=2400;
-	}
-	return fondo;
+public void correrFondo(Entorno e) {
+	this.x=x-2;
 	
-}
-
-public void avanzarFondo(int valor) {
-	this.x -= valor;
+	
 }
 
 public void dibujarFondo(Entorno e) {
 	e.dibujarImagen(fondo, x+ancho/2, e.alto()/2,0,1);
 }
+
+public int getX() {
+	return x;
+}
+
+public void setX(int x) {
+	this.x = x;
+}
+
+public int getY() {
+	return y;
+}
+
+public void setY(int y) {
+	this.y = y;
+}
+
+public int getAncho() {
+	return ancho;
+}
+
+public void setAncho(int ancho) {
+	this.ancho = ancho;
+}
+
+
+
 
 
 
