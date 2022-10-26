@@ -158,6 +158,8 @@ public class Juego extends InterfaceJuego {
 		for (int i = 0; i < tigre.length; i++) {
 			tigre[i].dibujarTigre(entorno);
 			tigre[i].desplazar();
+			
+			
 			if (tigre[i].saleDePantalla()) {
 				tigre[i] = null;
 				Tigre.agregaTigre(tigre, entorno, suelo);
@@ -169,6 +171,10 @@ public class Juego extends InterfaceJuego {
 					vidas.disminuirVidas();
 					
 				}
+			}
+			if(piedra.chocaConTigre(tigre[i])) {
+				tigre[i]=null;
+				Tigre.agregaTigre(tigre, entorno, suelo);
 			}
 		}
 		

@@ -31,7 +31,6 @@ public class Piedra {
 		e.dibujarImagen(imagen, x, y, 0, .15);
 	}
 	
-<<<<<<< HEAD
 	public boolean chocaConTigre(Tigre t) {
 		return (t.getX() - t.getAncho()/2 < x + diametro/2 && 
 				x - diametro/2 < t.getX() + t.getAncho()/2 &&
@@ -47,8 +46,7 @@ public class Piedra {
 				s.getY() - s.getAlto()/2 < y + diametro/2 &&
 				y - diametro/2 < s.getY() + s.getAlto()/2);
 	}
-	}
-=======
+
 	public void crearPiedras(Entorno e) {
 		Random random = new Random();
 		
@@ -57,7 +55,7 @@ public class Piedra {
 		e.dibujarRectangulo(e.ancho()+100, rand, 50, 50, 0, color.brighter());
 	}
 	
->>>>>>> 0fc104a4d1ea86a05d6c9187d687ec8e1f9d4268
+
 	public void lanzar(double g) {
 		this.x += g;
 	}
