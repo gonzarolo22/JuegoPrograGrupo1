@@ -14,11 +14,11 @@ public class Vidas {
 		private int vidas;
 		
 		public Vidas() {
-			this.x=150;
+			this.x=120;
 			this.y=50;
-			this.texto="vidas:";
+			this.texto="Vidas: ";
 			this.color=Color.red;
-			this.tamano=30;
+			this.tamano=25;
 			this.font=" ";
 			this.vidas=3;
 		}

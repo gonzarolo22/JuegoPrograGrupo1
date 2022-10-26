@@ -16,9 +16,9 @@ public class Reintentar {
 	public Reintentar() {
 		this.x=50;
 		this.y=500;
-		this.texto="presione la tecla [ENTER] para volver a empezar";
+		this.texto="Presione [ENTER] para volver a empezar";
 		this.color=Color.green;
-		this.tamano=35;
+		this.tamano=25;
 		this.font="";
 	}
 	
