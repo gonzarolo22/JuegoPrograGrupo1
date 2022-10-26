@@ -19,6 +19,7 @@ public class Juego extends InterfaceJuego {
 	private Selva selva;
 	private GrupoSerpientes serpientes;
 	private ManadaDeTigre tigres;
+	private Fondo[] fondo;
 
 	
 	public Juego() {
@@ -30,7 +31,9 @@ public class Juego extends InterfaceJuego {
 		this.piedra=new Piedra(50,mono.getY());
 		this.serpientes=new GrupoSerpientes();
 		this.tigres= new ManadaDeTigre();
+		this.fondo=new Fondo[2];
 		this.entorno.iniciar();
+		Fondo.iniciaFondo(fondo);
 	}
 		
 	
