@@ -1,12 +1,9 @@
 package juego;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.util.Iterator;
-import java.util.Random;
+
 
 import entorno.Entorno;
-import entorno.Herramientas;
+
 import entorno.InterfaceJuego;
 
 public class Juego extends InterfaceJuego {
@@ -18,6 +15,7 @@ public class Juego extends InterfaceJuego {
 	private Tigre[] tigre;
 	private Serpiente[] serpiente;
 	private Piedra piedra;
+	private Piedras piedras;
 	private Selva[] selva;
 	private Puntaje puntaje;
 	private Vidas vidas;
@@ -27,16 +25,16 @@ public class Juego extends InterfaceJuego {
 	public Juego() {
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,600);
 
-		// aca va las cosas a inicializar.....
-
 		this.selva = new Selva[2];
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra(mono.getX(), mono.getY());
+		this.piedras = new Piedras(500,300);
 		this.puntaje= new Puntaje();
 		this.vidas= new Vidas();
 		this.game_over = new Game_over(100);
 		this.reintentar = new Reintentar();
+
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -59,14 +57,24 @@ public class Juego extends InterfaceJuego {
 	int salto = 0;
 	int punto = 0;
 	int vida = 0;
-	
+	double giro = 0;
 
 	public void tick() {
-//		// Procesamiento de un instante de tiempo.
+		
+//		 Procesamiento de un instante de tiempo.
 		if(vidas.getVidas()>0) {
-
+			
+		//variables acumuladores
+		giro+=0.03;
+		
+		if (this.piedras.saleDePantalla()) {			
+			this.piedras.crearPiedras();
+		}
+		
+		
+		
 		suelo.dibujarRectangulo(entorno);
-//	
+
 		// si la primera imagen sale de la pantalla vuelve al final de la segunda imagen
 		if (selva[1].getX() == 0) {
 			selva[0].setX(2400);
@@ -159,6 +167,7 @@ public class Juego extends InterfaceJuego {
 				if(vida<1) {
 					vida++;
 					vidas.disminuirVidas();
+					
 				}
 			}
 		}
@@ -171,6 +180,9 @@ public class Juego extends InterfaceJuego {
 			if (serpiente[i].saleDePantalla()) {
 				serpiente[i] = null;
 				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+				
+				
+				
 			}
 			if(mono.chocaConSerpiente(serpiente[i])) {
 				if(vida<1) {
@@ -193,8 +205,11 @@ public class Juego extends InterfaceJuego {
 			this.piedra = new Piedra(mono.getX(), mono.getY());
 		}	
 		
+		
 		piedra.crearPiedra(entorno);
 		mono.dibujarMono(entorno);
+		piedras.dibujarPiedras(entorno,giro);
+		piedras.desplazar();
 		puntaje.cambiarPuntaje(entorno);
 		puntaje.escribirPuntaje(entorno);
 		vidas.cambiarVida(entorno);
