@@ -19,7 +19,7 @@ public class Juego extends InterfaceJuego {
 	private Selva selva;
 	private GrupoSerpientes serpientes;
 	private ManadaDeTigre tigres;
-	private Image fondo;
+
 	
 	public Juego() {
 		//aca va las cosas a inicialisar.....
@@ -30,7 +30,6 @@ public class Juego extends InterfaceJuego {
 		this.piedra=new Piedra(50,mono.getY());
 		this.serpientes=new GrupoSerpientes();
 		this.tigres= new ManadaDeTigre();
-		this.fondo = Herramientas.cargarImagen("fondo.jpg");
 		this.entorno.iniciar();
 	}
 		
@@ -43,7 +42,7 @@ public class Juego extends InterfaceJuego {
 	public void tick() {
 		// Procesamiento de un instante de tiempo.
 		
-		entorno.dibujarImagen(fondo, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.5);
+		
 		
 		suelo.dibujarRectangulo(entorno);
 		

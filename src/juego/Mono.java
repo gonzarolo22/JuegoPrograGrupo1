@@ -33,13 +33,13 @@ public class Mono {
 }
 	
 	public void dibujarMono(Entorno e) {
-		//e.dibujarRectangulo(this.x,this.y,this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imag, x, y, 0, 1.06);
+		e.dibujarRectangulo(this.x,this.y,this.ancho, this.alto, this.angulo, this.color);
+		
 		
 	}
 	
 	public void saltar() {
-		if(this.y>200) {
+		if(this.y>0) {
 		this.y -=8;
 		}
 	}
@@ -59,7 +59,7 @@ public class Mono {
 	}
 	
 	public void monoEnArbol(Arbol a) {
-		this.x = a.getX();
+		
 		this.y=a.getY()-30;
 	}
 	

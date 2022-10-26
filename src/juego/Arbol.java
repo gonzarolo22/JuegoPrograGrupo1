@@ -31,8 +31,8 @@ public class Arbol {
 	
 	
 	public void dibujarArbol(Entorno e) {
-		//e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imag, x, y, 0, 1.06);
+		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+		
 	}//crearArbol
 	
 	public void desplazar() {
