@@ -47,17 +47,17 @@ public class Piedra {
 				y - diametro/2 < s.getY() + s.getAlto()/2);
 	}
 
-	public void crearPiedras(Entorno e) {
-		Random random = new Random();
-		
-		int rand = random.nextInt(300,450);
-		
-		e.dibujarRectangulo(e.ancho()+100, rand, 50, 50, 0, color.brighter());
+	public static void agregarPiedra(Piedra[] piedra, Mono m) {
+		for (int i=0 ; i<piedra.length; i++) {
+			if(piedra[i] ==null) {
+				piedra[i] = new Piedra(m.getX(),m.getY());
+				return;
+			}
+		}
 	}
-	
 
-	public void lanzar(double g) {
-		this.x += g;
+	public void lanzar() {
+		this.x += 5;
 	}
 	public void saltar(double s) {
 		this.y -=s;
