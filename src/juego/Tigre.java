@@ -66,7 +66,7 @@ public class Tigre {
 	}
 	
 	public void desplazar() {
-		this.x-=3;
+		this.x-=5;
 	}//desplazar
 
 	public double getX() {

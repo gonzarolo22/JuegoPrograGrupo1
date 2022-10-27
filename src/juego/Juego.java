@@ -61,49 +61,39 @@ public class Juego extends InterfaceJuego {
 
 	public void tick() {
 		
-		
-		
-		
-		
-		
-		
+	suelo.dibujarRectangulo(entorno);
+	Selva.dibujarFondo(selva, entorno);
+																	//		 Procesamiento de un instante de tiempo.
+	if (vidas.getVidas() > 0) {
+		giro += 0.03;												// variables acumuladores
 
-//		 Procesamiento de un instante de tiempo.
-		if (vidas.getVidas() > 0) {
 
-			// variables acumuladores
-			giro += 0.03;
+	if (this.itemPiedra.saleDePantalla()) {
+		this.itemPiedra.crearPiedras();
+		}
 
-			if (this.itemPiedra.saleDePantalla()) {
-				this.itemPiedra.crearPiedras();
-			}
 
-			suelo.dibujarRectangulo(entorno);
-			Selva.dibujarFondo(selva, entorno);
+																	// condicionales del doble salto
+	if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
+		mono.aumentarTimer();
 
-			// condicionales del doble salto
-			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
-				mono.aumentarTimer();
+																	// cuenta los saltos cada vez q se oprime la tecla
+	if (entorno.sePresiono(entorno.TECLA_ARRIBA)) {
+		mono.aumentarSalto();
+	}
 
-				// cuenta los saltos cada vez q se oprime la tecla
-				if (entorno.sePresiono(entorno.TECLA_ARRIBA)) {
-					mono.aumentarSalto();
+	if (mono.contadorSalto()) {
+		mono.saltar(8);
+	} else {
+																	// si se mantiene apretado se activa gravedad
+	if (!mono.chocaConSuelo(entorno, suelo)|| !mono.chocaConArboles(arbol)) {
+		mono.gravedad();
+	}
 				}
-
-				if (mono.getTimer() < 30 && mono.getSalto() < 2) {
-					mono.saltar(8);
-					
-				} else {
-					// si se mantiene apretado se activa gravedad
-					if (!mono.chocaConSuelo(entorno, suelo)) {
-						mono.gravedad();
-						
-					}
-				}
-			} else {
+	} else {
 				mono.setTimer(0);;
-				if (mono.chocaConSuelo(entorno, suelo)) {
-					mono.setSalto(0);
+			if (mono.chocaConSuelo(entorno, suelo)|| mono.chocaConArboles(arbol)) {
+				mono.setSalto(0);
 				} else {
 					mono.gravedad();
 					
@@ -120,12 +110,7 @@ public class Juego extends InterfaceJuego {
 					if (punto < 2) {
 						puntaje.aumentaPuntos();
 					}
-					if (!entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
-						mono.monoEnArbol(arbol[i]);
-						mono.setSalto(0);
 
-						
-					}
 				}
 
 				if (arbol[i].saleDePantalla()) {

@@ -120,7 +120,7 @@ public class Arbol {
 	}
 
 	public void desplazar() {
-		this.x -= 1.2;
+		this.x -= 3;
 	}// desplazar
 
 	public double getAncho() {

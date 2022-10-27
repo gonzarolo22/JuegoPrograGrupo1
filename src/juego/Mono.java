@@ -39,6 +39,13 @@ public class Mono {
 		timer++;
 	}
 	
+	public boolean contadorSalto() {
+		if(timer < 30 && salto < 2) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 
 
@@ -89,6 +96,15 @@ public class Mono {
 			return false;
 		}
 	}// chocaConSuelo
+	
+	public boolean chocaConArboles(Arbol[] a) {
+		for(int i=0; i<a.length;i++) {
+			if(chocaConArbol(a[i])) {
+				return true;
+			}
+		}
+			return false;
+	}
 
 	public double getX() {
 		return x;
