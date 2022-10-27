@@ -14,7 +14,8 @@ public class Mono {
 	private int angulo;
 	private Color color;
 	private Image imagen;
-
+	private int timer;
+	private int salto;
 	// prueba
 
 	public Mono(int x, int y) {
@@ -25,8 +26,22 @@ public class Mono {
 		this.angulo = 0;
 		this.color = Color.white;
 		this.imagen = Herramientas.cargarImagen("mono.gif");
+		this.timer=0;
+		this.salto=0;
 
 	}
+	public void aumentarSalto() {
+		salto++;
+	}
+	
+	
+	public void aumentarTimer() {
+		timer++;
+	}
+	
+	
+
+
 	public boolean chocaConSerpiente(Serpiente s) {
 		if ( x + ancho / 2 > s.getX() - s.getAncho()/2 && x - ancho / 2 < s.getX() + s.getAncho() / 2 &&
                 s.getY() - s.getAlto() / 2 < y + largo/2  && y - largo/2  < s.getY() + s.getAlto() /2) {
@@ -91,4 +106,18 @@ public class Mono {
 		this.y = y;
 	}
 
+	public int getTimer() {
+		return timer;
+	}
+	
+	
+	public void setTimer(int timer) {
+		this.timer = timer;
+	}
+	public int getSalto() {
+		return salto;
+	}
+	public void setSalto(int salto) {
+		this.salto = salto;
+	}
 }// class Mono

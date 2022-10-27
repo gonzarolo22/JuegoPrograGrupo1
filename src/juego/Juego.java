@@ -53,7 +53,7 @@ public class Juego extends InterfaceJuego {
 		this.entorno.iniciar();
 	}// juego
 
-	int timer = 0;
+	
 	int salto = 0;
 	int punto = 0;
 	int vida = 0;
@@ -83,14 +83,14 @@ public class Juego extends InterfaceJuego {
 
 			// condicionales del doble salto
 			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
-				timer++;
+				mono.aumentarTimer();
 
 				// cuenta los saltos cada vez q se oprime la tecla
 				if (entorno.sePresiono(entorno.TECLA_ARRIBA)) {
-					salto++;
+					mono.aumentarSalto();
 				}
 
-				if (timer < 30 && salto < 3) {
+				if (mono.getTimer() < 30 && mono.getSalto() < 2) {
 					mono.saltar(8);
 					
 				} else {
@@ -101,9 +101,9 @@ public class Juego extends InterfaceJuego {
 					}
 				}
 			} else {
-				timer = 0;
+				mono.setTimer(0);;
 				if (mono.chocaConSuelo(entorno, suelo)) {
-					salto = 0;
+					mono.setSalto(0);
 				} else {
 					mono.gravedad();
 					
@@ -122,7 +122,7 @@ public class Juego extends InterfaceJuego {
 					}
 					if (!entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 						mono.monoEnArbol(arbol[i]);
-						salto = 0;
+						mono.setSalto(0);
 
 						
 					}
