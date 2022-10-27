@@ -71,18 +71,7 @@ public class Juego extends InterfaceJuego {
 			}
 
 			suelo.dibujarRectangulo(entorno);
-
-			// si la primera imagen sale de la pantalla vuelve al final de la segunda imagen
-			if (selva[1].getX() == 0) {
-				selva[0].setX(2400);
-			} else if (selva[0].getX() == 0) {
-				selva[1].setX(2400);
-			}
-			// se muestran ambas imagenes a la vez
-			selva[1].dibujarFondo(entorno);
-			selva[1].avanzarFondo(1);
-			selva[0].dibujarFondo(entorno);
-			selva[0].avanzarFondo(1);
+			Selva.dibujarFondo(selva, entorno);
 
 			// condicionales del doble salto
 			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {

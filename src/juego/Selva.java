@@ -31,6 +31,20 @@ public class Selva {
 		return selva;
 	}
 	
+	public static void dibujarFondo(Selva[] selva, Entorno entorno) {
+		
+		if (selva[1].getX() == 0) {
+			selva[0].setX(2400);
+		} else if (selva[0].getX() == 0) {
+			selva[1].setX(2400);
+		}
+		// se muestran ambas imagenes a la vez
+		selva[1].dibujarFondo(entorno);
+		selva[1].avanzarFondo(1);
+		selva[0].dibujarFondo(entorno);
+		selva[0].avanzarFondo(1);
+	}
+	
 	public void avanzarFondo(int valor) {
 		this.x -= valor;
 	}//avanzarFondo
