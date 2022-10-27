@@ -7,8 +7,7 @@ import java.util.Random;
 import entorno.Entorno;
 import entorno.Herramientas;
 
-public class Piedras {
-	
+public class Items {
 	private double x;
 	private double y;
 	private double ancho;
@@ -16,7 +15,7 @@ public class Piedras {
 	private Image imagen;
 	private Color color;
 	
-	public Piedras(int x, int y) {
+	public Items(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.ancho = 50;
