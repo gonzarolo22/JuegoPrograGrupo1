@@ -12,7 +12,7 @@ public class Juego extends InterfaceJuego {
 	private Arbol[] arbol;
 	private Tigre[] tigre;
 	private Serpiente[] serpiente;
-	private Piedra [] piedra;
+	private Piedra[] piedra;
 	private Items itemPiedra;
 	private Selva[] selva;
 	private Puntaje puntaje;
@@ -28,8 +28,8 @@ public class Juego extends InterfaceJuego {
 		this.selva = new Selva[2];
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, 500);
-		this.piedra=new Piedra[3];
-	
+		this.piedra = new Piedra[3];
+
 		this.itemPiedra = new Items(500, 300);
 		this.puntaje = new Puntaje();
 		this.vidas = new Vidas();
@@ -53,50 +53,48 @@ public class Juego extends InterfaceJuego {
 		this.entorno.iniciar();
 	}// juego
 
-	
 	int salto = 0;
 	int punto = 0;
 	int vida = 0;
 	double giro = 0;
 
 	public void tick() {
-		
-	suelo.dibujarRectangulo(entorno);
-	Selva.dibujarFondo(selva, entorno);
-																	//		 Procesamiento de un instante de tiempo.
-	if (vidas.getVidas() > 0) {
-		giro += 0.03;												// variables acumuladores
 
+		suelo.dibujarRectangulo(entorno);
+		Selva.dibujarFondo(selva, entorno);
+		// Procesamiento de un instante de tiempo.
+		if (vidas.getVidas() > 0) {
+			giro += 0.03; // variables acumuladores
 
-	if (this.itemPiedra.saleDePantalla()) {
-		this.itemPiedra.crearPiedras();
-		}
+			if (this.itemPiedra.saleDePantalla()) {
+				this.itemPiedra.crearPiedras();
+			}
 
+			// condicionales del doble salto
+			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
+				mono.aumentarTimer();
 
-																	// condicionales del doble salto
-	if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
-		mono.aumentarTimer();
-
-																	// cuenta los saltos cada vez q se oprime la tecla
-	if (entorno.sePresiono(entorno.TECLA_ARRIBA)) {
-		mono.aumentarSalto();
-	}
-
-	if (mono.contadorSalto()) {
-		mono.saltar(8);
-	} else {
-																	// si se mantiene apretado se activa gravedad
-	if (!mono.chocaConSuelo(entorno, suelo)|| !mono.chocaConArboles(arbol)) {
-		mono.gravedad();
-	}
+				// cuenta los saltos cada vez q se oprime la tecla
+				if (entorno.sePresiono(entorno.TECLA_ARRIBA)) {
+					mono.aumentarSalto();
 				}
-	} else {
-				mono.setTimer(0);;
-			if (mono.chocaConSuelo(entorno, suelo)|| mono.chocaConArboles(arbol)) {
-				mono.setSalto(0);
+
+				if (mono.contadorSalto()) {
+					mono.saltar(8);
+				} else {
+					// si se mantiene apretado se activa gravedad
+					if (!mono.chocaConSuelo(entorno, suelo) && !mono.chocaConArboles(arbol)) {
+						mono.gravedad();
+					}
+				}
+			} else {
+				mono.setTimer(0);
+				;
+				if (mono.chocaConSuelo(entorno, suelo) || mono.chocaConArboles(arbol)) {
+
+					mono.setSalto(0);
 				} else {
 					mono.gravedad();
-					
 				}
 			}
 
@@ -105,11 +103,12 @@ public class Juego extends InterfaceJuego {
 				arbol[i].dibujarArbol(entorno);
 				arbol[i].desplazar();
 
-				if (mono.chocaConArbol(arbol[i])) {
-					punto++;
-					if (punto < 2) {
-						puntaje.aumentaPuntos();
-					}
+				if (mono.chocaConArbol(arbol[i])&& arbol[i].isDioPuntos()==false) {
+					
+								punto+=5;
+						
+							arbol[i].setDioPuntos(true);
+					
 
 				}
 
@@ -117,12 +116,13 @@ public class Juego extends InterfaceJuego {
 					// si sale de la pantalla sobreescribo el arbol con uno nuevo
 					arbol[i] = null;
 					Arbol.crearArboles(this.arbol, entorno);
-					punto = 0;
+					
 				}
 			}
 
 			// condiciones de los tigres
 			for (int i = 0; i < tigre.length; i++) {
+				if(tigre[i]!=null) {
 				tigre[i].dibujarTigre(entorno);
 				tigre[i].desplazar();
 
@@ -138,10 +138,11 @@ public class Juego extends InterfaceJuego {
 
 					}
 				}
-//				if (piedra.chocaConTigre(tigre[i])) {
-//					tigre[i] = null;
-//					Tigre.agregaTigre(tigre, entorno, suelo);
-//				}
+				if (tigre[i].chocaConPiedra(piedra)) {
+					tigre[i]=null;
+					Tigre.agregaTigre(tigre, entorno, suelo);
+				}
+				}
 			}
 
 			// condiciones de las serpientes
@@ -170,18 +171,21 @@ public class Juego extends InterfaceJuego {
 
 			for (int i = 0; i < piedra.length; i++) {
 				if (piedra[i] != null) {
-					piedra[i].crearPiedra(entorno);
-					piedra[i].lanzar();
+					piedra[i].dibujarPiedra(entorno);
+					piedra[i].avanzar();
+					if(piedra[i].saleDePantalla(entorno)){
+						piedra[i]=null;
+					}
 				}
 			}
-			
-			if(entorno.sePresiono(entorno.TECLA_ESPACIO)) {
+
+			if (entorno.sePresiono(entorno.TECLA_ESPACIO)) {
+				if(mono.getDisparosDisp()>0) {
 				Piedra.agregarPiedra(piedra, mono);
+				
+				}
 			}
-			
 
-
-			
 			mono.dibujarMono(entorno);
 			itemPiedra.dibujarPiedras(entorno, giro);
 			itemPiedra.desplazar();
@@ -198,7 +202,7 @@ public class Juego extends InterfaceJuego {
 				punto = 0;
 			}
 		}
-
+		entorno.escribirTexto("puntaje:"+punto,100,200) ;
 	}// fin tick()
 
 	@SuppressWarnings("unused")

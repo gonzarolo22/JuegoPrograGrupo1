@@ -16,6 +16,7 @@ public class Mono {
 	private Image imagen;
 	private int timer;
 	private int salto;
+	private int disparosDisp;
 	// prueba
 
 	public Mono(int x, int y) {
@@ -28,7 +29,14 @@ public class Mono {
 		this.imagen = Herramientas.cargarImagen("mono.gif");
 		this.timer=0;
 		this.salto=0;
+		this.disparosDisp=3;
 
+	}
+	public int getDisparosDisp() {
+		return disparosDisp;
+	}
+	public void setDisparosDisp(int disparosDisp) {
+		this.disparosDisp = disparosDisp;
 	}
 	public void aumentarSalto() {
 		salto++;
@@ -135,5 +143,10 @@ public class Mono {
 	}
 	public void setSalto(int salto) {
 		this.salto = salto;
+	}
+	public Piedra lanzarPiedra() {
+		this.disparosDisp--;
+		return  new Piedra(x,y);
+		
 	}
 }// class Mono

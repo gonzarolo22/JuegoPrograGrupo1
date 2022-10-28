@@ -26,7 +26,7 @@ public class Piedra {
 		this.imagen = Herramientas.cargarImagen("rocas.png");
 	}
 	
-	public void crearPiedra(Entorno e) {
+	public void dibujarPiedra(Entorno e) {
 		e.dibujarCirculo(x, y, diametro, color);
 		e.dibujarImagen(imagen, x, y, 0, .15);
 	}
@@ -50,13 +50,21 @@ public class Piedra {
 	public static void agregarPiedra(Piedra[] piedra, Mono m) {
 		for (int i=0 ; i<piedra.length; i++) {
 			if(piedra[i] ==null) {
-				piedra[i] = new Piedra(m.getX(),m.getY());
+				piedra[i] =m.lanzarPiedra();
 				return;
 			}
 		}
 	}
 
-	public void lanzar() {
+	public double getDiametro() {
+		return diametro;
+	}
+
+	public void setDiametro(double diametro) {
+		this.diametro = diametro;
+	}
+
+	public void avanzar() {
 		this.x += 5;
 	}
 	public void saltar(double s) {
