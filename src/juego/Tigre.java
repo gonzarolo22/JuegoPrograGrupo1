@@ -24,7 +24,7 @@ public class Tigre {
 	public Tigre(double x, double y) {
 		this.x=x;
 		this.y=y;
-		this.ancho=100;
+		this.ancho=80;
 		this.alto=60;
 		this.angulo=0;
 		this.escala = 0.4;
