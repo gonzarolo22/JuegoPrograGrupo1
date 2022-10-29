@@ -70,7 +70,7 @@ public class Tigre {
 	}// agregarTigre
 
 	public void dibujarTigre(Entorno e) {
-		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+//		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
 		e.dibujarImagen(imagen, x + 30, y - 20, angulo, escala);
 	}// dibujarTigre
 

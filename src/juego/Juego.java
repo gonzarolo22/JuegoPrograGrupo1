@@ -19,7 +19,7 @@ public class Juego extends InterfaceJuego {
 	private Image gameOver;
 	private int punto;
 	private int vida;
-
+	private boolean pause;
 
 //
 	public Juego() {
@@ -33,8 +33,7 @@ public class Juego extends InterfaceJuego {
 		this.piedra = new Piedra[3];
 		this.gameOver = Herramientas.cargarImagen("game_over.jpg");
 		this.items = new Items();
-
-		// se crea un arreglo de x arboles
+		this.pause = false;
 		this.arbol = new Arbol[5];
 		this.tigre = new Tigre[2];
 		this.serpiente = new Serpiente[2];
@@ -56,7 +55,7 @@ public class Juego extends InterfaceJuego {
 
 		Selva.dibujarFondo(selva, entorno);
 		// Procesamiento de un instante de tiempo.
-		if (vida > 0) {
+		if (vida > 0 && !pause) {
 
 			if (this.items.saleDePantallaP()) {
 				this.items.crearPiedra();
@@ -155,7 +154,7 @@ public class Juego extends InterfaceJuego {
 						serpiente[i].setPerdioVida(true);
 					}
 
-					if (serpiente[i].chocaConPiedra(piedra)|| serpiente[i].saleDePantalla()) {
+					if (serpiente[i].chocaConPiedra(piedra) || serpiente[i].saleDePantalla()) {
 						serpiente[i] = null;
 						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 					}
@@ -175,8 +174,12 @@ public class Juego extends InterfaceJuego {
 			if (entorno.sePresiono(entorno.TECLA_ESPACIO)) {
 				if (mono.getDisparosDisp() > 0) {
 					Piedra.agregarPiedra(piedra, mono);
-					
+
 				}
+			}
+
+			if (entorno.sePresiono(entorno.TECLA_DELETE)) {
+				pause = true;
 			}
 
 			mono.dibujarMono(entorno);
@@ -190,6 +193,16 @@ public class Juego extends InterfaceJuego {
 			entorno.escribirTexto("PIEDRAS: " + mono.getDisparosDisp(), 300, 50);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("PUNTAJE: " + punto, 600, 50);
+			entorno.cambiarFont(" ", 20, Color.red);
+			entorno.escribirTexto("Presione [DELETE] para PAUSE", 250, 590);
+		} else if (pause) {
+
+			entorno.cambiarFont(" ", 50, Color.red);
+			entorno.escribirTexto("PAUSE", 320, 300);
+			if (entorno.sePresiono(entorno.TECLA_DELETE)) {
+				pause = false;
+			}
+
 		} else {
 			entorno.dibujarImagen(gameOver, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
 			entorno.cambiarFont(" ", 26, Color.red);
@@ -198,28 +211,20 @@ public class Juego extends InterfaceJuego {
 			entorno.escribirTexto("PUNTAJE OBTENIDO: " + punto, 250, 50);
 
 			if (entorno.estaPresionada(entorno.TECLA_ENTER)) {
-				vida = 3;
-				punto = 0;
-				mono.setDisparosDisp(3);
-				this.items.crearPiedra();
-				this.items.crearBananas();
-				for (int i = 0; i < arbol.length; i++) {
-					// if (arbol[i] != null) {
-					arbol[i] = null;
-					Arbol.crearArboles(this.arbol, entorno);
-				}
-				for (int i = 0; i < tigre.length; i++) {
-					if (tigre[i] != null) {
-						tigre[i] = null;
-						Tigre.agregaTigre(tigre, entorno);
-					}
-				}
-				for (int i = 0; i < serpiente.length; i++) {
-					if (serpiente[i] != null) {
-						serpiente[i] = null;
-						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
-					}
-				}
+				
+				this.punto = 0;
+				this.vida = 3;
+				this.mono = new Mono(0, 500);
+				this.piedra = new Piedra[3];
+				this.items = new Items();
+				this.arbol = new Arbol[5];
+				this.tigre = new Tigre[2];
+				this.serpiente = new Serpiente[2];
+
+				Arbol.crearArboles(this.arbol, entorno);
+				Tigre.agregaTigre(this.tigre, entorno);
+				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+				
 			}
 		}
 	}// fin tick()

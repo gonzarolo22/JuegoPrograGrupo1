@@ -31,10 +31,6 @@ public class Serpiente {
 		this.perdioVida = false;
 	}// Arbol
 
-	public void info() {
-		System.out.println("x=" + this.x + " y=" + this.y + " ancho=" + this.ancho + " alto=" + this.alto + " escala="
-				+ this.escala);
-	}
 
 	public static Serpiente[] agregaSerpiente(Serpiente[] s, Arbol[] arbol) {
 		Random random = new Random();
@@ -42,7 +38,8 @@ public class Serpiente {
 		for (int i = 0; i < s.length; i++) {
 			// elijo un arbol aleatorio disponible
 			int rand = random.nextInt(arbol.length);
-
+			
+			//se debe elegir una arbol q no este en pantalla para lograr colocar serpiente
 			while (arbol[rand].getX() < 800) {
 				rand = random.nextInt(arbol.length);
 			}
@@ -70,7 +67,7 @@ public class Serpiente {
 	}
 
 	public void dibujarSerpiente(Entorno e) {
-		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+//		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
 		e.dibujarImagen(imagen, x, y, angulo, escala);
 	}// dibujarSerpiente
 
