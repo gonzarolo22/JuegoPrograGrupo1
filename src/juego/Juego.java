@@ -19,12 +19,12 @@ public class Juego extends InterfaceJuego {
 	private Image gameOver;
 	private int punto;
 	private int vida;
-	
 
 //
 	public Juego() {
 
-		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800, 600);
+		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
+				600);
 		this.punto = 0;
 		this.vida = 3;
 		this.selva = new Selva[2];
@@ -38,7 +38,6 @@ public class Juego extends InterfaceJuego {
 		this.tigre = new Tigre[2];
 		this.serpiente = new Serpiente[2];
 
-	
 		// se crean el fondo de pantalla, los tigres, arboles y las serpientes
 		Selva.iniciaSelva(selva);
 
@@ -54,7 +53,6 @@ public class Juego extends InterfaceJuego {
 
 	public void tick() {
 
-
 		Selva.dibujarFondo(selva, entorno);
 		// Procesamiento de un instante de tiempo.
 		if (vida > 0) {
@@ -62,19 +60,19 @@ public class Juego extends InterfaceJuego {
 			if (this.items.saleDePantallaP()) {
 				this.items.crearPiedra();
 			}
-			if(this.items.saleDePantallaB()) {	
+			if (this.items.saleDePantallaB()) {
 				this.items.crearBananas();
 			}
-			 if(mono.chocaConBanana(items)){
-				  this.items.crearBananas();
-				  vida+=1;
-			 }
-			 if (mono.chocaConPiedra(items)) {
-				 // se crea el item piedra
-				 this.items.crearPiedra();
-				 //se reestablece la cantidad de municiones
-				 mono.setDisparosDisp(3);
-				
+			if (mono.chocaConBanana(items)) {
+				this.items.crearBananas();
+				vida += 1;
+			}
+			if (mono.chocaConPiedra(items)) {
+				// se crea el item piedra
+				this.items.crearPiedra();
+				// se reestablece la cantidad de municiones
+				mono.setDisparosDisp(3);
+
 			}
 			// condicionales del doble salto
 			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
@@ -197,28 +195,32 @@ public class Juego extends InterfaceJuego {
 			entorno.dibujarImagen(gameOver, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("Presione [ENTER] para volver a empezar", 160, 550);
-			
+			entorno.cambiarFont(" ", 26, Color.red);
+			entorno.escribirTexto("PUNTAJE OBTENIDO: " + punto, 250, 50);
+
 			if (entorno.estaPresionada(entorno.TECLA_ENTER)) {
-				vida += 3;
+				vida = 3;
 				punto = 0;
 				mono.setDisparosDisp(3);
 				this.items.crearPiedra();
 				this.items.crearBananas();
 				for (int i = 0; i < arbol.length; i++) {
-					//if (arbol[i] != null) {
-						arbol[i] = null;
-						Arbol.crearArboles(this.arbol, entorno);
-					}
+					// if (arbol[i] != null) {
+					arbol[i] = null;
+					Arbol.crearArboles(this.arbol, entorno);
+				}
 				for (int i = 0; i < tigre.length; i++) {
 					if (tigre[i] != null) {
 						tigre[i] = null;
 						Tigre.agregaTigre(tigre, entorno);
-					}}
+					}
+				}
 				for (int i = 0; i < serpiente.length; i++) {
 					if (serpiente[i] != null) {
 						serpiente[i] = null;
 						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
-					}}
+					}
+				}
 			}
 		}
 	}// fin tick()
