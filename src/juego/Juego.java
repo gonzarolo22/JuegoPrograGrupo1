@@ -67,9 +67,15 @@ public class Juego extends InterfaceJuego {
 			}
 			 if(mono.chocaConBanana(items)){
 				  this.items.crearBananas();
-				  punto+=10;
-
+				  vida+=1;
 			 }
+			 if (mono.chocaConPiedra(items)) {
+				 // se crea el item piedra
+				 this.items.crearPiedra();
+				 //se reestablece la cantidad de municiones
+				 mono.setDisparosDisp(3);
+				
+			}
 			// condicionales del doble salto
 			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 				mono.aumentarTimer();

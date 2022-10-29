@@ -86,6 +86,14 @@ public class Mono {
 		}
 	return false;
 	}
+	
+	public boolean chocaConPiedra(Items p) {
+		if ( x + ancho / 2 > p.getX()- p.getAncho()/2 && x - ancho / 2 < p.getX() + p.getAncho() / 2 &&
+                p.getY() - p.getAlto() / 2 < y + largo/2  && y - largo/2  < p.getY() + p.getAlto() /2) {
+			return true;
+		}
+	return false;
+	}
 
 	public void monoEnArbol(Arbol a) {
 		this.y = a.getY()-30;

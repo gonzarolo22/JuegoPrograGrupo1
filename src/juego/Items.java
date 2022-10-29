@@ -35,7 +35,7 @@ public class Items {
 	public void crearPiedra() {
 		Random random = new Random();
 		int rand = random.nextInt(300,450);
-		this.x =2000;
+		this.x =20131;
 		this.y = rand;
 	}
 	public void crearBananas() {
@@ -53,7 +53,7 @@ public class Items {
 		}
 	}
 	public boolean saleDePantallaB() {
-		if (this.x < -100) {
+		if (this.bx < -100) {
 			return true;
 		} else {
 			return false;
