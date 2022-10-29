@@ -18,8 +18,7 @@ public class Serpiente {
 	private double escala;
 	private Image imagen;
 	private boolean perdioVida;
-	
-	
+
 	public Serpiente(double x, double y) {
 		this.x = x;
 		this.y = y;
@@ -29,7 +28,7 @@ public class Serpiente {
 		this.color = Color.CYAN;
 		this.escala = .3;
 		this.imagen = Herramientas.cargarImagen("serpiente.gif");
-		this.perdioVida=false;
+		this.perdioVida = false;
 	}// Arbol
 
 	public void info() {
@@ -39,37 +38,36 @@ public class Serpiente {
 
 	public static Serpiente[] agregaSerpiente(Serpiente[] s, Arbol[] arbol) {
 		Random random = new Random();
-		
+
 		for (int i = 0; i < s.length; i++) {
 			// elijo un arbol aleatorio disponible
 			int rand = random.nextInt(arbol.length);
-			
-			while(arbol[rand].getX()<800) {
+
+			while (arbol[rand].getX() < 800) {
 				rand = random.nextInt(arbol.length);
 			}
-			
-			if(s[i] == null ) {
-
-				//se suma 30 para q la serpiente quede al borde de la rama
-				s[i] = new Serpiente(arbol[rand].getX()+30, arbol[rand].getY() -25 );
+			if (s[i] == null && !arbol[rand].isConSerpiente()) {
+				// se suma 30 para q la serpiente quede al borde de la rama, y se resta 25 para
+				// que quede centrada en el arbol
+				s[i] = new Serpiente(arbol[rand].getX() + 30, arbol[rand].getY() - 25);
+				arbol[rand].setConSerpiente(true);
 			}
 		}
 		return s;
 	}
+
 	public boolean chocaConPiedra(Piedra[] piedra) {
 		for (int i = 0; i < piedra.length; i++) {
 
 			if (piedra[i] != null && piedra[i].getX() - piedra[i].getDiametro() / 2 < x + ancho / 2
-					&& x - ancho / 2 < piedra[i].getX() + piedra[i].getDiametro() / 2 &&
-					piedra[i].getY() < y + alto / 2 && y - alto / 2 < piedra[i].getY())
-			{
+					&& x - ancho / 2 < piedra[i].getX() + piedra[i].getDiametro() / 2 && piedra[i].getY() < y + alto / 2
+					&& y - alto / 2 < piedra[i].getY()) {
 				piedra[i] = null;
 				return true;
 			}
 		}
 		return false;
 	}
-	
 
 	public void dibujarSerpiente(Entorno e) {
 		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
@@ -86,12 +84,9 @@ public class Serpiente {
 	}
 
 	public void desplazar() {
-		this.x -=3 ;
+		this.x -= 3;
 	}// desplazar
 
-	public void mostrar() {
-		System.out.println(this.x);
-	}
 
 	public double getX() {
 		return x;
@@ -116,7 +111,5 @@ public class Serpiente {
 	public void setPerdioVida(boolean perdioVida) {
 		this.perdioVida = perdioVida;
 	}
-	
-	
 
 }// class Tigre

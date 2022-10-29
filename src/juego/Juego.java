@@ -20,6 +20,7 @@ public class Juego extends InterfaceJuego {
 	private int punto;
 	private int vida;
 
+
 //
 	public Juego() {
 
@@ -74,7 +75,7 @@ public class Juego extends InterfaceJuego {
 				mono.setDisparosDisp(3);
 
 			}
-			// condicionales del doble salto
+			// condicionales del salto
 			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 				mono.aumentarTimer();
 
@@ -149,20 +150,16 @@ public class Juego extends InterfaceJuego {
 					serpiente[i].dibujarSerpiente(entorno);
 					serpiente[i].desplazar();
 
-					if (serpiente[i].saleDePantalla()) {
-						serpiente[i] = null;
-						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
-					}
-
 					if (mono.chocaConSerpiente(serpiente[i]) && serpiente[i].isPerdioVida() == false) {
 						vida -= 1;
 						serpiente[i].setPerdioVida(true);
 					}
 
-					if (serpiente[i].chocaConPiedra(piedra)) {
+					if (serpiente[i].chocaConPiedra(piedra)|| serpiente[i].saleDePantalla()) {
 						serpiente[i] = null;
 						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 					}
+
 				}
 			}
 			for (int i = 0; i < piedra.length; i++) {
@@ -178,7 +175,7 @@ public class Juego extends InterfaceJuego {
 			if (entorno.sePresiono(entorno.TECLA_ESPACIO)) {
 				if (mono.getDisparosDisp() > 0) {
 					Piedra.agregarPiedra(piedra, mono);
-
+					
 				}
 			}
 
@@ -187,10 +184,12 @@ public class Juego extends InterfaceJuego {
 			items.desplazarp();
 			items.dibujarBananas(entorno);
 			items.desplazarb();
-			entorno.cambiarFont(" ", 26, Color.red);
-			entorno.escribirTexto("PUNTAJE: " + punto, 600, 50);
 			entorno.cambiarFont(" ", 26, Color.RED);
 			entorno.escribirTexto("VIDAS: " + vida, 50, 50);
+			entorno.cambiarFont(" ", 26, Color.RED);
+			entorno.escribirTexto("PIEDRAS: " + mono.getDisparosDisp(), 300, 50);
+			entorno.cambiarFont(" ", 26, Color.red);
+			entorno.escribirTexto("PUNTAJE: " + punto, 600, 50);
 		} else {
 			entorno.dibujarImagen(gameOver, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
 			entorno.cambiarFont(" ", 26, Color.red);

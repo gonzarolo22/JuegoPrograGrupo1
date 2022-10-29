@@ -19,6 +19,7 @@ public class Arbol {
 	private Image imagen;
 	private Image imagen2;
 	private boolean dioPuntos;
+	private boolean conSerpiente;
 
 	public Arbol(double x, double y, double escala) {
 		this.x = x;
@@ -31,6 +32,7 @@ public class Arbol {
 		this.imagen = Herramientas.cargarImagen("arbol.png");
 		this.imagen2 = Herramientas.cargarImagen("rama.png");
 		this.dioPuntos=false;
+		this.conSerpiente = false;
 	}// Arbol
 	
 
@@ -60,6 +62,18 @@ public class Arbol {
 			return false;
 		}
 	}// arbolesVacios
+
+	public boolean isConSerpiente() {
+		return conSerpiente;
+	}
+
+
+
+	public void setConSerpiente(boolean conSerpiente) {
+		this.conSerpiente = conSerpiente;
+	}
+
+
 
 	public static Arbol[] crearArboles(Arbol[] arboles, Entorno e) {
 		Random random = new Random();
