@@ -18,6 +18,7 @@ public class Tigre {
 	private double escala;
 	private Color color;
 	private Image imagen;
+	private boolean perdioVida;
 	
 	
 	public Tigre(double x, double y) {
@@ -29,6 +30,7 @@ public class Tigre {
 		this.escala = 0.4;
 		this.color=Color.magenta;
 		this.imagen = Herramientas.cargarImagen("tigre1.gif");
+		this.perdioVida=false;
 }// Arbol
 	
 	public boolean chocaConPiedra(Piedra[] piedra) { 
@@ -54,17 +56,17 @@ public class Tigre {
 	
 	public static void agregaTigre( Tigre[] t,Entorno e, Suelo s) {
 		Random random = new Random();
-		double n =e.ancho();
+		double max =e.ancho();
 		
 		for(int i=0;i<t.length;i++) {
-			if(t[i]!=null&&t[i].x>n) {
-				n=t[i].x;
+			if(t[i]!=null&&t[i].x>max) {
+				max=t[i].x;
 			}
 		}
 		for (int i = 0; i < t.length; i++) {
 			if(t[i]==null) {
 				int rand = random.nextInt(100,200);
-				t[i]= new Tigre(rand+n,e.alto()-s.alto);
+				t[i]= new Tigre(rand+max,e.alto()-s.alto);
 				return ;
 			}
 		}
@@ -107,6 +109,15 @@ public class Tigre {
 	public double getAlto() {
 		return alto;
 	}
+
+	public boolean isPerdioVida() {
+		return perdioVida;
+	}
+
+	public void setPerdioVida(boolean perdioVida) {
+		this.perdioVida = perdioVida;
+	}
+	
 
 	
 	

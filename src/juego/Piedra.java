@@ -30,14 +30,6 @@ public class Piedra {
 		e.dibujarCirculo(x, y, diametro, color);
 		e.dibujarImagen(imagen, x, y, 0, .15);
 	}
-	
-	public boolean chocaConTigre(Tigre t) {
-		return (t.getX() - t.getAncho()/2 < x + diametro/2 && 
-				x - diametro/2 < t.getX() + t.getAncho()/2 &&
-				
-				t.getY() - t.getAlto()/2 < y + diametro/2 &&
-				y - diametro/2 < t.getY() + t.getAlto()/2);
-	}
 		
 	public boolean chocaConSerpiente(Serpiente s) {
 		return (s.getX() - s.getAncho()/2 < x + diametro/2 && 

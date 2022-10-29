@@ -17,6 +17,7 @@ public class Mono {
 	private int timer;
 	private int salto;
 	private int disparosDisp;
+	
 	// prueba
 
 	public Mono(int x, int y) {
@@ -149,4 +150,5 @@ public class Mono {
 		return  new Piedra(x,y);
 		
 	}
+	
 }// class Mono

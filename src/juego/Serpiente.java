@@ -17,6 +17,7 @@ public class Serpiente {
 	private Color color;
 	private double escala;
 	private Image imagen;
+	private boolean perdioVida;
 	
 	
 	public Serpiente(double x, double y) {
@@ -28,6 +29,7 @@ public class Serpiente {
 		this.color = Color.CYAN;
 		this.escala = .3;
 		this.imagen = Herramientas.cargarImagen("serpiente.gif");
+		this.perdioVida=false;
 	}// Arbol
 
 	public void info() {
@@ -54,6 +56,21 @@ public class Serpiente {
 		}
 		return s;
 	}
+	public boolean chocaConPiedra(Piedra[] piedra) { 
+		for (int i=0;i<piedra.length;i++) {
+			
+		if (piedra[i]!=null && piedra[i].getX() - piedra[i].getDiametro()/2 < x + ancho/2 && 
+				x - ancho/2 < piedra[i].getX() + piedra[i].getDiametro()/2 &&
+				
+				piedra[i].getY() < y + ancho/2 &&
+				y - ancho/2 < piedra[i].getY())
+			
+		{
+			piedra[i]=null;
+			return true;
+		}
+	}return false;
+		}
 
 	public void dibujarSerpiente(Entorno e) {
 		e.dibujarRectangulo(this.x, this.y - this.alto / 2, this.ancho, this.alto, this.angulo, this.color);
@@ -70,7 +87,7 @@ public class Serpiente {
 	}
 
 	public void desplazar() {
-		this.x -=1.2 ;
+		this.x -=3 ;
 	}// desplazar
 
 	public void mostrar() {
@@ -92,6 +109,15 @@ public class Serpiente {
 	public double getAlto() {
 		return alto;
 	}
+
+	public boolean isPerdioVida() {
+		return perdioVida;
+	}
+
+	public void setPerdioVida(boolean perdioVida) {
+		this.perdioVida = perdioVida;
+	}
+	
 	
 
 }// class Tigre
