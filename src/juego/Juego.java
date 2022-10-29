@@ -14,12 +14,11 @@ public class Juego extends InterfaceJuego {
 	private Tigre[] tigre;
 	private Serpiente[] serpiente;
 	private Piedra[] piedra;
-	private Items itemPiedra;
+	private Items items;
 	private Selva[] selva;
 	private Image gameOver;
 	private int punto;
 	private int vida;
-	private Itemsbanana banana;
 	
 
 //
@@ -32,8 +31,7 @@ public class Juego extends InterfaceJuego {
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra[3];
 		this.gameOver = Herramientas.cargarImagen("game_over.jpg");
-		this.itemPiedra = new Items(500, 300);
-		this.banana = new Itemsbanana(500,300);
+		this.items = new Items(500, 300,500,400);
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -61,14 +59,14 @@ public class Juego extends InterfaceJuego {
 		// Procesamiento de un instante de tiempo.
 		if (vida > 0) {
 
-			if (this.itemPiedra.saleDePantalla()) {
-				this.itemPiedra.crearPiedras();
+			if (this.items.saleDePantallaP()) {
+				this.items.crearPiedra();
 			}
-			if (this.banana.saleDePantalla()) {			  
-				  this.banana.crearBananas(banana);
+			if(this.items.saleDePantallaB()) {	
+				this.items.crearBananas(items);
 			}
-			 if(mono.chocaConBanana(banana)){
-				  this.banana.crearBananas(banana);
+			 if(mono.chocaConBanana(items)){
+				  this.items.crearBananas(items);
 				  punto+=10;
 
 			 }
@@ -181,10 +179,10 @@ public class Juego extends InterfaceJuego {
 			}
 
 			mono.dibujarMono(entorno);
-			itemPiedra.dibujarPiedras(entorno);
-			itemPiedra.desplazar();
-			banana.dibujarBananas(entorno);
-			banana.desplazar();
+			items.dibujarPiedras(entorno);
+			items.desplazarp();
+			items.dibujarBananas(entorno);
+			items.desplazarb();
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("PUNTAJE: " + punto, 600, 50);
 			entorno.cambiarFont(" ", 26, Color.RED);

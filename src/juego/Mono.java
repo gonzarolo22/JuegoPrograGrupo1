@@ -79,9 +79,9 @@ public class Mono {
         }
         return false;
     }
-	public boolean chocaConBanana(Itemsbanana b) {
-		if ( x + ancho / 2 > b.getX() - b.getAncho()/2 && x - ancho / 2 < b.getX() + b.getAncho() / 2 &&
-                b.getY() - b.getAlto() / 2 < y + largo/2  && y - largo/2  < b.getY() + b.getAlto() /2) {
+	public boolean chocaConBanana(Items b) {
+		if ( x + ancho / 2 > b.getBx()- b.getAncho()/2 && x - ancho / 2 < b.getBx() + b.getAncho() / 2 &&
+                b.getBy() - b.getAlto() / 2 < y + largo/2  && y - largo/2  < b.getBy() + b.getAlto() /2) {
 			return true;
 		}
 	return false;
