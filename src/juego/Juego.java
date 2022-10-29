@@ -196,18 +196,23 @@ public class Juego extends InterfaceJuego {
 				vida += 3;
 				punto = 0;
 				mono.setDisparosDisp(3);
+				this.items.crearPiedra();
+				this.items.crearBananas();
+				for (int i = 0; i < arbol.length; i++) {
+					//if (arbol[i] != null) {
+						arbol[i] = null;
+						Arbol.crearArboles(this.arbol, entorno);
+					}
 				for (int i = 0; i < tigre.length; i++) {
 					if (tigre[i] != null) {
 						tigre[i] = null;
 						Tigre.agregaTigre(tigre, entorno);
-					}
-				}
+					}}
 				for (int i = 0; i < serpiente.length; i++) {
 					if (serpiente[i] != null) {
 						serpiente[i] = null;
 						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
-					}
-				}
+					}}
 			}
 		}
 	}// fin tick()

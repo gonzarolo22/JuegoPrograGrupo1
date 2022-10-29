@@ -53,7 +53,7 @@ public class Items {
 		}
 	}
 	public boolean saleDePantallaB() {
-		if (this.x < -100) {
+		if (this.bx < -100) {
 			return true;
 		} else {
 			return false;
