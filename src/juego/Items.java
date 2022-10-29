@@ -14,12 +14,14 @@ public class Items {
 	private double alto;
 	private Image imagen;
 	private Color color;
+	private double giro;
 	
 	public Items(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.ancho = 50;
 		this.alto = 50;
+		this.giro = 0;
 		this.imagen = Herramientas.cargarImagen("rocas.png");
 	}
 	
@@ -38,12 +40,13 @@ public class Items {
 		}
 	}
 	
-	public void dibujarPiedras(Entorno e,double giro) {
+	public void dibujarPiedras(Entorno e) {
 		e.dibujarRectangulo(this.x, this.y, ancho, alto, 0,Color.red);
 		e.dibujarImagen(imagen, x, y, giro, .4);
+		this.giro += 0.03;
 	}//dibujarPiedras
 	
 	public void desplazar() {
-		this.x -= 1.2;
+		this.x -=3;
 	}
 }

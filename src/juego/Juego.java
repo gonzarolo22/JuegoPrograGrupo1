@@ -18,18 +18,20 @@ public class Juego extends InterfaceJuego {
 	private Items itemPiedra;
 	private Selva[] selva;
 	private Image fondo;
+	private int punto;
+	private int vida;
 
 //
 	public Juego() {
-		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,
-				600);
-
+		
+		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,600);
+		this.punto = 0;
+		this.vida = 3;
 		this.selva = new Selva[2];
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra[3];
 		this.fondo = Herramientas.cargarImagen("Game_over.jpg");
-
 		this.itemPiedra = new Items(500, 300);
 
 		// se crea un arreglo de x arboles
@@ -49,10 +51,7 @@ public class Juego extends InterfaceJuego {
 		this.entorno.iniciar();
 	}// juego
 
-	int salto = 0;
-	int punto = 0;
-	int vida = 3;
-	double giro = 0;
+
 
 	public void tick() {
 
@@ -60,7 +59,7 @@ public class Juego extends InterfaceJuego {
 		Selva.dibujarFondo(selva, entorno);
 		// Procesamiento de un instante de tiempo.
 		if (vida > 0) {
-			giro += 0.03; // variables acumuladores
+		
 
 			if (this.itemPiedra.saleDePantalla()) {
 				this.itemPiedra.crearPiedras();
@@ -175,7 +174,7 @@ public class Juego extends InterfaceJuego {
 			}
 
 			mono.dibujarMono(entorno);
-			itemPiedra.dibujarPiedras(entorno, giro);
+			itemPiedra.dibujarPiedras(entorno);
 			itemPiedra.desplazar();
 			entorno.cambiarFont(" ", 25, Color.red);
 			entorno.escribirTexto("puntaje:"+punto,600,50) ;
