@@ -19,6 +19,8 @@ public class Juego extends InterfaceJuego {
 	private Image gameOver;
 	private int punto;
 	private int vida;
+	private Itemsbanana banana;
+	
 
 //
 	public Juego() {
@@ -31,6 +33,7 @@ public class Juego extends InterfaceJuego {
 		this.piedra = new Piedra[3];
 		this.gameOver = Herramientas.cargarImagen("game_over.jpg");
 		this.itemPiedra = new Items(500, 300);
+		this.banana = new Itemsbanana(500,300);
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -61,7 +64,14 @@ public class Juego extends InterfaceJuego {
 			if (this.itemPiedra.saleDePantalla()) {
 				this.itemPiedra.crearPiedras();
 			}
+			if (this.banana.saleDePantalla()) {			  
+				  this.banana.crearBananas(banana);
+			}
+			 if(mono.chocaConBanana(banana)){
+				  this.banana.crearBananas(banana);
+				  punto+=10;
 
+			 }
 			// condicionales del doble salto
 			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
 				mono.aumentarTimer();
@@ -173,6 +183,8 @@ public class Juego extends InterfaceJuego {
 			mono.dibujarMono(entorno);
 			itemPiedra.dibujarPiedras(entorno);
 			itemPiedra.desplazar();
+			banana.dibujarBananas(entorno);
+			banana.desplazar();
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("PUNTAJE: " + punto, 600, 50);
 			entorno.cambiarFont(" ", 26, Color.RED);
