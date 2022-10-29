@@ -74,7 +74,7 @@ public class Mono {
 	}
 	public boolean chocaConArbol(Arbol a) {
         if ( x + ancho / 2 > a.getX() - a.getAncho()/2 && x - ancho / 2 < a.getX() + a.getAncho() / 2 &&
-                a.getY() - a.getAlto() / 2 < y + largo/2  && y - largo/2  < a.getY() + a.getAlto() /2) {
+                a.getY() - a.getAlto() / 2 < y + largo/2  && y+largo/2 < a.getY() + a.getAlto() /2) {
             return true;
         }
         return false;
@@ -92,8 +92,7 @@ public class Mono {
 	}
 
 	public void dibujarMono(Entorno e) {
-		e.dibujarRectangulo(this.x , this.y, this.ancho, this.largo, this.angulo, this.color);
-		
+		e.dibujarRectangulo(this.x , this.y, this.ancho, this.largo, this.angulo, this.color);	
 		e.dibujarImagen(imagen, x, y - 15, angulo, .3);
 	}
 

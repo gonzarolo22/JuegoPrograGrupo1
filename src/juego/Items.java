@@ -10,25 +10,25 @@ import entorno.Herramientas;
 public class Items {
 	private double x;
 	private double y;
-	private double ancho;
-	private double alto;
-	private Image imagen;
-	private Color color;
-	private double giro;
-	private Image imagen1;
 	private double bx;
 	private double by;
+	private double ancho;
+	private double alto;
+	private double giro;
+	private Image imagenRoca;
+	private Color color;
+	private Image imagenBanana;
 	
-	public Items(int x, int y, int bx, int by) {
-		this.x = x;
-		this.y = y;
-		this.by=by;
-		this.bx=bx;
+	public Items() {
+		this.x = 2000;
+		this.y =400;
+		this.bx=3000;
+		this.by=400;
 		this.ancho = 50;
 		this.alto = 50;
 		this.giro = 0;
-		this.imagen = Herramientas.cargarImagen("rocas.png");
-		this.imagen1 = Herramientas.cargarImagen("banana.png");
+		this.imagenRoca = Herramientas.cargarImagen("rocas.png");
+		this.imagenBanana = Herramientas.cargarImagen("banana.png");
 		
 	}
 	
@@ -38,10 +38,10 @@ public class Items {
 		this.x =2000;
 		this.y = rand;
 	}
-	public void crearBananas(Items items) {
+	public void crearBananas() {
 		 Random random = new Random();
 		 int rand = random.nextInt(300,450);
-		 this.bx =2000;
+		 this.bx =3000;
 		 this.by = rand;
 	}
 	
@@ -60,20 +60,18 @@ public class Items {
 		}
 	}
 	public void dibujarBananas(Entorno e) {
-		e.dibujarRectangulo(this.bx, this.by, ancho, alto, 0,Color.red);
-		e.dibujarImagen(imagen1, bx, by,giro,.1);
+		e.dibujarImagen(imagenBanana, bx, by,giro,.1);
 		this.giro += 0.03;
 	}
 	
 	public void dibujarPiedras(Entorno e) {
-		e.dibujarRectangulo(this.x, this.y, ancho, alto, 0,Color.red);
-		e.dibujarImagen(imagen, x, y, giro, .4);
+		e.dibujarImagen(imagenRoca, x, y, giro, .4);
 		this.giro += 0.03;
 	}//dibujarPiedras
 	
 	
 	public void desplazarp() {
-		this.x -=2;
+		this.x -=3;
 	}
 	public void desplazarb() {
 		this.bx -=3;

@@ -31,7 +31,7 @@ public class Juego extends InterfaceJuego {
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra[3];
 		this.gameOver = Herramientas.cargarImagen("game_over.jpg");
-		this.items = new Items(500, 300,500,400);
+		this.items = new Items();
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -63,10 +63,10 @@ public class Juego extends InterfaceJuego {
 				this.items.crearPiedra();
 			}
 			if(this.items.saleDePantallaB()) {	
-				this.items.crearBananas(items);
+				this.items.crearBananas();
 			}
 			 if(mono.chocaConBanana(items)){
-				  this.items.crearBananas(items);
+				  this.items.crearBananas();
 				  punto+=10;
 
 			 }
