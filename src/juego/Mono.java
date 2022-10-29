@@ -14,7 +14,10 @@ public class Mono {
 	private int angulo;
 	private Color color;
 	private Image imagen;
-
+	private int timer;
+	private int salto;
+	private int disparosDisp;
+	
 	// prueba
 
 	public Mono(int x, int y) {
@@ -25,9 +28,50 @@ public class Mono {
 		this.angulo = 0;
 		this.color = Color.white;
 		this.imagen = Herramientas.cargarImagen("mono.gif");
+		this.timer=0;
+		this.salto=0;
+		this.disparosDisp=3;
 
 	}
+	public int getDisparosDisp() {
+		return disparosDisp;
+	}
+	public void setDisparosDisp(int disparosDisp) {
+		this.disparosDisp = disparosDisp;
+	}
+	public void aumentarSalto() {
+		salto++;
+	}
+	
+	
+	public void aumentarTimer() {
+		timer++;
+	}
+	
+	public boolean contadorSalto() {
+		if(timer < 30 && salto < 2) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 
+
+	public boolean chocaConSerpiente(Serpiente s) {
+		if ( x + ancho / 2 > s.getX() - s.getAncho()/2 && x - ancho / 2 < s.getX() + s.getAncho() / 2 &&
+                s.getY() - s.getAlto() / 2 < y + largo/2  && y - largo/2  < s.getY() + s.getAlto() /2) {
+			return true;
+		}
+	return false;
+	}
+	public boolean chocaConTigre(Tigre t) {
+		if ( x + ancho / 2 > t.getX() - t.getAncho()/2 && x - ancho / 2 < t.getX() + t.getAncho() / 2 &&
+                t.getY() - t.getAlto() / 2 < y + largo/2  && y - largo/2  < t.getY() + t.getAlto() /2) {
+			return true;
+		}
+	return false;
+	}
 	public boolean chocaConArbol(Arbol a) {
         if ( x + ancho / 2 > a.getX() - a.getAncho()/2 && x - ancho / 2 < a.getX() + a.getAncho() / 2 &&
                 a.getY() - a.getAlto() / 2 < y + largo/2  && y - largo/2  < a.getY() + a.getAlto() /2) {
@@ -61,6 +105,15 @@ public class Mono {
 			return false;
 		}
 	}// chocaConSuelo
+	
+	public boolean chocaConArboles(Arbol[] a) {
+		for(int i=0; i<a.length;i++) {
+			if(chocaConArbol(a[i])) {
+				return true;
+			}
+		}
+			return false;
+	}
 
 	public double getX() {
 		return x;
@@ -78,4 +131,24 @@ public class Mono {
 		this.y = y;
 	}
 
+	public int getTimer() {
+		return timer;
+	}
+	
+	
+	public void setTimer(int timer) {
+		this.timer = timer;
+	}
+	public int getSalto() {
+		return salto;
+	}
+	public void setSalto(int salto) {
+		this.salto = salto;
+	}
+	public Piedra lanzarPiedra() {
+		this.disparosDisp--;
+		return  new Piedra(x,y);
+		
+	}
+	
 }// class Mono

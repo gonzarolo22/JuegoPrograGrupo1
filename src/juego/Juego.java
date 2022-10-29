@@ -2,9 +2,6 @@ package juego;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.util.Iterator;
-import java.util.Random;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
@@ -17,20 +14,25 @@ public class Juego extends InterfaceJuego {
 	private Arbol[] arbol;
 	private Tigre[] tigre;
 	private Serpiente[] serpiente;
-	private Piedra piedra;
+	private Piedra[] piedra;
+	private Items itemPiedra;
 	private Selva[] selva;
-	private Puntaje puntaje;
+	private Image fondo;
+	private int punto;
+	private int vida;
+
 //
 	public Juego() {
+		
 		this.entorno = new Entorno(this, "Escape del mono - Grupo 1 - Correa A - Rolon G - Bentacor L - V0.01", 800,600);
-
-		// aca va las cosas a inicializar.....
-
+		this.punto = 0;
+		this.vida = 3;
 		this.selva = new Selva[2];
 		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
 		this.mono = new Mono(0, 500);
-		this.piedra = new Piedra(mono.getX(), mono.getY());
-		this.puntaje= new Puntaje();
+		this.piedra = new Piedra[3];
+		this.fondo = Herramientas.cargarImagen("Game_over.jpg");
+		this.itemPiedra = new Items(500, 300);
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];
@@ -49,136 +51,155 @@ public class Juego extends InterfaceJuego {
 		this.entorno.iniciar();
 	}// juego
 
-	int timer = 0;
-	int salto = 0;
-	int punto = 0;
-	
+
 
 	public void tick() {
-//		// Procesamiento de un instante de tiempo.
 
 		suelo.dibujarRectangulo(entorno);
-//	
-		// si la primera imagen sale de la pantalla vuelve al final de la segunda imagen
-		if (selva[1].getX() == 0) {
-			selva[0].setX(2400);
-		} else if (selva[0].getX() == 0) {
-			selva[1].setX(2400);
-		}
-		// se muestran ambas imagenes a la vez
-		selva[1].dibujarFondo(entorno);
-		selva[1].avanzarFondo(1);
-		selva[0].dibujarFondo(entorno);
-		selva[0].avanzarFondo(1);
+		Selva.dibujarFondo(selva, entorno);
+		// Procesamiento de un instante de tiempo.
+		if (vida > 0) {
+		
 
-		
-		
-		
-		
-		//condicionales del doble salto
-		if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
-			timer++;
-
-			// cuenta los saltos cada vez q se oprime la tecla
-			if (entorno.sePresiono(entorno.TECLA_ARRIBA)) {
-				salto++;
+			if (this.itemPiedra.saleDePantalla()) {
+				this.itemPiedra.crearPiedras();
 			}
 
-			if (timer < 30 && salto < 3) {
-				mono.saltar(8);
-				if (piedra.getX() <= mono.getX()) { // cuando la piedra es lanzada no sera afecta por el salto del mono
-					piedra.saltar(8);
+			// condicionales del doble salto
+			if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
+				mono.aumentarTimer();
+
+				// cuenta los saltos cada vez q se oprime la tecla
+				if (entorno.sePresiono(entorno.TECLA_ARRIBA)) {
+					mono.aumentarSalto();
+				}
+
+				if (mono.contadorSalto()) {
+					mono.saltar(8);
+				} else {
+					// si se mantiene apretado se activa gravedad
+					if (!mono.chocaConSuelo(entorno, suelo) && !mono.chocaConArboles(arbol)) {
+						mono.gravedad();
+					}
 				}
 			} else {
-				// si se mantiene apretado se activa gravedad
-				if (!mono.chocaConSuelo(entorno, suelo)) {
+				mono.setTimer(0);
+				;
+				if (mono.chocaConSuelo(entorno, suelo) || mono.chocaConArboles(arbol)) {
+
+					mono.setSalto(0);
+				} else {
 					mono.gravedad();
-					if (piedra.getX() <= mono.getX()) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
-						piedra.gravedad(5);
+				}
+			}
+
+			// condiciones de los arboles
+			for (int i = 0; i < arbol.length; i++) {
+				if(arbol[i]!=null) {
+				arbol[i].dibujarArbol(entorno);
+				arbol[i].desplazar();
+
+				if (mono.chocaConArbol(arbol[i]) && arbol[i].isDioPuntos()==false) {
+					punto+=5;
+					arbol[i].setDioPuntos(true);
+				}
+
+				if (arbol[i].saleDePantalla()) {
+					// si sale de la pantalla sobreescribo el arbol con uno nuevo
+					arbol[i] = null;
+					Arbol.crearArboles(this.arbol, entorno);
+				}
+				}
+			}
+
+			// condiciones de los tigres
+			for (int i = 0; i < tigre.length; i++) {
+				if(tigre[i]!=null) {
+				tigre[i].dibujarTigre(entorno);
+				tigre[i].desplazar();
+
+				if (tigre[i].saleDePantalla()) {
+					tigre[i] = null;
+					Tigre.agregaTigre(tigre, entorno, suelo);
+				}
+				if (mono.chocaConTigre(tigre[i]) && tigre[i].isPerdioVida()==false) {
+						vida-=1;
+						tigre[i].setPerdioVida(true);
+					
+				}
+				if (tigre[i].chocaConPiedra(piedra)) {
+					tigre[i]=null;
+					Tigre.agregaTigre(tigre, entorno, suelo);
+				}
+				}
+			}
+
+			// condiciones de las serpientes
+			for (int i = 0; i < serpiente.length; i++) {
+				if(serpiente[i]!=null) {
+				serpiente[i].dibujarSerpiente(entorno);
+				serpiente[i].desplazar();
+
+				if (serpiente[i].saleDePantalla()) {
+					serpiente[i] = null;
+					Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+				}
+
+				if(mono.chocaConSerpiente(serpiente[i]) && serpiente[i].isPerdioVida()==false) {
+					vida-=1;
+					serpiente[i].setPerdioVida(true);
+				}
+				
+				
+				if (serpiente[i].chocaConPiedra(piedra)) {
+					serpiente[i]=null;
+					Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+				}}
+				}
+			for (int i = 0; i < piedra.length; i++) {
+				if (piedra[i] != null) {
+					piedra[i].dibujarPiedra(entorno);
+					piedra[i].avanzar();
+					if(piedra[i].saleDePantalla(entorno)){
+						piedra[i]=null;
 					}
 				}
 			}
+
+			if (entorno.sePresiono(entorno.TECLA_ESPACIO)) {
+				if(mono.getDisparosDisp()>0) {
+				Piedra.agregarPiedra(piedra, mono);
+				
+				}
+			}
+
+			mono.dibujarMono(entorno);
+			itemPiedra.dibujarPiedras(entorno);
+			itemPiedra.desplazar();
+			entorno.cambiarFont(" ", 25, Color.red);
+			entorno.escribirTexto("puntaje:"+punto,600,50) ;
+			entorno.cambiarFont(" ", 25, Color.RED);
+			entorno.escribirTexto("vidas:"+vida,50,50) ;
 		} else {
-			timer = 0;
-			if (mono.chocaConSuelo(entorno, suelo)) {
-				salto = 0;
-			} else {
-				mono.gravedad();
-				if (piedra.getX() <= mono.getX()) { // cuando la piedra es lanzada no sera afectada por la gravedad del mono
-					piedra.gravedad(5);
-				}
-			}
+			entorno.dibujarImagen(fondo,entorno.ancho()/2,entorno.alto()/2, 0, 1);
+			entorno.cambiarFont(" ", 35, Color.red);
+			entorno.escribirTexto("apreta la tecla [ENTER] para volver a empezar",50,500) ;
+			if (entorno.estaPresionada(entorno.TECLA_ENTER)) {
+				vida+=3;
+				punto = 0;
+				mono.setDisparosDisp(3);
+				for (int i=0;i<tigre.length;i++) {
+				if(tigre[i]!=null) {
+					tigre[i] = null;
+					Tigre.agregaTigre(tigre, entorno, suelo);
+				}}
+				for ( int i=0;i<serpiente.length;i++) {
+					if(serpiente[i]!=null) {
+						serpiente[i] = null;
+						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+					}}
 		}
-
-		// condiciones de los arboles
-		for (int i = 0; i < arbol.length; i++) {
-			arbol[i].dibujarArbol(entorno);
-			arbol[i].desplazar();
-			
-			if (mono.chocaConArbol(arbol[i])) {
-				punto++;
-				if(punto<2) {
-					puntaje.aumentaPuntos();
-				}
-                if(!entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
-                    mono.monoEnArbol(arbol[i]);
-                    salto=0;
-                   
-                    if(piedra.getX()<=mono.getX()) {
-    					piedra.setY(mono.getY());					
-    				}
-                }
-            }
-
-			if (arbol[i].saleDePantalla()) {
-				// si sale de la pantalla sobreescribo el arbol con uno nuevo
-				arbol[i] = null;
-				Arbol.crearArboles(this.arbol, entorno);
-				punto=0;
-			}		
 		}
-
-		// condiciones de los tigres
-		for (int i = 0; i < tigre.length; i++) {
-			tigre[i].dibujarTigre(entorno);
-			tigre[i].desplazar();
-			if (tigre[i].saleDePantalla()) {
-				tigre[i] = null;
-				Tigre.agregaTigre(tigre, entorno, suelo);
-			}
-		}
-		
-
-		for (int i = 0; i < serpiente.length; i++) {
-			serpiente[i].dibujarSerpiente(entorno);
-			serpiente[i].desplazar();
-
-			if (serpiente[i].saleDePantalla()) {
-				serpiente[i] = null;
-				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
-			}
-		}
-
-		if(entorno.estaPresionada(entorno.TECLA_ESPACIO) ) {	
-			piedra.lanzar(8);
-			}else { // si se presiona se seguira moviendo la piedra
-				if(piedra.getX()>mono.getX()) {
-					piedra.lanzar(8);
-					
-				}
-			}
-			
-		if (piedra.saleDePantalla(entorno)) {
-			this.piedra = new Piedra(mono.getX(), mono.getY());
-		}
-		
-		piedra.crearPiedra(entorno);
-		mono.dibujarMono(entorno);
-		puntaje.cambiarPuntaje(entorno);
-		puntaje.escribirPuntaje(entorno);
-	
-		
-
 	}// fin tick()
 
 	@SuppressWarnings("unused")

@@ -18,9 +18,10 @@ public class Tigre {
 	private double escala;
 	private Color color;
 	private Image imagen;
+	private boolean perdioVida;
 	
 	
-	public Tigre(int x, double y) {
+	public Tigre(double x, double y) {
 		this.x=x;
 		this.y=y;
 		this.ancho=100;
@@ -29,7 +30,24 @@ public class Tigre {
 		this.escala = 0.4;
 		this.color=Color.magenta;
 		this.imagen = Herramientas.cargarImagen("tigre1.gif");
+		this.perdioVida=false;
 }// Arbol
+	
+	public boolean chocaConPiedra(Piedra[] piedra) { 
+		for (int i=0;i<piedra.length;i++) {
+			
+		if (piedra[i]!=null && piedra[i].getX() - piedra[i].getDiametro()/2 < x + ancho/2 && 
+				x - ancho/2 < piedra[i].getX() + piedra[i].getDiametro()/2 &&
+				
+				piedra[i].getY() < y + ancho/2 &&
+				y - ancho/2 < piedra[i].getY())
+			
+		{
+			piedra[i]=null;
+			return true;
+		}
+	}return false;
+		}
 	
 	public void info() {
 		System.out.println("x="+this.x+" y="+this.y+" ancho="+this.ancho+" alto="+this.alto+" escala="+this.escala);
@@ -38,14 +56,21 @@ public class Tigre {
 	
 	public static void agregaTigre( Tigre[] t,Entorno e, Suelo s) {
 		Random random = new Random();
-		int n =0;
+		double max =e.ancho();
+		
+		for(int i=0;i<t.length;i++) {
+			if(t[i]!=null&&t[i].x>max) {
+				max=t[i].x;
+			}
+		}
 		for (int i = 0; i < t.length; i++) {
 			if(t[i]==null) {
 				int rand = random.nextInt(100,200);
-				t[i]= new Tigre(e.ancho()+rand+n,e.alto()-s.alto);
-				n+=450;
+				t[i]= new Tigre(rand+max,e.alto()-s.alto);
+				return ;
 			}
 		}
+		
 	}// agregarTigre
 	
 	
@@ -66,8 +91,33 @@ public class Tigre {
 	}
 	
 	public void desplazar() {
-		this.x-=3;
+		this.x-=5;
 	}//desplazar
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public double getAncho() {
+		return ancho;
+	}
+
+	public double getAlto() {
+		return alto;
+	}
+
+	public boolean isPerdioVida() {
+		return perdioVida;
+	}
+
+	public void setPerdioVida(boolean perdioVida) {
+		this.perdioVida = perdioVida;
+	}
+	
 
 	
 	

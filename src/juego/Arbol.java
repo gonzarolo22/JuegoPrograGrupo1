@@ -18,6 +18,7 @@ public class Arbol {
 	private double escala;
 	private Image imagen;
 	private Image imagen2;
+	private boolean dioPuntos;
 
 	public Arbol(double x, double y, double escala) {
 		this.x = x;
@@ -29,7 +30,13 @@ public class Arbol {
 		this.escala = escala;
 		this.imagen = Herramientas.cargarImagen("arbol.png");
 		this.imagen2 = Herramientas.cargarImagen("rama.png");
+		this.dioPuntos=false;
 	}// Arbol
+	
+	
+
+
+
 
 	public void info() {
 		System.out.println("x=" + this.x + " y=" + this.y + " ancho=" + this.ancho + " alto=" + this.alto + " escala="
@@ -120,7 +127,7 @@ public class Arbol {
 	}
 
 	public void desplazar() {
-		this.x -= 1.2;
+		this.x -= 3;
 	}// desplazar
 
 	public double getAncho() {
@@ -139,4 +146,13 @@ public class Arbol {
 		return y;
 	}
 
+	public boolean isDioPuntos() {
+		return dioPuntos;
+	}
+	
+	
+	
+	public void setDioPuntos(boolean dioPuntos) {
+		this.dioPuntos = dioPuntos;
+	}
 }// class Arbol
