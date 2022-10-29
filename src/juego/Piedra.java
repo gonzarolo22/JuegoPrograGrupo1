@@ -14,10 +14,12 @@ public class Piedra {
 	private double diametro;
 	private Color color;
 	private Image imagen;
-
+	private double giro;
+	
 	public Piedra(double x, double y) {
 		this.x = x;
 		this.y = y;
+		this.giro = 0;
 		this.diametro = 20;
 		this.color = Color.white;
 		this.imagen = Herramientas.cargarImagen("roca.png");
@@ -26,7 +28,8 @@ public class Piedra {
 
 	public void dibujarPiedra(Entorno e) {
 		e.dibujarCirculo(x, y, diametro, color);
-		e.dibujarImagen(imagen, x, y, 0, .15);
+		e.dibujarImagen(imagen, x, y, giro, .15);
+		this.giro += .2;
 	}
 
 	public boolean chocaConSerpiente(Serpiente s) {
@@ -43,6 +46,16 @@ public class Piedra {
 			}
 		}
 	}
+	
+
+	
+	public boolean saleDePantalla(Entorno e) {
+		if (this.x > e.ancho()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public double getDiametro() {
 		return diametro;
@@ -50,22 +63,6 @@ public class Piedra {
 
 	public void avanzar() {
 		this.x += 5;
-	}
-
-	public void saltar(double s) {
-		this.y -= s;
-	}
-
-	public void gravedad(int g) {
-		this.y += g;
-	}
-
-	public boolean saleDePantalla(Entorno e) {
-		if (this.x > e.ancho()) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public double getX() {
