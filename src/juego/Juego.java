@@ -16,7 +16,7 @@ public class Juego extends InterfaceJuego {
 	private Piedra[] piedra;
 	private Items itemPiedra;
 	private Selva[] selva;
-	private Image fondo;
+	private Image gameOver;
 	private int punto;
 	private int vida;
 
@@ -27,10 +27,9 @@ public class Juego extends InterfaceJuego {
 		this.punto = 0;
 		this.vida = 3;
 		this.selva = new Selva[2];
-		
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra[3];
-		this.fondo = Herramientas.cargarImagen("Game_over.jpg");
+		this.gameOver = Herramientas.cargarImagen("game_over.jpg");
 		this.itemPiedra = new Items(500, 300);
 
 		// se crea un arreglo de x arboles
@@ -179,7 +178,7 @@ public class Juego extends InterfaceJuego {
 			entorno.cambiarFont(" ", 26, Color.RED);
 			entorno.escribirTexto("VIDAS: " + vida, 50, 50);
 		} else {
-			entorno.dibujarImagen(fondo, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
+			entorno.dibujarImagen(gameOver, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("Presione [ENTER] para volver a empezar", 160, 550);
 			
