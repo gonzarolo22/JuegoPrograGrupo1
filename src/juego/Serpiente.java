@@ -51,30 +51,29 @@ public class Serpiente {
 			if(s[i] == null ) {
 
 				//se suma 30 para q la serpiente quede al borde de la rama
-				s[i] = new Serpiente(arbol[rand].getX()+30, arbol[rand].getY());
+				s[i] = new Serpiente(arbol[rand].getX()+30, arbol[rand].getY() -25 );
 			}
 		}
 		return s;
 	}
-	public boolean chocaConPiedra(Piedra[] piedra) { 
-		for (int i=0;i<piedra.length;i++) {
-			
-		if (piedra[i]!=null && piedra[i].getX() - piedra[i].getDiametro()/2 < x + ancho/2 && 
-				x - ancho/2 < piedra[i].getX() + piedra[i].getDiametro()/2 &&
-				
-				piedra[i].getY() < y + ancho/2 &&
-				y - ancho/2 < piedra[i].getY())
-			
-		{
-			piedra[i]=null;
-			return true;
+	public boolean chocaConPiedra(Piedra[] piedra) {
+		for (int i = 0; i < piedra.length; i++) {
+
+			if (piedra[i] != null && piedra[i].getX() - piedra[i].getDiametro() / 2 < x + ancho / 2
+					&& x - ancho / 2 < piedra[i].getX() + piedra[i].getDiametro() / 2 &&
+					piedra[i].getY() < y + alto / 2 && y - alto / 2 < piedra[i].getY())
+			{
+				piedra[i] = null;
+				return true;
+			}
 		}
-	}return false;
-		}
+		return false;
+	}
+	
 
 	public void dibujarSerpiente(Entorno e) {
-		e.dibujarRectangulo(this.x, this.y - this.alto / 2, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imagen, x, y-25, angulo, escala);
+		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+		e.dibujarImagen(imagen, x, y, angulo, escala);
 	}// dibujarSerpiente
 
 	public boolean saleDePantalla() {

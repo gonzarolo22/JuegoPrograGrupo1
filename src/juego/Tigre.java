@@ -36,7 +36,7 @@ public class Tigre {
 
 			if (piedra[i] != null && piedra[i].getX() - piedra[i].getDiametro() / 2 < x + ancho / 2
 					&& x - ancho / 2 < piedra[i].getX() + piedra[i].getDiametro() / 2 &&
-					piedra[i].getY() < y + ancho / 2 && y - ancho / 2 < piedra[i].getY())
+					piedra[i].getY() < y + alto / 2 && y - alto / 2 < piedra[i].getY())
 			{
 				piedra[i] = null;
 				return true;

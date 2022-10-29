@@ -32,11 +32,6 @@ public class Piedra {
 		this.giro += .2;
 	}
 
-	public boolean chocaConSerpiente(Serpiente s) {
-		return (s.getX() - s.getAncho() / 2 < x + diametro / 2 && x - diametro / 2 < s.getX() + s.getAncho() / 2 &&
-
-				s.getY() - s.getAlto() / 2 < y + diametro / 2 && y - diametro / 2 < s.getY() + s.getAlto() / 2);
-	}
 
 	public static void agregarPiedra(Piedra[] piedra, Mono m) {
 		for (int i = 0; i < piedra.length; i++) {
