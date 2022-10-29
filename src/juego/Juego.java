@@ -30,7 +30,7 @@ public class Juego extends InterfaceJuego {
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra[3];
 		this.gameOver = Herramientas.cargarImagen("game_over.jpg");
-		this.itemPiedra = new Items(500, 300);
+		this.itemPiedra = new Items(2000, 300);
 
 		// se crea un arreglo de x arboles
 		this.arbol = new Arbol[5];

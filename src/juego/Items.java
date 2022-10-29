@@ -41,7 +41,7 @@ public class Items {
 	}
 	
 	public void dibujarPiedras(Entorno e) {
-		e.dibujarRectangulo(this.x, this.y, ancho, alto, 0,Color.red);
+//		e.dibujarRectangulo(this.x, this.y, ancho, alto, 0,Color.red);
 		e.dibujarImagen(imagen, x, y, giro, .4);
 		this.giro += 0.03;
 	}//dibujarPiedras

@@ -33,9 +33,6 @@ public class Arbol {
 		this.dioPuntos=false;
 	}// Arbol
 	
-	
-
-
 
 
 	public void info() {
@@ -45,8 +42,9 @@ public class Arbol {
 
 	public void dibujarArbol(Entorno e) {
 		e.dibujarImagen(imagen, this.x, this.y, angulo, this.escala);
-		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-//		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
+//		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+
+		e.dibujarImagen(imagen2, this.x, this.y - 14, angulo, .15);
 	}// crearArbol
 
 	public static boolean arbolesVacios(Arbol[] a) {
