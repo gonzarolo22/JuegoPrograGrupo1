@@ -10,7 +10,6 @@ public class Juego extends InterfaceJuego {
 
 	private Entorno entorno;
 	private Mono mono;
-	private Suelo suelo;
 	private Arbol[] arbol;
 	private Tigre[] tigre;
 	private Serpiente[] serpiente;
@@ -28,7 +27,7 @@ public class Juego extends InterfaceJuego {
 		this.punto = 0;
 		this.vida = 3;
 		this.selva = new Selva[2];
-		this.suelo = new Suelo(entorno, entorno.ancho() / 2);
+		
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra[3];
 		this.fondo = Herramientas.cargarImagen("Game_over.jpg");
@@ -45,7 +44,7 @@ public class Juego extends InterfaceJuego {
 
 		Arbol.crearArboles(this.arbol, entorno);
 
-		Tigre.agregaTigre(this.tigre, entorno, suelo);
+		Tigre.agregaTigre(this.tigre, entorno);
 
 		Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 
@@ -55,7 +54,7 @@ public class Juego extends InterfaceJuego {
 
 	public void tick() {
 
-		suelo.dibujarRectangulo(entorno);
+
 		Selva.dibujarFondo(selva, entorno);
 		// Procesamiento de un instante de tiempo.
 		if (vida > 0) {
@@ -77,14 +76,14 @@ public class Juego extends InterfaceJuego {
 					mono.saltar(8);
 				} else {
 					// si se mantiene apretado se activa gravedad
-					if (!mono.chocaConSuelo(entorno, suelo) && !mono.chocaConArboles(arbol)) {
+					if (!mono.chocaConSuelo(entorno) && !mono.chocaConArboles(arbol)) {
 						mono.gravedad();
 					}
 				}
 			} else {
 				mono.setTimer(0);
 				;
-				if (mono.chocaConSuelo(entorno, suelo) || mono.chocaConArboles(arbol)) {
+				if (mono.chocaConSuelo(entorno) || mono.chocaConArboles(arbol)) {
 
 					mono.setSalto(0);
 				} else {
@@ -119,7 +118,7 @@ public class Juego extends InterfaceJuego {
 
 					if (tigre[i].saleDePantalla()) {
 						tigre[i] = null;
-						Tigre.agregaTigre(tigre, entorno, suelo);
+						Tigre.agregaTigre(tigre, entorno);
 					}
 					if (mono.chocaConTigre(tigre[i]) && tigre[i].isPerdioVida() == false) {
 						vida -= 1;
@@ -128,7 +127,7 @@ public class Juego extends InterfaceJuego {
 					}
 					if (tigre[i].chocaConPiedra(piedra)) {
 						tigre[i] = null;
-						Tigre.agregaTigre(tigre, entorno, suelo);
+						Tigre.agregaTigre(tigre, entorno);
 					}
 				}
 			}
@@ -191,7 +190,7 @@ public class Juego extends InterfaceJuego {
 				for (int i = 0; i < tigre.length; i++) {
 					if (tigre[i] != null) {
 						tigre[i] = null;
-						Tigre.agregaTigre(tigre, entorno, suelo);
+						Tigre.agregaTigre(tigre, entorno);
 					}
 				}
 				for (int i = 0; i < serpiente.length; i++) {

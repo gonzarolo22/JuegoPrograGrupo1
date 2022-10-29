@@ -98,8 +98,8 @@ public class Mono {
 		this.y += 5;
 	}
 
-	public boolean chocaConSuelo(Entorno e, Suelo s) {
-		if (this.y > e.alto() - s.alto) {
+	public boolean chocaConSuelo(Entorno e) {
+		if (this.y >500) {
 			return true;
 		} else {
 			return false;

@@ -14,7 +14,7 @@ public class Piedra {
 	private double diametro;
 	private Color color;
 	private Image imagen;
-	private Image imagen2;
+
 	
 	
 	public Piedra(double x, double y) {
@@ -23,7 +23,7 @@ public class Piedra {
 		this.diametro=20;
 		this.color= Color.white;
 		this.imagen = Herramientas.cargarImagen("roca.png");
-		this.imagen = Herramientas.cargarImagen("rocas.png");
+		
 	}
 	
 	public void dibujarPiedra(Entorno e) {
@@ -52,9 +52,6 @@ public class Piedra {
 		return diametro;
 	}
 
-	public void setDiametro(double diametro) {
-		this.diametro = diametro;
-	}
 
 	public void avanzar() {
 		this.x += 5;

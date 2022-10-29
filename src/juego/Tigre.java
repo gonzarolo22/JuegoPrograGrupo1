@@ -54,7 +54,7 @@ public class Tigre {
 	}
 	
 	
-	public static void agregaTigre( Tigre[] t,Entorno e, Suelo s) {
+	public static void agregaTigre( Tigre[] t,Entorno e) {
 		Random random = new Random();
 		double max =e.ancho();
 		
@@ -66,7 +66,7 @@ public class Tigre {
 		for (int i = 0; i < t.length; i++) {
 			if(t[i]==null) {
 				int rand = random.nextInt(100,200);
-				t[i]= new Tigre(rand+max,e.alto()-s.alto);
+				t[i]= new Tigre(rand+max,500);
 				return ;
 			}
 		}
