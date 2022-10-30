@@ -162,6 +162,7 @@ public class Juego extends InterfaceJuego {
 							if (aguila[i] != null) {
 								aguila[i].dibujarAguila(entorno);
 								aguila[i].desplazar();
+								aguila[i].descender();
 
 								if (aguila[i].saleDePantalla()) {
 									aguila[i] = null;

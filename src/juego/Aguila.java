@@ -57,15 +57,21 @@ public class Aguila {
 		for (int i = 0; i < t.length; i++) {
 			if (t[i] == null) {
 				int rand = random.nextInt(100, 200);
-				t[i] = new Aguila(rand + max, 100);
+				t[i] = new Aguila(1000, 100);
 				return;
 			}
 		}
 
 	}// agregarTigre
+	
+	public void descender() {
+		if(x<700 && x>400) {
+			this.y+=5;
+		}
+	}
 
 	public void dibujarAguila(Entorno e) {
-	e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
+	//e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
 		e.dibujarImagen(imagen, x , y, angulo, escala);
 	}// dibujarTigre
 
