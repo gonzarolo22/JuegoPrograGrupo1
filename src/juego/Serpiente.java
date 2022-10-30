@@ -81,7 +81,7 @@ public class Serpiente {
 	}
 
 	public void desplazar() {
-		this.x -= 3;
+		this.x -= 3;//Juego.getVelocidad();
 	}// desplazar
 
 
