@@ -45,10 +45,6 @@ public class Tigre {
 		return false;
 	}
 
-	public void info() {
-		System.out.println("x=" + this.x + " y=" + this.y + " ancho=" + this.ancho + " alto=" + this.alto + " escala="
-				+ this.escala);
-	}
 
 	public static void agregaTigre(Tigre[] t, Entorno e) {
 		Random random = new Random();

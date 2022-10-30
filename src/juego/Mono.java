@@ -99,10 +99,7 @@ public class Mono {
 		return false;
 	}
 
-	public void monoEnArbol(Arbol a) {
-		this.y = a.getY() - 30;
-	}
-
+	
 	public void dibujarMono(Entorno e) {
 //		e.dibujarRectangulo(this.x , this.y, this.ancho, this.largo, 0, this.color);	
 		e.dibujarImagen(imagen, x, y - 15, angulo, .3);

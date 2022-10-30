@@ -37,10 +37,7 @@ public class Arbol {
 	
 
 
-	public void info() {
-		System.out.println("x=" + this.x + " y=" + this.y + " ancho=" + this.ancho + " alto=" + this.alto + " escala="
-				+ this.escala);
-	}
+	
 
 	public void dibujarArbol(Entorno e) {
 		e.dibujarImagen(imagen, this.x, this.y, angulo, this.escala);
