@@ -122,7 +122,7 @@ public class Mono {
 		this.y += 5;
 	}
 
-	public boolean chocaConSuelo(Entorno e) {
+	public boolean chocaConSuelo() {
 		if (this.y > 500) {
 			return true;
 		} else {

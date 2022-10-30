@@ -55,6 +55,7 @@ public class Tigre {
 				max = t[i].x;
 			}
 		}
+		
 		for (int i = 0; i < t.length; i++) {
 			if (t[i] == null) {
 				int rand = random.nextInt(100, 200);
@@ -79,8 +80,8 @@ public class Tigre {
 		}
 	}
 
-	public void desplazar() {
-		this.x -= Juego.getVelocidad();
+	public void desplazar(double v) {
+		this.x -=v;
 	}// desplazar
 
 	public double getX() {

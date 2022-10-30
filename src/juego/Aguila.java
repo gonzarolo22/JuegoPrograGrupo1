@@ -46,18 +46,13 @@ public class Aguila {
 
 
 	public static void agregaAguila(Aguila[] t, Entorno e) {
-		Random random = new Random();
-		double max = e.ancho();
-
+		Random rand = new Random();
+	
 		for (int i = 0; i < t.length; i++) {
-			if (t[i] != null && t[i].x > max) {
-				max = t[i].x;
-			}
-		}
-		for (int i = 0; i < t.length; i++) {
+			int distancia = rand.nextInt(e.ancho(),5000);
+			
 			if (t[i] == null) {
-				int rand = random.nextInt(100, 200);
-				t[i] = new Aguila(1000, 100);
+				t[i] = new Aguila(distancia, 100);
 				return;
 			}
 		}
@@ -84,8 +79,8 @@ public class Aguila {
 		}
 	}
 
-	public void desplazar() {
-		this.x -= 6;
+	public void desplazar(double v) {
+		this.x -= v;
 	}// desplazar
 
 	public double getX() {
