@@ -64,7 +64,7 @@ public class Juego extends InterfaceJuego {
 			entorno.cambiarFont(" ", 50, Color.red);
 			entorno.escribirTexto("MENÚ", 320, 50);
 			entorno.cambiarFont(" ", 26, Color.red);
-			entorno.escribirTexto("Presione [ENTER] comenzar", 200, 100);
+			entorno.escribirTexto("Presione [ENTER] comenzar", 235, 100);
 			if (entorno.sePresiono(entorno.TECLA_ENTER)) {
 				menu= false;
 			}
@@ -250,11 +250,11 @@ public class Juego extends InterfaceJuego {
 		} else {
 			entorno.dibujarImagen(gameOver, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
 			entorno.cambiarFont(" ", 26, Color.red);
-			entorno.escribirTexto("Presione [INICIO] para reiniciar", 160,500);
+			entorno.escribirTexto("Presione [INICIO] para reiniciar |", 15,550);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("PUNTAJE OBTENIDO: " + punto, 250, 50);
 			entorno.cambiarFont(" ", 26, Color.red);
-			entorno.escribirTexto("Presione [FIN] para volver al menú", 160, 550);
+			entorno.escribirTexto("Presione [FIN] para volver al menú", 390, 550);
 
 			if (entorno.estaPresionada(entorno.TECLA_INICIO)) {
 				
@@ -277,6 +277,20 @@ public class Juego extends InterfaceJuego {
 			
 			if (entorno.sePresiono(entorno.TECLA_FIN)) {
 				menu=true;
+				this.punto = 0;
+				this.vida = 3;
+				this.mono = new Mono(0, 500);
+				this.piedra = new Piedra[3];
+				this.items = new Items();
+				this.arbol = new Arbol[5];
+				this.tigre = new Tigre[2];
+				this.aguila=new Aguila[2];
+				this.serpiente = new Serpiente[2];
+
+				Arbol.crearArboles(this.arbol, entorno);
+				Tigre.agregaTigre(this.tigre, entorno);
+				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+				Aguila.agregaAguila(aguila, entorno);
 			}
 		}
 	}// fin tick()
