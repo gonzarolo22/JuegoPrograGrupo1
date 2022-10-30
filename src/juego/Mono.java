@@ -67,6 +67,13 @@ public class Mono {
 		return false;
 	}
 
+	public boolean chocaConAguila(Aguila a) {
+		if (x + ancho / 2 > a.getX() - a.getAncho() / 2 && x - ancho / 2 < a.getX() + a.getAncho() / 2
+				&& a.getY() - a.getAlto() / 2 < y + largo / 2 && y - largo / 2 < a.getY() + a.getAlto() / 2) {
+			return true;
+		}
+		return false;
+	}
 	public boolean chocaConTigre(Tigre t) {
 		if (x + ancho / 2 > t.getX() - t.getAncho() / 2 && x - ancho / 2 < t.getX() + t.getAncho() / 2
 				&& t.getY() - t.getAlto() / 2 < y + largo / 2 && y - largo / 2 < t.getY() + t.getAlto() / 2) {
@@ -169,5 +176,6 @@ public class Mono {
 		return new Piedra(x, y);
 
 	}
+
 
 }// class Mono

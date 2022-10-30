@@ -13,6 +13,7 @@ public class Juego extends InterfaceJuego {
 	private Arbol[] arbol;
 	private Tigre[] tigre;
 	private Serpiente[] serpiente;
+	private Aguila[] aguila;
 	private Piedra[] piedra;
 	private Items items;
 	private Selva[] selva;
@@ -39,6 +40,7 @@ public class Juego extends InterfaceJuego {
 		this.arbol = new Arbol[5];
 		this.tigre = new Tigre[2];
 		this.serpiente = new Serpiente[2];
+		this.aguila=new Aguila[2];
 		this.menu = true;
 
 		// se crean el fondo de pantalla, los tigres, arboles y las serpientes
@@ -46,6 +48,7 @@ public class Juego extends InterfaceJuego {
 		Arbol.crearArboles(this.arbol, entorno);
 		Tigre.agregaTigre(this.tigre, entorno);
 		Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+		Aguila.agregaAguila(this.aguila, entorno);
 
 		// una vez q se cargan los datos se inicia el juego
 		this.entorno.iniciar();
@@ -153,6 +156,36 @@ public class Juego extends InterfaceJuego {
 					}
 				}
 			}
+			
+			// condiciones de las aguilas
+						for (int i = 0; i < aguila.length; i++) {
+							if (aguila[i] != null) {
+								aguila[i].dibujarAguila(entorno);
+								aguila[i].desplazar();
+
+								if (aguila[i].saleDePantalla()) {
+									aguila[i] = null;
+									Aguila.agregaAguila(aguila, entorno);
+								}
+								if (mono.chocaConAguila(aguila[i]) && aguila[i].isPerdioVida() == false) {
+									vida -= 1;
+									aguila[i].setPerdioVida(true);
+
+								}
+								if (aguila[i].chocaConPiedra(piedra)) {
+									aguila[i] = null;
+									Aguila.agregaAguila(aguila, entorno);
+								}
+							}
+						}
+			
+			
+			
+			
+			
+			
+			
+			
 
 			// condiciones de las serpientes
 			for (int i = 0; i < serpiente.length; i++) {
@@ -232,11 +265,13 @@ public class Juego extends InterfaceJuego {
 				this.items = new Items();
 				this.arbol = new Arbol[5];
 				this.tigre = new Tigre[2];
+				this.aguila=new Aguila[2];
 				this.serpiente = new Serpiente[2];
 
 				Arbol.crearArboles(this.arbol, entorno);
 				Tigre.agregaTigre(this.tigre, entorno);
 				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
+				Aguila.agregaAguila(aguila, entorno);
 				
 			}
 			
