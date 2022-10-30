@@ -80,7 +80,7 @@ public class Tigre {
 	}
 
 	public void desplazar() {
-		this.x -= 5;
+		this.x -= Juego.getVelocidad();
 	}// desplazar
 
 	public double getX() {

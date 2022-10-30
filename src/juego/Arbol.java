@@ -136,7 +136,7 @@ public class Arbol {
 	}
 
 	public void desplazar() {
-		this.x -= 3;
+		this.x -= Juego.getVelocidad();
 	}// desplazar
 
 	public double getAncho() {

@@ -85,7 +85,7 @@ public class Aguila {
 	}
 
 	public void desplazar() {
-		this.x -= 5;
+		this.x -= 6;
 	}// desplazar
 
 	public double getX() {

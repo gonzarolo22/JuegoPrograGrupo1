@@ -23,6 +23,9 @@ public class Juego extends InterfaceJuego {
 	private int vida;
 	private boolean pause;
 	private boolean menu;
+	private boolean subioNivel;
+	private static int velocidad;
+	private int nivel;
 //
 	public Juego() {
 
@@ -42,6 +45,10 @@ public class Juego extends InterfaceJuego {
 		this.serpiente = new Serpiente[2];
 		this.aguila=new Aguila[2];
 		this.menu = true;
+		this.velocidad=3;
+		this.nivel=1;
+		this.subioNivel=false;
+
 
 		// se crean el fondo de pantalla, los tigres, arboles y las serpientes
 		Selva.iniciaSelva(selva);
@@ -53,6 +60,9 @@ public class Juego extends InterfaceJuego {
 		// una vez q se cargan los datos se inicia el juego
 		this.entorno.iniciar();
 	}// juego
+	public static int getVelocidad() {
+		return velocidad;
+	}
 
 	public void tick() {
 
@@ -70,6 +80,14 @@ public class Juego extends InterfaceJuego {
 			}
 			
 		}else if (vida > 0 && !pause) {
+			
+			if(subioNivel==false && punto==30 || subioNivel==false && punto==50 ||subioNivel==false && punto==100 ) {
+				nivel+=1;
+				subioNivel=true;
+				System.out.println(subioNivel);
+				if(velocidad<5) {
+					velocidad+=1;
+				}}
 
 			if (this.items.saleDePantallaP()) {
 				this.items.crearPiedra();
@@ -124,6 +142,7 @@ public class Juego extends InterfaceJuego {
 
 					if (mono.chocaConArbol(arbol[i]) && arbol[i].isDioPuntos() == false) {
 						punto += 5;
+						subioNivel=false;
 						arbol[i].setDioPuntos(true);
 					}
 
@@ -158,6 +177,7 @@ public class Juego extends InterfaceJuego {
 			}
 			
 			// condiciones de las aguilas
+			if(nivel>2) {
 						for (int i = 0; i < aguila.length; i++) {
 							if (aguila[i] != null) {
 								aguila[i].dibujarAguila(entorno);
@@ -178,7 +198,7 @@ public class Juego extends InterfaceJuego {
 									Aguila.agregaAguila(aguila, entorno);
 								}
 							}
-						}
+						}}
 			
 			
 			
@@ -235,6 +255,8 @@ public class Juego extends InterfaceJuego {
 			entorno.cambiarFont(" ", 26, Color.RED);
 			entorno.escribirTexto("VIDAS: " + vida, 50, 50);
 			entorno.cambiarFont(" ", 26, Color.RED);
+			entorno.escribirTexto("NIVEL: " + nivel, 50, 575);
+			entorno.cambiarFont(" ", 26, Color.RED);
 			entorno.escribirTexto("PIEDRAS: " + mono.getDisparosDisp(), 300, 50);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("PUNTAJE: " + punto, 600, 50);
@@ -258,7 +280,8 @@ public class Juego extends InterfaceJuego {
 			entorno.escribirTexto("Presione [FIN] para volver al menú", 390, 550);
 
 			if (entorno.estaPresionada(entorno.TECLA_INICIO)) {
-				
+				this.velocidad=2;
+				this.nivel=1;
 				this.punto = 0;
 				this.vida = 3;
 				this.mono = new Mono(0, 500);
@@ -278,6 +301,8 @@ public class Juego extends InterfaceJuego {
 			
 			if (entorno.sePresiono(entorno.TECLA_FIN)) {
 				menu=true;
+				this.velocidad=2;
+				this.nivel=1;
 				this.punto = 0;
 				this.vida = 3;
 				this.mono = new Mono(0, 500);
