@@ -17,10 +17,11 @@ public class Juego extends InterfaceJuego {
 	private Items items;
 	private Selva[] selva;
 	private Image gameOver;
+	private Image menuImg;
 	private int punto;
 	private int vida;
 	private boolean pause;
-
+	private boolean menu;
 //
 	public Juego() {
 
@@ -32,19 +33,18 @@ public class Juego extends InterfaceJuego {
 		this.mono = new Mono(0, 500);
 		this.piedra = new Piedra[3];
 		this.gameOver = Herramientas.cargarImagen("game_over.jpg");
+		this.menuImg = Herramientas.cargarImagen("menu.jpg");
 		this.items = new Items();
 		this.pause = false;
 		this.arbol = new Arbol[5];
 		this.tigre = new Tigre[2];
 		this.serpiente = new Serpiente[2];
+		this.menu = true;
 
 		// se crean el fondo de pantalla, los tigres, arboles y las serpientes
 		Selva.iniciaSelva(selva);
-
 		Arbol.crearArboles(this.arbol, entorno);
-
 		Tigre.agregaTigre(this.tigre, entorno);
-
 		Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 
 		// una vez q se cargan los datos se inicia el juego
@@ -55,7 +55,18 @@ public class Juego extends InterfaceJuego {
 
 		Selva.dibujarFondo(selva, entorno);
 		// Procesamiento de un instante de tiempo.
-		if (vida > 0 && !pause) {
+		if (menu) {
+			
+			entorno.dibujarImagen(this.menuImg, entorno.ancho() / 2, entorno.alto() / 2, 0, 1);
+			entorno.cambiarFont(" ", 50, Color.red);
+			entorno.escribirTexto("MENÚ", 320, 50);
+			entorno.cambiarFont(" ", 26, Color.red);
+			entorno.escribirTexto("Presione [ENTER] comenzar", 200, 100);
+			if (entorno.sePresiono(entorno.TECLA_ENTER)) {
+				menu= false;
+			}
+			
+		}else if (vida > 0 && !pause) {
 
 			if (this.items.saleDePantallaP()) {
 				this.items.crearPiedra();
@@ -206,11 +217,13 @@ public class Juego extends InterfaceJuego {
 		} else {
 			entorno.dibujarImagen(gameOver, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
 			entorno.cambiarFont(" ", 26, Color.red);
-			entorno.escribirTexto("Presione [ENTER] para volver a empezar", 160, 550);
+			entorno.escribirTexto("Presione [INICIO] para reiniciar", 160,500);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("PUNTAJE OBTENIDO: " + punto, 250, 50);
+			entorno.cambiarFont(" ", 26, Color.red);
+			entorno.escribirTexto("Presione [FIN] para volver al menú", 160, 550);
 
-			if (entorno.estaPresionada(entorno.TECLA_ENTER)) {
+			if (entorno.estaPresionada(entorno.TECLA_INICIO)) {
 				
 				this.punto = 0;
 				this.vida = 3;
@@ -225,6 +238,10 @@ public class Juego extends InterfaceJuego {
 				Tigre.agregaTigre(this.tigre, entorno);
 				Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 				
+			}
+			
+			if (entorno.sePresiono(entorno.TECLA_FIN)) {
+				menu=true;
 			}
 		}
 	}// fin tick()
