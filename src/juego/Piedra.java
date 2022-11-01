@@ -35,22 +35,24 @@ public class Piedra {
 
 	public static void agregarPiedra(Piedra[] piedra, Mono m) {
 		for (int i = 0; i < piedra.length; i++) {
+			// si piedra es null se utilizar el lanzarPiedra de mono
 			if (piedra[i] == null) {
 				piedra[i] = m.lanzarPiedra();
 				return;
 			}
 		}
 	}
-	
 
 	
 	public boolean saleDePantalla(Entorno e) {
+		// si el eje x se paso del entorno es true
 		if (this.x > e.ancho()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+
 
 	public double getDiametro() {
 		return diametro;

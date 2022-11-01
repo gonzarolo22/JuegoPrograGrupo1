@@ -49,10 +49,12 @@ public class Arbol {
 	public static boolean arbolesVacios(Arbol[] a) {
 		int contador = 0;
 		for (int i = 0; i < a.length; i++) {
+			//si el arbol es null, contador aumenta 
 			if (a[i] == null) {
 				contador++;
 			}
 		}
+		// si contador es igual al numero de objetos arbol retorna true
 		if (contador == a.length) {
 			return true;
 		} else {
@@ -74,10 +76,11 @@ public class Arbol {
 
 	public static Arbol[] crearArboles(Arbol[] arboles, Entorno e) {
 		Random random = new Random();
-
+        // si arbolesVacios es true se podra recorrer el for 
 		if (arbolesVacios(arboles)) {
 			int n = 0;
 			for (int i = 0; i < arboles.length; i++) {
+				//si el arbol es igual a null se crea un random y se podra recorrer el while
 				if (arboles[i] == null) {
 					// se crea un altura aleatoria para las ramas de los arboles
 					int rand = random.nextInt(300, 350);
@@ -93,9 +96,9 @@ public class Arbol {
 				} // if
 			} // for
 			return arboles;
-		} else {
-
+		} else { 
 			for (int i = 0; i < arboles.length; i++) {
+				// si arbol en la posicion 0 es null se crea un random y se podra recorrer el while
 				if (arboles[0] == null) {
 					int rand = random.nextInt(300, 350);
 					while(rand%5==0) {
@@ -108,6 +111,7 @@ public class Arbol {
 					double ultimoX = arboles[arboles.length - 1].x;
 					arboles[0] = new Arbol(ultimoX + e.ancho(), rand, escala);
 				} else {
+					//si el arbol es null se crea un random y se podra recorrer el while
 					if (arboles[i] == null) {
 						int rand = random.nextInt(300,350);
 						while(rand%5==0) {
@@ -165,4 +169,4 @@ public class Arbol {
 	public void setDioPuntos(boolean dioPuntos) {
 		this.dioPuntos = dioPuntos;
 	}
-}// class Arbol
+}// class Arbol

@@ -33,7 +33,7 @@ public class Tigre {
 
 	public boolean chocaConPiedra(Piedra[] piedra) {
 		for (int i = 0; i < piedra.length; i++) {
-
+            // si piedra no es null y tigre choque con piedra, esta ultima se vuelve null y retorna true
 			if (piedra[i] != null && piedra[i].getX() - piedra[i].getDiametro() / 2 < x + ancho / 2
 					&& x - ancho / 2 < piedra[i].getX() + piedra[i].getDiametro() / 2 &&
 					piedra[i].getY() < y + alto / 2 && y - alto / 2 < piedra[i].getY())
@@ -51,12 +51,14 @@ public class Tigre {
 		double max = e.ancho();
 
 		for (int i = 0; i < t.length; i++) {
+			// si el tigre no es null y el eje x de tigre se pasa del entorno, max se vuelve el eje de x del tigre 
 			if (t[i] != null && t[i].x > max) {
 				max = t[i].x;
 			}
 		}
 		
 		for (int i = 0; i < t.length; i++) {
+			// si el tigre es null se crea un nuevo tigre a partir de un random limitado sumado a max 
 			if (t[i] == null) {
 				int rand = random.nextInt(100, 200);
 				t[i] = new Tigre(rand + max, 500);
@@ -72,7 +74,7 @@ public class Tigre {
 	}// dibujarTigre
 
 	public boolean saleDePantalla() {
-
+        //cuando el eje x pasa a ser mayor a -100 devuelve true
 		if (this.x < -100) {
 			return true;
 		} else {
@@ -108,4 +110,4 @@ public class Tigre {
 		this.perdioVida = perdioVida;
 	}
 
-}// class Tigre
+}// class Tigre

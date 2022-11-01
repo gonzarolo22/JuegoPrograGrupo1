@@ -56,10 +56,10 @@ public class Serpiente {
 	public boolean chocaConPiedra(Piedra[] piedra) {
 		for (int i = 0; i < piedra.length; i++) {
 
-			if (piedra[i] != null && piedra[i].getX() - piedra[i].getDiametro() / 2 < x + ancho / 2
+			if (piedra[i] != null && piedra[i].getX() - piedra[i].getDiametro() / 2 < x + ancho / 2							// cuando las dimensiones de nuestro objeto choquen con el objeto pasado como parametro y ese mismo objeto no sea nulo, retornamos true
 					&& x - ancho / 2 < piedra[i].getX() + piedra[i].getDiametro() / 2 && piedra[i].getY() < y + alto / 2
 					&& y - alto / 2 < piedra[i].getY()) {
-				piedra[i] = null;
+				piedra[i] = null;																							// volvemos nula la piedra iterada 												
 				return true;
 			}
 		}
@@ -67,12 +67,11 @@ public class Serpiente {
 	}
 
 	public void dibujarSerpiente(Entorno e) {
-//		e.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		e.dibujarImagen(imagen, x, y, angulo, escala);
+		e.dibujarImagen(imagen, x, y, angulo, escala);   //graficamos en el entorno el objeto
 	}// dibujarSerpiente
 
 	public boolean saleDePantalla() {
-
+											//si el eje X es menos a -100 retorna true sino retorna false
 		if (this.x < -100) {
 			return true;
 		} else {
@@ -80,7 +79,7 @@ public class Serpiente {
 		}
 	}
 
-	public void desplazar(double v) {
+	public void desplazar(double v) {		// restamos al eje X el valor pasado como parametro
 		this.x -= v;
 	}// desplazar
 
@@ -109,4 +108,4 @@ public class Serpiente {
 		this.perdioVida = perdioVida;
 	}
 
-}// class Tigre
+}// class Serpiente

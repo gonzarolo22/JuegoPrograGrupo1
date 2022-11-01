@@ -53,6 +53,7 @@ public class Mono {
 	}
 
 	public boolean contadorSalto() {
+		//si timer es menor a 30 y salto es menor a 2 devuelve true
 		if (timer < 30 && salto < 2) {
 			return true;
 		}
@@ -60,13 +61,14 @@ public class Mono {
 	}
 
 	public boolean chocaConSerpiente(Serpiente s) {
+		// si el mono choca con serpiente devuelve true
 		if (x + ancho / 2 > s.getX() - s.getAncho() / 2 && x - ancho / 2 < s.getX() + s.getAncho() / 2
 				&& s.getY() - s.getAlto() / 2 < y + largo / 2 && y - largo / 2 < s.getY() + s.getAlto() / 2) {
 			return true;
 		}
 		return false;
 	}
-
+	// si el mono choca con aguila devuelve true
 	public boolean chocaConAguila(Aguila a) {
 		if (x + ancho / 2 > a.getX() - a.getAncho() / 2 && x - ancho / 2 < a.getX() + a.getAncho() / 2
 				&& a.getY() - a.getAlto() / 2 < y + largo / 2 && y - largo / 2 < a.getY() + a.getAlto() / 2) {
@@ -74,6 +76,7 @@ public class Mono {
 		}
 		return false;
 	}
+	// si el mono choca con tigre devuelve true
 	public boolean chocaConTigre(Tigre t) {
 		if (x + ancho / 2 > t.getX() - t.getAncho() / 2 && x - ancho / 2 < t.getX() + t.getAncho() / 2
 				&& t.getY() - t.getAlto() / 2 < y + largo / 2 && y - largo / 2 < t.getY() + t.getAlto() / 2) {
@@ -83,6 +86,7 @@ public class Mono {
 	}
 
 	public boolean chocaConArbol(Arbol a) {
+		// si el mono choca con arbol devuelve true
 		if (x + ancho / 2 > a.getX() - a.getAncho() / 2 && x - ancho / 2 < a.getX() + a.getAncho() / 2
 				&& a.getY() - a.getAlto() / 2 < y + largo / 2 && y + largo / 2 < a.getY() + a.getAlto() / 2) {
 			return true;
@@ -91,6 +95,7 @@ public class Mono {
 	}
 
 	public boolean chocaConBanana(Items b) {
+		// si el mono choca con banana devuelve true
 		if (x + ancho / 2 > b.getBx() - b.getAncho() / 2 && x - ancho / 2 < b.getBx() + b.getAncho() / 2
 				&& b.getBy() - b.getAlto() / 2 < y + largo / 2 && y - largo / 2 < b.getBy() + b.getAlto() / 2) {
 			return true;
@@ -99,6 +104,7 @@ public class Mono {
 	}
 
 	public boolean chocaConPiedra(Items p) {
+		// si el mono choca con piedra devuelve true
 		if (x + ancho / 2 > p.getX() - p.getAncho() / 2 && x - ancho / 2 < p.getX() + p.getAncho() / 2
 				&& p.getY() - p.getAlto() / 2 < y + largo / 2 && y - largo / 2 < p.getY() + p.getAlto() / 2) {
 			return true;
@@ -123,6 +129,7 @@ public class Mono {
 	}
 
 	public boolean chocaConSuelo() {
+		//si la instancia y del mono es mayor a 500 devuelve true
 		if (this.y > 500) {
 			return true;
 		} else {
@@ -132,6 +139,7 @@ public class Mono {
 
 	public boolean chocaConArboles(Arbol[] a) {
 		for (int i = 0; i < a.length; i++) {
+			// si choca con con arbol es true devuelve true
 			if (chocaConArbol(a[i])) {
 				return true;
 			}
@@ -178,4 +186,4 @@ public class Mono {
 	}
 
 
-}// class Mono
+}// class Mono

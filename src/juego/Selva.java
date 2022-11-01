@@ -32,9 +32,12 @@ public class Selva {
 	}
 	
 	public static void dibujarFondo(Selva[] selva, Entorno entorno) {
-		
+		//si la instancia x de selva en la posicion 1 es igual a 0, 
+		//selva en la posicion 0 cambiara su instancia x a 2400 
 		if (selva[1].getX() == 0) {
 			selva[0].setX(2400);
+		// si la otra condicion no se utilizo y selva en posicion 0 tiene como instancia x igual 0, 
+		//selva en posicion 1 cambia su instancia x a 2400
 		} else if (selva[0].getX() == 0) {
 			selva[1].setX(2400);
 		}

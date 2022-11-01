@@ -46,6 +46,7 @@ public class Items {
 	}
 	
 	public boolean saleDePantallaP() {
+		//si la instancia x es menor a -100 retorna true
 		if (this.x < -100) {
 			return true;
 		} else {
@@ -53,6 +54,7 @@ public class Items {
 		}
 	}
 	public boolean saleDePantallaB() {
+		// si la instancia bx es menor a -100 retorna true
 		if (this.bx < -100) {
 			return true;
 		} else {

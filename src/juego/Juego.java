@@ -65,11 +65,13 @@ public class Juego extends InterfaceJuego {
 		// Procesamiento de un instante de tiempo.
 		if (menu) {
 
+			// se grafican las palabras en el menu
 			entorno.dibujarImagen(this.menuImg, entorno.ancho() / 2, entorno.alto() / 2, 0, 1);
 			entorno.cambiarFont(" ", 50, Color.red);
 			entorno.escribirTexto("MENÚ", 320, 50);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("Presione [ENTER] comenzar", 235, 100);
+			// si se oprime enter entonces se sale del menu
 			if (entorno.sePresiono(entorno.TECLA_ENTER)) {
 				menu = false;
 			}
@@ -120,6 +122,7 @@ public class Juego extends InterfaceJuego {
 				}
 			} else {
 				mono.setTimer(0);
+				// cuando el mono esta sobre el suelo o esta en arbol entonces puede saltar
 				if (mono.chocaConSuelo() || mono.chocaConArboles(arbol)) {
 					mono.setSalto(0);
 				} else {
@@ -133,6 +136,7 @@ public class Juego extends InterfaceJuego {
 
 					arbol[i].dibujarArbol(entorno);
 
+					// dependiendo del nivel cambia la velocidad de desplazamiento
 					if (nivel == 1) {
 						arbol[i].desplazar(2);
 					} else if (nivel == 2) {
@@ -143,11 +147,15 @@ public class Juego extends InterfaceJuego {
 						arbol[i].desplazar(3.5);
 					}
 
+					// si el mono choca con el arbol y el arbol no dio punto entonces incrementa su
+					// puntaje
 					if (mono.chocaConArbol(arbol[i]) && arbol[i].isDioPuntos() == false) {
 						punto += 5;
 						arbol[i].setDioPuntos(true);
 					}
 
+					// si el arbol sale de la pantalla entonces se anula el elemento y se crea uno
+					// nuevo
 					if (arbol[i].saleDePantalla()) {
 						arbol[i] = null;
 						Arbol.crearArboles(this.arbol, entorno);
@@ -160,6 +168,7 @@ public class Juego extends InterfaceJuego {
 				if (tigre[i] != null) {
 					tigre[i].dibujarTigre(entorno);
 
+					// dependiendo del nivel cambia la velocidad de desplazamiento
 					if (nivel == 1) {
 						tigre[i].desplazar(4);
 					} else if (nivel == 2) {
@@ -169,17 +178,23 @@ public class Juego extends InterfaceJuego {
 					} else {
 						tigre[i].desplazar(7);
 					}
-
+					// si el tigre sale de la pantalla entonces se anula el elemento y se crea uno
+					// nuevo
 					if (tigre[i].saleDePantalla()) {
 						tigre[i] = null;
 						Tigre.agregaTigre(tigre, entorno);
 					} else {
 
+						// si el mono choca con el tigre y el mono aun no perdio vida con este tigre
+						// entonces se resta una vida
 						if (mono.chocaConTigre(tigre[i]) && tigre[i].isPerdioVida() == false) {
 							vida -= 1;
 							tigre[i].setPerdioVida(true);
 						}
 
+						// si el tigre choca con la piedra se aumenta el puntaje y aumenta la cantidad
+						// de enemigos aniquilados,
+						// el tigre se pone null y se instancia uno nuevo
 						if (tigre[i].chocaConPiedra(piedra)) {
 							punto += 5;
 							this.enemigosMuertos++;
@@ -194,6 +209,8 @@ public class Juego extends InterfaceJuego {
 			for (int i = 0; i < serpiente.length; i++) {
 				if (serpiente[i] != null) {
 					serpiente[i].dibujarSerpiente(entorno);
+					// si el tigre sale de la pantalla entonces se anula el elemento y se crea uno
+					// nuevo
 					if (nivel == 1) {
 						serpiente[i].desplazar(2);
 					} else if (nivel == 2) {
@@ -203,16 +220,21 @@ public class Juego extends InterfaceJuego {
 					} else {
 						serpiente[i].desplazar(3.5);
 					}
-
+					// si la serpiente sale de la pantalla entonces se anula el elemento y se crea
+					// uno nuevo
 					if (serpiente[i].saleDePantalla()) {
 						serpiente[i] = null;
 						Serpiente.agregaSerpiente(this.serpiente, this.arbol);
 					} else {
+						// si el mono choca con la serpiente y ademas no perdio vida con esta serpiente
+						// entonces pierde una vida
 						if (mono.chocaConSerpiente(serpiente[i]) && serpiente[i].isPerdioVida() == false) {
 							vida -= 1;
 							serpiente[i].setPerdioVida(true);
 						}
-
+						// si la serpiente choca con la piedra entonces el mono obtiene 5 puntos e
+						// incrementa los enemigos aniquilados
+						// la serpiente se pone en null y se crea una nueva
 						if (serpiente[i].chocaConPiedra(piedra)) {
 							punto += 5;
 							this.enemigosMuertos++;
@@ -228,6 +250,8 @@ public class Juego extends InterfaceJuego {
 				if (aguila[i] != null && nivel > 2) {
 
 					aguila[i].dibujarAguila(entorno);
+					// si el aguila sale de la pantalla entonces se anula el elemento y se crea uno
+					// nuevo
 					if (nivel == 1) {
 						aguila[i].desplazar(6);
 					} else if (nivel == 2) {
@@ -238,16 +262,21 @@ public class Juego extends InterfaceJuego {
 						aguila[i].desplazar(6.6);
 					}
 					aguila[i].descender();
-
+					// si el aguila sale de la pantalla entonces se anula el elemento y se crea uno
+					// nuevo
 					if (aguila[i].saleDePantalla()) {
 						aguila[i] = null;
 						Aguila.agregaAguila(aguila, entorno);
 					} else {
+						// si el aguila choca con la piedra entonces el mono obtiene 5 puntos e
+						// incrementa los enemigos aniquilados
+						// el aguila se pone en null y se crea una nueva
 						if (mono.chocaConAguila(aguila[i]) && aguila[i].isPerdioVida() == false) {
 							vida -= 1;
 							aguila[i].setPerdioVida(true);
-
 						}
+						// si el aguila choca con la piedra entonces el mono gana puntos, incrementa los
+						// enemigos aniquilados y el aguila se coloca null y se crea uno nuevo
 						if (aguila[i].chocaConPiedra(piedra)) {
 							punto += 10;
 							this.enemigosMuertos++;
@@ -258,29 +287,31 @@ public class Juego extends InterfaceJuego {
 				}
 
 			}
-			
-			//condicional de la piedra
+
+			// condicional de la piedra
 			for (int i = 0; i < piedra.length; i++) {
+				//si la piedra no es null entonces la dibuja y la hace desplazar
 				if (piedra[i] != null) {
 					piedra[i].dibujarPiedra(entorno);
 					piedra[i].avanzar();
+					// si la piedra sale de la pantalla entonces se coloca nula
 					if (piedra[i].saleDePantalla(entorno)) {
 						piedra[i] = null;
 					}
 				}
 			}
-
+			//si se presiona la tecla espacio y tiene disparos disponibles entonces realiza disparo
 			if (entorno.sePresiono(entorno.TECLA_ESPACIO)) {
 				if (mono.getDisparosDisp() > 0) {
 					Piedra.agregarPiedra(piedra, mono);
 				}
 			}
-
+			// si se oprimi la tecla supr entonces el juego se coloca en pause
 			if (entorno.sePresiono(entorno.TECLA_DELETE)) {
 				pause = true;
 			}
-			
-			//condicionales de puntajes y niveles
+
+			// condicionales de puntajes y niveles
 			if (punto > 120) {
 				nivel = 4;
 			} else if (punto > 80) {
@@ -288,7 +319,8 @@ public class Juego extends InterfaceJuego {
 			} else if (punto > 30) {
 				nivel = 2;
 			}
-
+			
+			// se grafican los objetos y las estadisticas del juego
 			mono.dibujarMono(entorno);
 			items.dibujarPiedras(entorno);
 			items.desplazarp();
@@ -305,7 +337,8 @@ public class Juego extends InterfaceJuego {
 			entorno.cambiarFont(" ", 20, Color.red);
 			entorno.escribirTexto("Presione [DELETE] para PAUSE", 250, 590);
 		} else if (pause) {
-
+			
+			//se grafica el mensaje "pause"
 			entorno.cambiarFont(" ", 50, Color.red);
 			entorno.escribirTexto("PAUSE", 320, 300);
 			if (entorno.sePresiono(entorno.TECLA_DELETE)) {
@@ -313,6 +346,7 @@ public class Juego extends InterfaceJuego {
 			}
 
 		} else {
+			// se grafican las opciones luego de la partida junto con las estadisticas del juego
 			entorno.dibujarImagen(gameOver, entorno.ancho() / 2, entorno.alto() / 2, 0, 1.35);
 			entorno.cambiarFont(" ", 26, Color.red);
 			entorno.escribirTexto("Presione [INICIO] para reiniciar |", 15, 550);
@@ -324,8 +358,8 @@ public class Juego extends InterfaceJuego {
 			entorno.escribirTexto("ENEMIGOS ABATIDOS: " + this.enemigosMuertos, 250, 80);
 
 			if (entorno.estaPresionada(entorno.TECLA_INICIO)) {
-				
-				//reinicio de parametros iniciales
+
+				// reinicio de parametros iniciales
 				this.nivel = 1;
 				this.punto = 0;
 				this.vida = 3;
@@ -346,8 +380,8 @@ public class Juego extends InterfaceJuego {
 			}
 
 			if (entorno.sePresiono(entorno.TECLA_FIN)) {
-				
-				//reinicio de parametros iniciales
+
+				// reinicio de parametros iniciales
 				menu = true;
 				this.nivel = 1;
 				this.punto = 0;
